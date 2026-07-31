@@ -1,47 +1,48 @@
 {
-  "updatedAt": "2026-07-30T07:31:35.638263+00:00",
+  "updatedAt": "2026-07-31T07:47:43.298967+00:00",
   "team": "Groen Geel - H8",
   "groupId": "C2F9BB5402A944DE934B55DB9D136EEA",
   "memberCount": 23,
   "upcomingEvent": {
-    "id": "64D2FB46767346E383B98E16F2DFBAB3",
+    "id": "FA1682413DC441B283AB80CBF08C2AE3",
     "name": "Training",
-    "startTimestamp": "2026-07-30T17:00:00Z",
-    "endTimestamp": "2026-07-30T18:00:00Z",
+    "startTimestamp": "2026-08-06T17:00:00Z",
+    "endTimestamp": "2026-08-06T18:00:00Z",
     "location": null,
     "type": "training",
     "attending": [
-      "Chris Willemsen",
       "Joost Kirkenier",
-      "Luc de Goeij",
+      "Lennart Koetzier",
       "Maarten Bambacht",
       "Marc Segers",
-      "Rikkert Verberne",
       "Thomas Taks",
+      "Victor Peet",
+      "Willem van Rootselaar",
       "Wilma Willemsen"
     ],
     "declined": [
+      "Bruno Recordon",
+      "Chris Willemsen",
+      "Floris Hage",
+      "Joost Sleddering",
+      "Michiel Willemsen",
+      "Stijn Terwindt"
+    ],
+    "unanswered": [
       "Bart Gijsberts",
       "Bas Quirijns",
       "Bob Leuterrr",
-      "Bruno Recordon",
       "Faas Van t Hek",
-      "Floris Hage",
       "Jasper Zaar",
       "Jenne",
-      "Joost Sleddering",
-      "Lennart Koetzier",
-      "Michiel Willemsen",
-      "Stijn Terwindt",
-      "Thijs Oudkerk",
-      "Victor Peet",
-      "Willem van Rootselaar"
+      "Luc de Goeij",
+      "Rikkert Verberne",
+      "Thijs Oudkerk"
     ],
-    "unanswered": [],
     "counts": {
       "attending": 8,
-      "declined": 15,
-      "unanswered": 0
+      "declined": 6,
+      "unanswered": 9
     }
   }
 }
