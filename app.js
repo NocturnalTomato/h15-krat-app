@@ -34,7 +34,7 @@ const POLL_TIMEOUT_MS = 60000;
 const POLL_INTERVAL_MS = 3000;
 const KRATFLAP_UNLOCK_KEY = "hokrat_kratflap_unlocked";
 const KRATFLAP_API_URL = "https://ho-kratflap-api.lucdegoeij.workers.dev/scores";
-const ROULETTE_COUNTDOWN_SECONDS = 3;
+const ROULETTE_COUNTDOWN_SECONDS = 10;
 const ROULETTE_END_HOLD_MS = 10000;
 const ROULETTE_COLORS = [
   "#ff5c5c", "#ffab40", "#ffd60a", "#46d369",
@@ -2792,6 +2792,9 @@ function resolveRouletteWinner() {
 
   winnerTouch.ringEl.classList.add("roulette-winner");
 
+  const button = document.getElementById("rouletteButton");
+  if (button) button.classList.add("roulette-result-active");
+
   const result = document.getElementById("rouletteResult");
   const swatch = document.getElementById("rouletteResultSwatch");
   if (swatch) {
@@ -2822,7 +2825,7 @@ function finishRoulette() {
   const label = document.getElementById("rouletteButtonLabel");
   const result = document.getElementById("rouletteResult");
   if (instructions) instructions.classList.remove("roulette-hidden");
-  if (button) button.classList.remove("roulette-counting");
+  if (button) button.classList.remove("roulette-counting", "roulette-result-active");
   if (label) label.textContent = "DRUK";
   if (result) result.style.display = "none";
 
