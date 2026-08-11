@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T06:07:54.269013+00:00",
+  "updatedAt": "2026-08-11T05:50:11.029102+00:00",
   "team": "Groen Geel - H8",
   "groupId": "C2F9BB5402A944DE934B55DB9D136EEA",
   "memberCount": 23,
@@ -12,7 +12,6 @@
     "type": "training",
     "attending": [
       "Bart Gijsberts",
-      "Chris Willemsen",
       "Faas Van t Hek",
       "Joost Kirkenier",
       "Lennart Koetzier",
@@ -23,6 +22,7 @@
     ],
     "declined": [
       "Bruno Recordon",
+      "Chris Willemsen",
       "Floris Hage",
       "Joost Sleddering",
       "Marc Segers",
@@ -40,8 +40,8 @@
       "Wilma Willemsen"
     ],
     "counts": {
-      "attending": 9,
-      "declined": 7,
+      "attending": 8,
+      "declined": 8,
       "unanswered": 7
     }
   }
