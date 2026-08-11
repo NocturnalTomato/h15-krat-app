@@ -1816,3 +1816,151 @@ summary {
   font-weight: 900;
   color: #7fde8a;
 }
+
+/* =========================
+   RIETADT RUSSIAN ROULETTE
+========================= */
+
+.roulette-panel {
+  height: 100dvh;
+  border-radius: 0;
+}
+
+.roulette-arena {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 62px);
+  overflow: hidden;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #14090a 0%, #050505 70%);
+}
+
+.roulette-instructions {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  text-align: center;
+  color: #a1a1a6;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: opacity 0.25s ease;
+}
+
+.roulette-instructions.roulette-hidden {
+  opacity: 0;
+}
+
+.roulette-button {
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #ff8080, #ff5c5c 55%, #b02e2e 100%);
+  box-shadow: 0 0 0 6px rgba(255, 92, 92, 0.18), 0 10px 40px rgba(255, 92, 92, 0.35);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.roulette-button:active {
+  transform: scale(0.96);
+}
+
+.roulette-button.roulette-counting {
+  background: radial-gradient(circle at 35% 30%, #ffe08a, #ffd60a 55%, #b8930a 100%);
+  box-shadow: 0 0 0 6px rgba(255, 214, 10, 0.2), 0 10px 40px rgba(255, 214, 10, 0.4);
+}
+
+.roulette-button-label {
+  font-size: 22px;
+  font-weight: 950;
+  color: #050505;
+  letter-spacing: 0.04em;
+}
+
+.roulette-finger-ring {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin-left: -32px;
+  margin-top: -32px;
+  border-radius: 999px;
+  border-width: 4px;
+  border-style: solid;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 2;
+}
+
+.roulette-finger-ring.roulette-fading {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.roulette-finger-ring.roulette-winner {
+  animation: roulette-pulse 0.7s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes roulette-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.roulette-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 4;
+  animation: roulette-result-in 0.3s ease;
+}
+
+@keyframes roulette-result-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.roulette-result-swatch {
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  box-shadow: 0 0 60px 10px currentColor;
+}
+
+.roulette-result-text {
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
+
+.roulette-confetti-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}

@@ -18,6 +18,14 @@ let kratflipGlowing = false; // fase 1: constante gloed, knop is nog CHECK
 let kratflipRevealed = false; // fase 2: gemorpht naar de KRATFLIP?-knop
 let kratflipDone = false; // egg voorbij deze sessie (gespeeld of verspeeld)
 
+// Rietadt Russian Roulette
+let rouletteTouches = new Map(); // pointerId -> { ringEl, color }
+let roulettePhase = "idle"; // idle | collecting | result
+let rouletteCountdownTimer = null;
+let rouletteCountdownValue = 0;
+let rouletteFinishTimer = null;
+let rouletteColorCursor = 0;
+
 const COOLDOWN_MS = 5000;
 const SYNC_URL = "https://ho-krat-trigger.lucdegoeij.workers.dev/?key=aksjjkhdsadk2387or4ihfakhufahiueciahlcvhliarg9loahe3qtfh4789";
 const SPLITSER_URL = "https://ho-krat-trigger.lucdegoeij.workers.dev/splitser-balance?key=aksjjkhdsadk2387or4ihfakhufahiueciahlcvhliarg9loahe3qtfh4789";
@@ -26,9 +34,16 @@ const POLL_TIMEOUT_MS = 60000;
 const POLL_INTERVAL_MS = 3000;
 const KRATFLAP_UNLOCK_KEY = "hokrat_kratflap_unlocked";
 const KRATFLAP_API_URL = "https://ho-kratflap-api.lucdegoeij.workers.dev/scores";
+const ROULETTE_COUNTDOWN_SECONDS = 3;
+const ROULETTE_END_HOLD_MS = 10000;
+const ROULETTE_COLORS = [
+  "#ff5c5c", "#ffab40", "#ffd60a", "#46d369",
+  "#2dd4bf", "#4da3ff", "#7c5cff", "#e05cff", "#ff5ca8", "#c2ff5c",
+];
 
 async function init() {
   restoreKratflapUnlock();
+  initRoulette();
   showSplitserLoading();
   await loadResponses();
 
@@ -2633,4 +2648,249 @@ function standingsSeasonChanged() {
   const sel = document.getElementById("standingsSeasonSelect");
   if (sel) standingsPouleId = sel.value;
   loadStandings();
+}
+
+/* =========================
+   RIETADT RUSSIAN ROULETTE
+========================= */
+
+function initRoulette() {
+  const button = document.getElementById("rouletteButton");
+  const arena = document.getElementById("rouletteArena");
+  if (!button || !arena) return;
+
+  button.addEventListener("pointerdown", handleRouletteButtonDown);
+  arena.addEventListener("pointerdown", handleRouletteArenaPointerDown);
+  arena.addEventListener("pointermove", handleRouletteArenaPointerMove);
+  arena.addEventListener("pointerup", handleRouletteArenaPointerUp);
+  arena.addEventListener("pointercancel", handleRouletteArenaPointerUp);
+}
+
+function openRoulette() {
+  const sheet = document.getElementById("rouletteSheet");
+  if (!sheet) return;
+
+  sheet.classList.add("show");
+  sheet.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeRoulette() {
+  const sheet = document.getElementById("rouletteSheet");
+  if (!sheet) return;
+
+  sheet.classList.remove("show");
+  sheet.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  resetRoulette();
+}
+
+function handleRouletteButtonDown(e) {
+  if (roulettePhase !== "idle") return;
+  e.preventDefault();
+
+  startRouletteCountdown();
+  registerRoulettePointer(e);
+}
+
+function handleRouletteArenaPointerDown(e) {
+  if (roulettePhase !== "collecting") return;
+  if (rouletteTouches.has(e.pointerId)) return;
+
+  registerRoulettePointer(e);
+}
+
+function handleRouletteArenaPointerMove(e) {
+  const touch = rouletteTouches.get(e.pointerId);
+  if (!touch) return;
+
+  const arena = document.getElementById("rouletteArena");
+  const rect = arena.getBoundingClientRect();
+  touch.ringEl.style.left = `${e.clientX - rect.left}px`;
+  touch.ringEl.style.top = `${e.clientY - rect.top}px`;
+}
+
+function handleRouletteArenaPointerUp(e) {
+  const touch = rouletteTouches.get(e.pointerId);
+  if (!touch) return;
+
+  removeRouletteRing(e.pointerId, touch);
+
+  if (roulettePhase === "result" && rouletteTouches.size === 0) {
+    finishRoulette();
+  }
+}
+
+function registerRoulettePointer(e) {
+  const arena = document.getElementById("rouletteArena");
+  if (!arena) return;
+
+  const color = ROULETTE_COLORS[rouletteColorCursor % ROULETTE_COLORS.length];
+  rouletteColorCursor += 1;
+
+  const rect = arena.getBoundingClientRect();
+  const ring = document.createElement("div");
+  ring.className = "roulette-finger-ring";
+  ring.style.borderColor = color;
+  ring.style.boxShadow = `0 0 16px ${color}`;
+  ring.style.left = `${e.clientX - rect.left}px`;
+  ring.style.top = `${e.clientY - rect.top}px`;
+  arena.appendChild(ring);
+
+  rouletteTouches.set(e.pointerId, { ringEl: ring, color });
+}
+
+function removeRouletteRing(pointerId, touch) {
+  rouletteTouches.delete(pointerId);
+
+  touch.ringEl.classList.add("roulette-fading");
+  setTimeout(() => touch.ringEl.remove(), 350);
+}
+
+function startRouletteCountdown() {
+  roulettePhase = "collecting";
+
+  const instructions = document.getElementById("rouletteInstructions");
+  const button = document.getElementById("rouletteButton");
+  const label = document.getElementById("rouletteButtonLabel");
+  if (instructions) instructions.classList.add("roulette-hidden");
+  if (button) button.classList.add("roulette-counting");
+
+  rouletteCountdownValue = ROULETTE_COUNTDOWN_SECONDS;
+  if (label) label.textContent = String(rouletteCountdownValue);
+
+  clearInterval(rouletteCountdownTimer);
+  rouletteCountdownTimer = setInterval(() => {
+    rouletteCountdownValue -= 1;
+
+    if (rouletteCountdownValue <= 0) {
+      clearInterval(rouletteCountdownTimer);
+      resolveRouletteWinner();
+      return;
+    }
+
+    if (label) label.textContent = String(rouletteCountdownValue);
+  }, 1000);
+}
+
+function resolveRouletteWinner() {
+  roulettePhase = "result";
+
+  const entries = Array.from(rouletteTouches.entries());
+  if (entries.length === 0) {
+    resetRoulette();
+    return;
+  }
+
+  const winnerIndex = randomInt(0, entries.length - 1);
+  const [winnerId, winnerTouch] = entries[winnerIndex];
+
+  entries.forEach(([pointerId, touch]) => {
+    if (pointerId === winnerId) return;
+    removeRouletteRing(pointerId, touch);
+  });
+
+  winnerTouch.ringEl.classList.add("roulette-winner");
+
+  const result = document.getElementById("rouletteResult");
+  const swatch = document.getElementById("rouletteResultSwatch");
+  if (swatch) {
+    swatch.style.background = winnerTouch.color;
+    swatch.style.color = winnerTouch.color;
+  }
+  if (result) result.style.display = "flex";
+
+  const arena = document.getElementById("rouletteArena");
+  const rect = arena.getBoundingClientRect();
+  const winnerX = parseFloat(winnerTouch.ringEl.style.left) || rect.width / 2;
+  const winnerY = parseFloat(winnerTouch.ringEl.style.top) || rect.height / 2;
+  fireRouletteConfetti(winnerX, winnerY, winnerTouch.color);
+
+  clearTimeout(rouletteFinishTimer);
+  rouletteFinishTimer = setTimeout(finishRoulette, ROULETTE_END_HOLD_MS);
+}
+
+function finishRoulette() {
+  clearTimeout(rouletteFinishTimer);
+  clearInterval(rouletteCountdownTimer);
+
+  rouletteTouches.forEach((touch) => touch.ringEl.remove());
+  rouletteTouches.clear();
+
+  const instructions = document.getElementById("rouletteInstructions");
+  const button = document.getElementById("rouletteButton");
+  const label = document.getElementById("rouletteButtonLabel");
+  const result = document.getElementById("rouletteResult");
+  if (instructions) instructions.classList.remove("roulette-hidden");
+  if (button) button.classList.remove("roulette-counting");
+  if (label) label.textContent = "DRUK";
+  if (result) result.style.display = "none";
+
+  roulettePhase = "idle";
+}
+
+function resetRoulette() {
+  finishRoulette();
+}
+
+function fireRouletteConfetti(x, y, color) {
+  const canvas = document.getElementById("rouletteConfettiCanvas");
+  const arena = document.getElementById("rouletteArena");
+  if (!canvas || !arena) return;
+
+  const rect = arena.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  const ctx = canvas.getContext("2d");
+
+  const confettiColors = [color, "#ffd60a", "#46d369", "#4da3ff", "#e05cff", "#ffffff"];
+  const particles = [];
+  for (let i = 0; i < 70; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2 + Math.random() * 5;
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 2,
+      size: 4 + Math.random() * 5,
+      color: confettiColors[randomInt(0, confettiColors.length - 1)],
+      rotation: Math.random() * Math.PI * 2,
+      rotationSpeed: (Math.random() - 0.5) * 0.4,
+      life: 1,
+    });
+  }
+
+  const gravity = 0.15;
+  const startTime = performance.now();
+  const duration = 1500;
+
+  function step(now) {
+    const elapsed = now - startTime;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p) => {
+      p.vy += gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.rotationSpeed;
+      p.life = Math.max(0, 1 - elapsed / duration);
+
+      ctx.save();
+      ctx.globalAlpha = p.life;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      ctx.restore();
+    });
+
+    if (elapsed < duration) {
+      requestAnimationFrame(step);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  requestAnimationFrame(step);
 }

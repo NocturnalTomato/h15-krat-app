@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HO Krat App</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=17" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script src="app.js?v=1018" defer></script>
+  <script src="app.js?v=1019" defer></script>
 </head>
 
 <body>
@@ -312,6 +312,13 @@
       </div>
     </div>
 
+    <div class="kratflap-teaser roulette-teaser" id="rouletteTeaser">
+      <div class="kratflap-teaser-text">Wie moet er drinken?</div>
+      <button class="kratflap-button" type="button" onclick="openRoulette()">
+        Speel Rietadt Russian Roulette
+      </button>
+    </div>
+
     <div class="version">HO KRAT ORACLE v3.0 - Florine</div>
   </div>
 
@@ -465,6 +472,38 @@
         loading="lazy"
         allow="web-share; clipboard-write"
       ></iframe>
+    </div>
+  </div>
+
+  <div class="kratflap-sheet roulette-sheet" id="rouletteSheet" aria-hidden="true">
+    <div class="kratflap-backdrop" onclick="closeRoulette()"></div>
+
+    <div class="kratflap-panel roulette-panel">
+      <div class="kratflap-panel-header">
+        <div>
+          <div class="kratflap-kicker">RIETADT</div>
+          <div class="kratflap-title">Russian Roulette</div>
+        </div>
+
+        <button class="kratflap-close" type="button" onclick="closeRoulette()">×</button>
+      </div>
+
+      <div class="roulette-arena" id="rouletteArena">
+        <div class="roulette-instructions" id="rouletteInstructions">
+          Druk de knop in en leg alle vingers op het scherm
+        </div>
+
+        <button class="roulette-button" type="button" id="rouletteButton">
+          <span class="roulette-button-label" id="rouletteButtonLabel">DRUK</span>
+        </button>
+
+        <div class="roulette-result" id="rouletteResult" style="display:none;">
+          <div class="roulette-result-swatch" id="rouletteResultSwatch"></div>
+          <div class="roulette-result-text">mag een Rietadt doen! 🍹</div>
+        </div>
+
+        <canvas class="roulette-confetti-canvas" id="rouletteConfettiCanvas"></canvas>
+      </div>
     </div>
   </div>
 </body>
