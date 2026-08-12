@@ -1,165 +1,172 @@
 {
-  "updatedAt": "2026-08-12T09:44:21.246Z",
+  "updatedAt": "2026-08-12T09:50:03.712Z",
   "people": [
     {
-      "name": "Bambi",
-      "fullName": "Maarten Bambacht",
-      "amount": "€124.04",
-      "amountCents": 12404,
-      "isCurrent": false
+      "name": "Luc",
+      "fullName": "Luc de Goeij",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": true
     },
     {
-      "name": "Marc",
-      "fullName": "Marc Segers",
-      "amount": "€117.79",
-      "amountCents": 11779,
-      "isCurrent": false
-    },
-    {
-      "name": "Gijsberts",
-      "fullName": "Bart Gijsberts",
-      "amount": "€105.51",
-      "amountCents": 10551,
-      "isCurrent": false
-    },
-    {
-      "name": "Floris",
-      "fullName": "Floris Hage",
-      "amount": "€82.94",
-      "amountCents": 8294,
-      "isCurrent": false
-    },
-    {
-      "name": "Petra",
-      "fullName": "Victor Peet",
-      "amount": "€60.92",
-      "amountCents": 6092,
-      "isCurrent": false
-    },
-    {
-      "name": "Schaap",
-      "fullName": "Michiel Willemsen",
-      "amount": "€53.35",
-      "amountCents": 5335,
-      "isCurrent": false
-    },
-    {
-      "name": "Jeroen",
-      "fullName": "Jeroen Mossinkoff",
-      "amount": "€48.62",
-      "amountCents": 4862,
-      "isCurrent": false
-    },
-    {
-      "name": "Jim",
-      "fullName": "Jim Wevers",
-      "amount": "€40.18",
-      "amountCents": 4018,
-      "isCurrent": false
-    },
-    {
-      "name": "JZaar",
-      "fullName": "Jasper",
-      "amount": "€12.14",
-      "amountCents": 1214,
-      "isCurrent": false
-    },
-    {
-      "name": "Wilma",
-      "fullName": "Mark Willemsen",
-      "amount": "€7.72",
-      "amountCents": 772,
-      "isCurrent": false
-    },
-    {
-      "name": "Jenne",
-      "fullName": "Jenne Cramer",
-      "amount": "€0.30",
-      "amountCents": 30,
-      "isCurrent": false
-    },
-    {
-      "name": "Sled",
-      "fullName": "Joost Sleddering",
+      "name": "Jules",
+      "fullName": "Jules Lapre",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Joost/Abby",
-      "fullName": "Joost Kirkenier",
-      "amount": "-€0.37",
-      "amountCents": -37,
+      "name": "Bouke",
+      "fullName": "Bouke van Blokland",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Rikkert",
-      "fullName": "Stijn Verberne",
-      "amount": "-€13.58",
-      "amountCents": -1358,
+      "name": "Maarten",
+      "fullName": "Maarten Prins",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Stijn",
-      "fullName": "Stijn Terwindt",
-      "amount": "-€23.47",
-      "amountCents": -2347,
+      "name": "Pepijn",
+      "fullName": "Pepijn",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "BOB",
-      "fullName": "Bob Leutscher",
-      "amount": "-€30.91",
-      "amountCents": -3091,
+      "name": "Jeroen",
+      "fullName": "Jeroen Torfs",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Bas(Q)",
-      "fullName": "Bas Quirijns",
-      "amount": "-€39.45",
-      "amountCents": -3945,
+      "name": "Jochem",
+      "fullName": "Jochem Herbrink",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Luc",
-      "fullName": "Luc de Goeij",
-      "amount": "-€45.44",
-      "amountCents": -4544,
-      "isCurrent": true
+      "name": "Noud",
+      "fullName": "Noud van Maanen",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
     },
     {
-      "name": "Taks",
-      "fullName": "Thomas Taks",
-      "amount": "-€52.58",
-      "amountCents": -5258,
+      "name": "Thomas",
+      "fullName": "Thomas de Hollander",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Morris",
+      "fullName": "Morris Giele",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Thijmen",
+      "fullName": "Thijmen Post",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "bernard",
+      "fullName": "bernard zweers",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Tom",
+      "fullName": "Tom v Wijk",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Koen de Koning",
+      "fullName": "Koen de Koning",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
       "name": "Chris",
-      "fullName": "Chris Willemsen",
-      "amount": "-€58.34",
-      "amountCents": -5834,
+      "fullName": "Chris de Haas",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Faas",
-      "fullName": "Faas Van T Hek",
-      "amount": "-€96.54",
-      "amountCents": -9654,
+      "name": "Pim",
+      "fullName": "Pim Kuiper",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Willem",
-      "fullName": "Willem van Rootselaar",
-      "amount": "-€137.46",
-      "amountCents": -13746,
+      "name": "Thomas van der Woning",
+      "fullName": "Thomas van der Woning",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
-      "name": "Thijs",
-      "fullName": "Matthijs Oudkerk",
-      "amount": "-€155.94",
-      "amountCents": -15594,
+      "name": "Jasper",
+      "fullName": "Jasper van de Stadt",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Jasper Piers",
+      "fullName": "Jasper Piers",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Koen",
+      "fullName": "Koen Elfferich",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Joppe",
+      "fullName": "Joppe Bastiaansen",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Sverre",
+      "fullName": "Sverre",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Timo",
+      "fullName": "Timo van Zagten",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Joep",
+      "fullName": "Joep van keulen",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     }
   ]
