@@ -2610,9 +2610,8 @@ async function loadStandings() {
     `;
 
     for (const s of data.standings) {
-      const isGG = s.team_id === 3768 ||
-        (s.team_name || "").toLowerCase().includes("groen") ||
-        (s.team_name || "").toLowerCase().includes("geel");
+      const isGG = s.team_id === 3781 ||
+        (s.team_name || "").toLowerCase().includes("h15");
       const rowClass = isGG ? ' class="standings-gg"' : "";
       const pim = s.points_deducted > 0 ? s.points_deducted : "-";
       html += `
