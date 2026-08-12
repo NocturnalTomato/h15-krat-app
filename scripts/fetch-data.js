@@ -91,12 +91,12 @@ async function spondGet(path_, token) {
 
 function isRelevantEvent(event) {
   const name = String(event.heading || "").toLowerCase();
-  return name.includes("training") || name.includes("thuis") || name.includes("uit") || name.includes("td");
+  return name.includes("train") || name.includes("thuis") || name.includes("uit") || name.includes("td");
 }
 
 function getEventType(event) {
   const name = String(event.heading || "").toLowerCase();
-  if (name.includes("training")) return "training";
+  if (name.includes("train")) return "training";
   if (name.includes("td")) return "td";
   return "wedstrijd";
 }
