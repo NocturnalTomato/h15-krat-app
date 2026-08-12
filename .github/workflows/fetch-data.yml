@@ -25,6 +25,8 @@ jobs:
         env:
           SPOND_USERNAME: ${{ secrets.SPOND_USERNAME }}
           SPOND_PASSWORD: ${{ secrets.SPOND_PASSWORD }}
+          SPLITSER_EMAIL: ${{ secrets.SPLITSER_EMAIL }}
+          SPLITSER_PASSWORD: ${{ secrets.SPLITSER_PASSWORD }}
         # Partial failures (e.g. one flaky endpoint) shouldn't block committing
         # whichever data files did update successfully — see fetch-data.js.
         run: node scripts/fetch-data.js || echo "::warning::fetch-data.js reported partial failures, see log above"

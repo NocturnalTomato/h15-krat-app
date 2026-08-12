@@ -606,6 +606,52 @@ async function fetchPastMatches(username, password) {
 }
 
 /* ============================================================
+   Splitser balance (wiebetaaltwat.nl)
+============================================================ */
+
+const WBW_LIST_ID = "ccb30c39-6895-41d8-b90b-3486fd022f79";
+
+async function fetchSplitserBalance(email, password) {
+  const loginResponse = await fetch("https://api2.wiebetaaltwat.nl/api/users/sign_in", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Accept-Version": "4",
+      "User-Agent": "h15-krat-fetch-data"
+    },
+    body: JSON.stringify({ user: { email, password } })
+  });
+
+  const setCookie = loginResponse.headers.get("set-cookie");
+  if (!setCookie) throw new Error(`Splitser login failed: HTTP ${loginResponse.status}`);
+  const sessionCookie = setCookie.split(";")[0];
+
+  const balanceResponse = await fetch(`https://api2.wiebetaaltwat.nl/api/lists/${WBW_LIST_ID}/balance`, {
+    headers: {
+      "Accept": "application/json",
+      "Accept-Version": "4",
+      "Cookie": sessionCookie,
+      "User-Agent": "h15-krat-fetch-data"
+    }
+  });
+  if (!balanceResponse.ok) throw new Error(`Splitser balance fetch failed: HTTP ${balanceResponse.status}`);
+  const data = await balanceResponse.json();
+
+  const people = data.balance.member_totals
+    .map(x => ({
+      name: x.member_total.member.nickname.trim(),
+      fullName: x.member_total.member.full_name,
+      amount: x.member_total.balance_total.formatted,
+      amountCents: x.member_total.balance_total.fractional,
+      isCurrent: x.member_total.member.is_current
+    }))
+    .sort((a, b) => b.amountCents - a.amountCents);
+
+  return { updatedAt: new Date().toISOString(), people };
+}
+
+/* ============================================================
    Main
 ============================================================ */
 
@@ -683,6 +729,21 @@ async function main() {
   } catch (err) {
     hadError = true;
     console.error("KNHB wedstrijd fetch failed:", err.message);
+  }
+
+  const splitserEmail = process.env.SPLITSER_EMAIL;
+  const splitserPassword = process.env.SPLITSER_PASSWORD;
+  if (splitserEmail && splitserPassword) {
+    try {
+      const splitserBalance = await fetchSplitserBalance(splitserEmail, splitserPassword);
+      writeJson(path.join(DATA_DIR, "splitser-balance.json"), splitserBalance);
+      console.log("splitser-balance.json updated. people:", splitserBalance.people.length);
+    } catch (err) {
+      hadError = true;
+      console.error("Splitser balance fetch failed:", err.message);
+    }
+  } else {
+    console.log("Skipping Splitser balance fetch: SPLITSER_EMAIL/SPLITSER_PASSWORD not set");
   }
 
   saveCache(loadedCacheRef);
