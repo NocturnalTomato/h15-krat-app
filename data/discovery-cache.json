@@ -1,1 +1,14 @@
-{}
+{
+  "hw_device": {
+    "uuid": "8de45683-45bd-48fd-a50b-f3ca1fd844b8",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1dWlkIjoiOGRlNDU2ODMtNDViZC00OGZkLWE1MGItZjNjYTFmZDg0NGI4In0.S3Sg2ndi17dAI2EFVDecFAhEaJpW5_xHgTFwpuzWwfnOwKIQFXCTc1jIDsQNAjHUp6CWDn_audGb-XQkaRg6oll7-2U-kDga2FAo400Sh18bDgLorfwyWDvdnRJZwjXAer41WgevvwWGVsUOtLHZ5laKn6TFrkMzsCHt8SUGfE_nBKXP4efukdh8XDVNzRdN9YkQYFJzmGg377xRHOFopryj2CHT1e2hOtEkalia-KSbZdyPLOiOhG-6_jwIfCYNsikXxducaU6lYTO9jYDaht94j4eJgH1iVYiWghHl_qVvOu1ZLZoYkmcrvFfXanh0y_6vc4QYWR_2nGiy6cWbF7BLcIrrX3i6_UI9HbEq9BkOUSDfEogV12ziDbZxVyRppFOhrwrJ4fHfOZKwEFIjqYtIes88o7lu1ihoYOgwNarCYrThWtU_yJHKlHy9TyJK6irCYUTbpgPgGf1KYUmMosYTn9B6r_gJPpRaZJjfz3piP5OT67zXdrXsGsUDI9SLjaWieC11F45dLPjiFTpwAauDcSLCoByr8PH3ddsYm5aOFqdcKQLU_6lqlcaf7z6qdd-XQPFtIkzzjR9l-nJ-UngJOkdF-8cOrFVPZtnOAUPHQh-lF1DsObmGqLxq0TkzvKQZrvn8IGfhHmTdXQANrSOgzmDWwNnAo79b_B8TgYY"
+  },
+  "hw_team_id": {
+    "value": "3781",
+    "at": 1786526627380
+  },
+  "hw_recent_poule_id": {
+    "value": "174873",
+    "at": 1786526627380
+  }
+}

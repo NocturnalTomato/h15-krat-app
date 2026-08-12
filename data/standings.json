@@ -1,6 +1,132 @@
 {
-  "poule_id": null,
-  "competition": null,
-  "poule_options": [],
-  "standings": []
+  "poule_id": "174873",
+  "competition": "Heren Reserve Sep tm Jun",
+  "poule_options": [
+    {
+      "id": "174873",
+      "label": "Heren Reserve Sep tm Jun"
+    }
+  ],
+  "standings": [
+    {
+      "rank": 1,
+      "team_id": 8429,
+      "team_name": "Leonidas H19",
+      "team_short": "H19",
+      "played": 18,
+      "won": 16,
+      "drawn": 1,
+      "lost": 1,
+      "points_deducted": 0,
+      "points": 49
+    },
+    {
+      "rank": 2,
+      "team_id": 7097,
+      "team_name": "Spijkenisse H2-O",
+      "team_short": "H2-O",
+      "played": 18,
+      "won": 11,
+      "drawn": 2,
+      "lost": 5,
+      "points_deducted": 0,
+      "points": 35
+    },
+    {
+      "rank": 3,
+      "team_id": 9374,
+      "team_name": "Zoetermeer H6",
+      "team_short": "H6",
+      "played": 18,
+      "won": 10,
+      "drawn": 3,
+      "lost": 5,
+      "points_deducted": 0,
+      "points": 33
+    },
+    {
+      "rank": 4,
+      "team_id": 16172,
+      "team_name": "Leonidas H21",
+      "team_short": "H21",
+      "played": 18,
+      "won": 9,
+      "drawn": 5,
+      "lost": 4,
+      "points_deducted": 0,
+      "points": 32
+    },
+    {
+      "rank": 5,
+      "team_id": 3778,
+      "team_name": "Groen-Geel H14",
+      "team_short": "H14",
+      "played": 18,
+      "won": 9,
+      "drawn": 4,
+      "lost": 5,
+      "points_deducted": 0,
+      "points": 31
+    },
+    {
+      "rank": 6,
+      "team_id": 43837,
+      "team_name": "Roomburg-Augustinus H9",
+      "team_short": "H9",
+      "played": 18,
+      "won": 10,
+      "drawn": 1,
+      "lost": 7,
+      "points_deducted": 0,
+      "points": 28
+    },
+    {
+      "rank": 7,
+      "team_id": 3776,
+      "team_name": "Groen-Geel H13",
+      "team_short": "H13",
+      "played": 18,
+      "won": 4,
+      "drawn": 3,
+      "lost": 11,
+      "points_deducted": 0,
+      "points": 15
+    },
+    {
+      "rank": 8,
+      "team_id": 3781,
+      "team_name": "Groen-Geel H15",
+      "team_short": "H15",
+      "played": 18,
+      "won": 4,
+      "drawn": 2,
+      "lost": 12,
+      "points_deducted": 0,
+      "points": 14
+    },
+    {
+      "rank": 9,
+      "team_id": 39866,
+      "team_name": "Wateringse veld H2-O",
+      "team_short": "H2-O",
+      "played": 18,
+      "won": 3,
+      "drawn": 2,
+      "lost": 13,
+      "points_deducted": 0,
+      "points": 11
+    },
+    {
+      "rank": 10,
+      "team_id": 3774,
+      "team_name": "Groen-Geel H12",
+      "team_short": "H12",
+      "played": 18,
+      "won": 2,
+      "drawn": 1,
+      "lost": 15,
+      "points_deducted": 0,
+      "points": 7
+    }
+  ]
 }
