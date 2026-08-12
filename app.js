@@ -29,11 +29,11 @@ let rouletteColorCursor = 0;
 const COOLDOWN_MS = 5000;
 const SYNC_URL = "https://ho-krat-trigger.lucdegoeij.workers.dev/?key=aksjjkhdsadk2387or4ihfakhufahiueciahlcvhliarg9loahe3qtfh4789";
 const SPLITSER_URL = "https://ho-krat-trigger.lucdegoeij.workers.dev/splitser-balance?key=aksjjkhdsadk2387or4ihfakhufahiueciahlcvhliarg9loahe3qtfh4789";
-const SPOND_URL = "https://ho-krat-spond-trigger.lucdegoeij.workers.dev/";
+const SPOND_URL = "./data/spond-event.json";
 const POLL_TIMEOUT_MS = 60000;
 const POLL_INTERVAL_MS = 3000;
 const KRATFLAP_UNLOCK_KEY = "hokrat_kratflap_unlocked";
-const KRATFLAP_API_URL = "https://ho-kratflap-api.lucdegoeij.workers.dev/scores";
+const KRATFLAP_API_URL = "/api/scores";
 const ROULETTE_COUNTDOWN_SECONDS = 10;
 const ROULETTE_END_HOLD_MS = 10000;
 const ROULETTE_COLORS = [
@@ -1089,9 +1089,9 @@ function formatDateTime(date) {
    LINEUP OPSTELLING
 ========================= */
 
-const STATS_URL = "https://ho-krat-spond-trigger.lucdegoeij.workers.dev/stats";
-const PAST_MATCHES_URL = "https://ho-krat-spond-trigger.lucdegoeij.workers.dev/past-matches";
-const LINEUP_URL = "https://ho-krat-spond-trigger.lucdegoeij.workers.dev/lineup";
+const STATS_URL = "/api/stats";
+const PAST_MATCHES_URL = "./data/past-matches.json";
+const LINEUP_URL = "/api/lineup";
 
 let statsData = { matches: [] };
 let statsPassword = null;
@@ -2560,16 +2560,14 @@ init();
    POULESTAND
 ========================= */
 
-const STANDINGS_URL = "https://ho-krat-spond-trigger.lucdegoeij.workers.dev/standings";
-let standingsPouleId = null;
+const STANDINGS_URL = "./data/standings.json";
 
 async function loadStandings() {
   const body = document.getElementById("standingsBody");
   if (!body) return;
 
   try {
-    const url = standingsPouleId ? `${STANDINGS_URL}?poule_id=${encodeURIComponent(standingsPouleId)}` : STANDINGS_URL;
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(STANDINGS_URL, { cache: "no-store" });
     const data = await res.json();
 
     if (data.error) {
@@ -2577,16 +2575,11 @@ async function loadStandings() {
       return;
     }
 
-    // Season selector — only show when multiple poules are available
+    // Season selector removed — standings.json is a static snapshot of the
+    // current poule only (generated periodically by scripts/fetch-data.js),
+    // there's no live backend left to fetch a different season on demand.
     const sel = document.getElementById("standingsSeasonSelect");
-    if (sel && data.poule_options && data.poule_options.length > 1) {
-      sel.innerHTML = data.poule_options.map(p =>
-        `<option value="${escapeHtml(String(p.id))}" ${String(p.id) === String(data.poule_id) ? "selected" : ""}>${escapeHtml(p.label)}</option>`
-      ).join("");
-      sel.style.display = "";
-    } else if (sel) {
-      sel.style.display = "none";
-    }
+    if (sel) sel.style.display = "none";
 
     if (!data.standings || data.standings.length === 0) {
       body.innerHTML = `<div class="lineup-meta">Geen stand beschikbaar.</div>`;
@@ -2642,12 +2635,6 @@ async function loadStandings() {
   } catch (e) {
     body.innerHTML = `<div class="lineup-meta">Fout bij laden van poulestand.</div>`;
   }
-}
-
-function standingsSeasonChanged() {
-  const sel = document.getElementById("standingsSeasonSelect");
-  if (sel) standingsPouleId = sel.value;
-  loadStandings();
 }
 
 /* =========================

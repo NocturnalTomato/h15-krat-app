@@ -1,0 +1,11 @@
+{
+  "name": "h15-krat-app",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "fetch-data": "node scripts/fetch-data.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^0.27.1"
+  }
+}

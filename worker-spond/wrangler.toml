@@ -1,7 +1,0 @@
-name = "ho-krat-spond-trigger"
-main = "worker.js"
-compatibility_date = "2024-01-01"
-
-[[kv_namespaces]]
-binding = "LINEUP_KV"
-id = "9c601474870b464bac6a5eca685665b9"

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b3d2e" />
+  <title>Flesje Flippen — HO Krat</title>
+  <style>
+    :root {
+      --green: #0b3d2e;
+      --green2: #14664a;
+      --amber: #f4b52a;
+      --amber2: #d98e12;
+      --crate: #8a5a2b;
+      --cream: #fdf6e3;
+      --ink: #10241c;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      background: var(--green);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--cream);
+      touch-action: none; user-select: none; -webkit-user-select: none;
+    }
+    #game { position: fixed; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+    .overlay {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 18px;
+      padding: env(safe-area-inset-top) 22px env(safe-area-inset-bottom);
+      text-align: center;
+      background: radial-gradient(120% 120% at 50% 0%, rgba(20,102,74,.55), rgba(11,61,46,.92));
+      backdrop-filter: blur(2px);
+      z-index: 10;
+    }
+    .overlay.hidden { display: none; }
+
+    .title {
+      font-size: clamp(30px, 9vw, 52px); font-weight: 900; letter-spacing: .5px;
+      line-height: 1; margin: 0;
+      color: var(--amber); text-shadow: 0 3px 0 var(--amber2), 0 6px 14px rgba(0,0,0,.35);
+    }
+    .subtitle { margin: -6px 0 0; font-size: 14px; opacity: .85; letter-spacing: 3px; text-transform: uppercase; }
+    .logo-slot {
+      width: 78px; height: 78px; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, var(--amber), var(--amber2));
+      box-shadow: 0 8px 22px rgba(0,0,0,.35), inset 0 2px 0 rgba(255,255,255,.4);
+      font-size: 40px;
+    }
+    .hint { font-size: 15px; max-width: 320px; opacity: .9; line-height: 1.5; }
+
+    .btn {
+      appearance: none; border: 0; cursor: pointer;
+      font-size: 19px; font-weight: 800; letter-spacing: .3px;
+      padding: 16px 34px; border-radius: 16px; min-width: 200px;
+      color: var(--ink); background: linear-gradient(160deg, var(--amber), var(--amber2));
+      box-shadow: 0 6px 0 #b5770c, 0 10px 20px rgba(0,0,0,.3);
+      transition: transform .06s ease, box-shadow .06s ease;
+    }
+    .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b5770c, 0 5px 12px rgba(0,0,0,.3); }
+    .btn.secondary { background: linear-gradient(160deg,#1e7a59,#14664a); color: var(--cream); box-shadow: 0 6px 0 #0c4432, 0 10px 20px rgba(0,0,0,.3); }
+    .btn.secondary:active { box-shadow: 0 2px 0 #0c4432; }
+
+    .best { font-size: 15px; opacity: .9; }
+    .best b { color: var(--amber); font-size: 20px; }
+
+    /* HUD */
+    #hud {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 5;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: calc(env(safe-area-inset-top) + 12px) 18px 0; pointer-events: none;
+    }
+    #hud.hidden { display: none; }
+    .score-box { font-size: 15px; opacity: .85; }
+    .score-box .big { font-size: 40px; font-weight: 900; color: var(--amber); line-height: 1; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+    .combo { font-size: 15px; font-weight: 800; color: var(--cream); opacity: 0; transition: opacity .2s; text-align: right; }
+    .combo.show { opacity: 1; }
+    .combo b { color: var(--amber); }
+
+    /* Game over */
+    .card {
+      background: rgba(8, 40, 30, .72); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; padding: 22px; width: 100%; max-width: 380px;
+      max-height: 82vh; overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    }
+    .final-score { font-size: 15px; opacity: .85; margin: 0 0 2px; }
+    .final-score b { display: block; font-size: 54px; font-weight: 900; color: var(--amber); line-height: 1; }
+    .name-row { display: flex; gap: 8px; margin: 16px 0 6px; }
+    .name-row input {
+      flex: 1; font-size: 17px; padding: 13px 14px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08);
+      color: var(--cream); outline: none; min-width: 0;
+    }
+    .name-row input::placeholder { color: rgba(253,246,227,.5); }
+    .save-state { font-size: 13px; min-height: 18px; opacity: .85; margin: 6px 0 0; }
+    .prompt-cap { font-size: 14px; opacity: .8; margin: 2px 0 0; }
+
+    /* Naamveld op het startscherm */
+    .name-input {
+      font-size: 17px; padding: 13px 16px; border-radius: 12px; text-align: center;
+      border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08);
+      color: var(--cream); outline: none; width: 240px; max-width: 82%;
+    }
+    .name-input:focus { border-color: var(--amber); }
+    .name-input::placeholder { color: rgba(253,246,227,.5); }
+    .btn:disabled { filter: grayscale(.6) brightness(.8); box-shadow: 0 6px 0 #7a5208; cursor: not-allowed; }
+
+    .board-block { margin-top: 16px; }
+    .board-title {
+      display: flex; align-items: center; gap: 8px; margin: 0 0 4px;
+      font-size: 15px; font-weight: 800; color: var(--cream);
+    }
+    .board { list-style: none; margin: 0; padding: 0; min-height: 44px; }
+    .board li {
+      display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center;
+      padding: 8px 6px; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .board li .rank { font-weight: 800; color: var(--amber); text-align: center; }
+    .board li .sc { font-weight: 800; }
+    .board .muted { opacity: .6; text-align: center; padding: 14px 0; grid-column: 1/-1; }
+    .weeklabel { font-size: 12px; opacity: .6; font-weight: 600; }
+    .row-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .row-actions .btn { min-width: 0; flex: 1; padding: 14px; font-size: 17px; }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <canvas id="c"></canvas>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div class="score-box"><span class="big" id="hudScore">0</span><br>flips</div>
+    <div class="combo" id="hudCombo">combo <b>x2</b></div>
+  </div>
+
+  <!-- Start scherm -->
+  <div id="startScreen" class="overlay">
+    <div class="logo-slot" id="logoSlot">🍾</div>
+    <h1 class="title">Flesje Flippen</h1>
+    <p class="subtitle">HO Krat</p>
+    <p class="hint">Swipe omhoog om het flesje te flippen en laat het <b>rechtop</b> op de volgende krat landen. Hoe verder je komt, hoe kleiner de kratten!</p>
+    <input id="nameInput" class="name-input" maxlength="10" placeholder="Vul je naam in" autocomplete="off" />
+    <button class="btn" id="playBtn" disabled>Spelen</button>
+    <p class="best">Jouw record: <b id="startBest">0</b></p>
+  </div>
+
+  <!-- Game over: eerst doorgaan of stoppen -->
+  <div id="gameoverPrompt" class="overlay hidden">
+    <div class="card" style="text-align:center;">
+      <p class="final-score">Game over!<b id="promptScore">0</b></p>
+      <p class="prompt-cap">flips gehaald</p>
+      <p class="save-state" id="promptSave"></p>
+      <div class="row-actions">
+        <button class="btn" id="continueBtn">Doorgaan</button>
+        <button class="btn secondary" id="stopBtn">Stoppen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score-/ranglijstscherm (na 'Stoppen') -->
+  <div id="gameOver" class="overlay hidden">
+    <div class="card">
+      <p class="final-score">Aantal flips<b id="finalScore">0</b></p>
+      <p class="save-state" id="saveState"></p>
+
+      <div class="board-block">
+        <p class="board-title">🗓️ Deze week <span class="weeklabel" id="weekLabel"></span></p>
+        <ol class="board" id="boardWeek"><li class="muted">Laden…</li></ol>
+      </div>
+      <div class="board-block">
+        <p class="board-title">🏆 Aller tijden</p>
+        <ol class="board" id="boardAll"><li class="muted">Laden…</li></ol>
+      </div>
+
+      <div class="row-actions">
+        <button class="btn secondary" id="againBtn">Opnieuw</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    // ---- API-configuratie ----------------------------------------------
+    // Volgorde: ?api= query > window.HO_KRATFLIP_API (injectie door HO krat app)
+    // > automatisch afgeleid van de eigen host (ho-kratflip.* -> ho-kratflip-api.*)
+    // > DEFAULT_API_BASE (fallback, bv. bij openen via file://).
+    const DEFAULT_API_BASE = "/api/kratflip";
+    const params = new URLSearchParams(location.search);
+    function resolveApiBase() {
+      const q = params.get("api");
+      if (q) return q;
+      if (window.HO_KRATFLIP_API) return window.HO_KRATFLIP_API;
+      const h = location.hostname;
+      if (h.indexOf("ho-kratflip.") === 0) {
+        return location.protocol + "//" + h.replace("ho-kratflip.", "ho-kratflip-api.");
+      }
+      return DEFAULT_API_BASE;
+    }
+    const API_BASE = resolveApiBase().replace(/\/$/, "");
+
+    // ---- Canvas / schaal ------------------------------------------------
+    const canvas = document.getElementById("c");
+    const ctx = canvas.getContext("2d");
+    let W = 0, H = 0, DPR = 1, S = 1;
+
+    function resize() {
+      DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = Math.round(W * DPR);
+      canvas.height = Math.round(H * DPR);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      S = Math.max(0.65, Math.min(1.7, Math.min(W, H) / 420));
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // ---- Game constanten ------------------------------------------------
+    const GRAVITY = 2200;          // px/s^2 (geschaald met S bij gebruik)
+    const KV = 7.0;                // snelheid per swipe-pixel
+    const KSPIN = 0.075;           // spin per swipe-magnitude
+    const UPRIGHT_TOL = 0.52;      // rad (~30°) marge om "rechtop" te landen (ruimhartig)
+    const MAX_SPEED = 2600;        // clamp launch-snelheid
+    const surfaceRatio = 0.70;     // hoogte van het krat-oppervlak
+    const anchorRatio = 0.26;      // schermpositie van de huidige krat
+
+    // ---- Game state -----------------------------------------------------
+    let platforms = [];
+    let currentIndex = 0;
+    let bottle = null;
+    let camX = 0, camTarget = 0;
+    let score = 0, combo = 0;
+    let sessionToken = null;
+    let state = "menu";            // menu | ready | flying | over
+    let drag = null;               // {sx, sy, cx, cy}
+    let lastT = 0;
+    let particles = [];            // regenboog-confetti + happy emoji bij landing
+
+    function surfaceY() { return H * surfaceRatio; }
+    function bottleW() { return 22 * S; }
+    function bottleH() { return 58 * S; }
+
+    function makePlatform(x, level) {
+      const w = Math.max(58 * S, (150 - level * 9) * S);
+      return { x, w, level };
+    }
+
+    function resetGame() {
+      platforms = [];
+      const startX = 0;
+      platforms.push(makePlatform(startX, 0));
+      spawnNext();
+      spawnNext();
+      currentIndex = 0;
+      const p = platforms[0];
+      bottle = {
+        x: p.x + p.w / 2, y: surfaceY() - bottleH() / 2,
+        vx: 0, vy: 0, angle: 0, va: 0, flying: false,
+      };
+      score = 0; combo = 0;
+      particles = [];
+      camTarget = platforms[0].x - W * anchorRatio;
+      camX = camTarget;
+      state = "ready";
+      updateHud();
+    }
+
+    function spawnNext() {
+      const last = platforms[platforms.length - 1];
+      const level = last.level + 1;
+      const gap = Math.min(230 * S, (95 + level * 12) * S);
+      platforms.push(makePlatform(last.x + last.w + gap, level));
+    }
+
+    // ---- Input ----------------------------------------------------------
+    function pointerPos(e) {
+      const t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX, y: t.clientY };
+    }
+    function onDown(e) {
+      if (state !== "ready") return;
+      e.preventDefault();
+      const p = pointerPos(e);
+      drag = { sx: p.x, sy: p.y, cx: p.x, cy: p.y };
+    }
+    function onMove(e) {
+      if (!drag) return;
+      e.preventDefault();
+      const p = pointerPos(e);
+      drag.cx = p.x; drag.cy = p.y;
+    }
+    function onUp(e) {
+      if (!drag || state !== "ready") { drag = null; return; }
+      e.preventDefault();
+      const sdx = drag.cx - drag.sx;
+      const sdy = drag.cy - drag.sy;
+      drag = null;
+      const mag = Math.hypot(sdx, sdy);
+      if (mag < 14) return;                 // te kleine tik → negeer
+      let vx = sdx * KV * S;
+      let vy = sdy * KV * S;
+      const sp = Math.hypot(vx, vy);
+      if (sp > MAX_SPEED * S) { const k = (MAX_SPEED * S) / sp; vx *= k; vy *= k; }
+      if (vy > -220 * S) vy = -220 * S;     // altijd een minimale opwaartse worp
+      bottle.vx = vx; bottle.vy = vy;
+      bottle.va = mag * KSPIN * (vx >= 0 ? 1 : -1);
+      bottle.flying = true;
+      state = "flying";
+      blip(180, 0.05);
+      if (navigator.vibrate) navigator.vibrate(8);
+    }
+    canvas.addEventListener("touchstart", onDown, { passive: false });
+    canvas.addEventListener("touchmove", onMove, { passive: false });
+    canvas.addEventListener("touchend", onUp, { passive: false });
+    canvas.addEventListener("mousedown", onDown);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+
+    // ---- Fysica / update ------------------------------------------------
+    function normAngle(a) {
+      a = a % (2 * Math.PI);
+      if (a > Math.PI) a -= 2 * Math.PI;
+      if (a < -Math.PI) a += 2 * Math.PI;
+      return a;
+    }
+
+    // ---- Feestje bij landing: regenboog-confetti + happy emoji ----------
+    const HAPPY = ["🎉", "✨", "🌈", "⭐", "🥳", "🍺", "💖", "🎊"];
+    function spawnBurst(x, y, combo) {
+      const n = 30 + Math.min(40, combo * 6);      // meer combo = groter feest
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const sp = (70 + Math.random() * 300) * S;
+        particles.push({
+          x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 160 * S,
+          life: 0.9 + Math.random() * 0.8, age: 0,
+          hue: Math.floor(Math.random() * 360), size: (4 + Math.random() * 6) * S,
+          rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 14, emoji: null,
+        });
+      }
+      const m = 5 + Math.min(6, combo);
+      for (let i = 0; i < m; i++) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 44 * S, y: y - 8 * S,
+          vx: (Math.random() - 0.5) * 140 * S, vy: (-190 - Math.random() * 140) * S,
+          life: 1.0 + Math.random() * 0.7, age: 0, hue: 0,
+          size: (20 + Math.random() * 12) * S, rot: 0, vr: (Math.random() - 0.5) * 4,
+          emoji: HAPPY[Math.floor(Math.random() * HAPPY.length)],
+        });
+      }
+    }
+    function updateParticles(dt) {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.age += dt;
+        if (p.age >= p.life) { particles.splice(i, 1); continue; }
+        p.vy += GRAVITY * S * 0.32 * dt;   // lichte zwaartekracht
+        p.vx *= (1 - 0.9 * dt);            // luchtweerstand
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        p.rot += p.vr * dt;
+      }
+    }
+    function drawParticles() {
+      if (!particles.length) return;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      for (const p of particles) {
+        const t = 1 - p.age / p.life;
+        ctx.globalAlpha = Math.max(0, Math.min(1, t * 1.5));
+        const X = sx(p.x), Y = p.y;
+        if (p.emoji) {
+          ctx.font = p.size + "px serif";
+          ctx.fillText(p.emoji, X, Y);
+        } else {
+          ctx.save();
+          ctx.translate(X, Y); ctx.rotate(p.rot);
+          ctx.fillStyle = "hsl(" + p.hue + " 95% 62%)";
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.62);
+          ctx.restore();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function update(dt) {
+      updateParticles(dt);
+      // camera altijd zacht naar doel
+      camTarget = platforms[currentIndex].x - W * anchorRatio;
+      camX += (camTarget - camX) * Math.min(1, dt * 6);
+
+      if (state !== "flying" || !bottle.flying) return;
+
+      bottle.vy += GRAVITY * S * dt;
+      bottle.x += bottle.vx * dt;
+      bottle.y += bottle.vy * dt;
+      bottle.angle += bottle.va * dt;
+
+      const restY = surfaceY() - bottleH() / 2;
+      // landing detecteren op weg naar beneden
+      if (bottle.vy > 0 && bottle.y >= restY) {
+        const cur = platforms[currentIndex];
+        const next = platforms[currentIndex + 1];
+        const onNext = next && bottle.x >= next.x && bottle.x <= next.x + next.w;
+        const onCur = bottle.x >= cur.x && bottle.x <= cur.x + cur.w;
+        const upright = Math.abs(normAngle(bottle.angle)) < UPRIGHT_TOL;
+
+        if (onNext && upright) {           // geslaagd → volgende krat
+          land(next, currentIndex + 1, true);
+        } else if (onCur && upright) {     // veilig terug op dezelfde krat → opnieuw proberen
+          land(cur, currentIndex, false);
+        } else if (onNext || onCur) {      // geraakt maar niet rechtop → omgevallen
+          gameOver();
+        }
+        // anders: nog in de lucht boven de kloof
+      }
+
+      // in de kloof gevallen
+      if (bottle.y > H + 120) gameOver();
+    }
+
+    function land(p, index, scored) {
+      bottle.x = Math.min(Math.max(bottle.x, p.x + bottleW() / 2), p.x + p.w - bottleW() / 2);
+      bottle.y = surfaceY() - bottleH() / 2;
+      bottle.vx = bottle.vy = bottle.va = 0;
+      bottle.angle = 0; bottle.flying = false;
+      currentIndex = index;
+      state = "ready";
+      if (scored) {
+        score += 1; combo += 1;
+        while (platforms.length < currentIndex + 3) spawnNext();
+        blip(660, 0.07); blip(880, 0.07, 0.06); blip(1175, 0.08, 0.12);
+        if (navigator.vibrate) navigator.vibrate([10, 20, 10]);
+        spawnBurst(bottle.x, bottle.y - bottleH() / 2, combo);
+        showCombo();
+      } else {
+        combo = 0;
+      }
+      updateHud();
+    }
+
+    // ---- Render ---------------------------------------------------------
+    function sx(x) { return x - camX; }
+
+    function drawCrate(p) {
+      const top = surfaceY();
+      const h = Math.max(60, H - top + 40);
+      const x = sx(p.x);
+      ctx.fillStyle = "#6d4420";
+      ctx.fillRect(x, top, p.w, h);
+      ctx.fillStyle = "#8a5a2b";
+      ctx.fillRect(x, top, p.w, 10 * S);
+      // spijlen
+      ctx.strokeStyle = "rgba(0,0,0,.22)"; ctx.lineWidth = 2;
+      const slats = Math.max(3, Math.round(p.w / (26 * S)));
+      for (let i = 1; i < slats; i++) {
+        const lx = x + (p.w * i) / slats;
+        ctx.beginPath(); ctx.moveTo(lx, top); ctx.lineTo(lx, top + h); ctx.stroke();
+      }
+      ctx.strokeRect(x, top, p.w, 42 * S);
+      // toprand highlight
+      ctx.fillStyle = "rgba(255,255,255,.15)";
+      ctx.fillRect(x, top, p.w, 3);
+    }
+
+    function drawBottle() {
+      const w = bottleW(), h = bottleH();
+      ctx.save();
+      ctx.translate(sx(bottle.x), bottle.y);
+      ctx.rotate(bottle.angle);
+      // schaduw op de grond bij rust
+      // body
+      const bodyH = h * 0.62;
+      ctx.fillStyle = "#2f9e63";
+      roundRect(-w / 2, h / 2 - bodyH, w, bodyH, 5 * S); ctx.fill();
+      // schouder
+      ctx.beginPath();
+      ctx.moveTo(-w / 2, h / 2 - bodyH);
+      ctx.quadraticCurveTo(-w / 2, h / 2 - bodyH - 10 * S, -w * 0.18, h / 2 - bodyH - 14 * S);
+      ctx.lineTo(w * 0.18, h / 2 - bodyH - 14 * S);
+      ctx.quadraticCurveTo(w / 2, h / 2 - bodyH - 10 * S, w / 2, h / 2 - bodyH);
+      ctx.closePath(); ctx.fillStyle = "#2f9e63"; ctx.fill();
+      // hals
+      ctx.fillStyle = "#2f9e63";
+      ctx.fillRect(-w * 0.16, -h / 2 + 2 * S, w * 0.32, h / 2 - bodyH + 8 * S);
+      // glans
+      ctx.fillStyle = "rgba(255,255,255,.25)";
+      ctx.fillRect(-w / 2 + 3 * S, h / 2 - bodyH + 4 * S, 3 * S, bodyH - 8 * S);
+      // dop
+      ctx.fillStyle = "#f4b52a";
+      roundRect(-w * 0.16, -h / 2, w * 0.32, 8 * S, 2 * S); ctx.fill();
+      // etiket
+      ctx.fillStyle = "#fdf6e3";
+      ctx.fillRect(-w / 2 + 2 * S, h / 2 - bodyH * 0.7, w - 4 * S, bodyH * 0.34);
+      ctx.restore();
+    }
+
+    function drawAim() {
+      if (!drag) return;
+      const sdx = drag.cx - drag.sx, sdy = drag.cy - drag.sy;
+      const mag = Math.hypot(sdx, sdy);
+      if (mag < 14) return;
+      let vx = sdx * KV * S, vy = sdy * KV * S;
+      const sp = Math.hypot(vx, vy);
+      if (sp > MAX_SPEED * S) { const k = (MAX_SPEED * S) / sp; vx *= k; vy *= k; }
+      if (vy > -220 * S) vy = -220 * S;
+      // voorspelde baan
+      let px = bottle.x, py = bottle.y, pvy = vy;
+      ctx.fillStyle = "rgba(253,246,227,.55)";
+      for (let i = 0; i < 26; i++) {
+        px += vx * 0.028; py += pvy * 0.028; pvy += GRAVITY * S * 0.028;
+        if (py > surfaceY() - bottleH() / 2) break;
+        if (i % 2 === 0) { ctx.beginPath(); ctx.arc(sx(px), py, 3 * S, 0, 7); ctx.fill(); }
+      }
+    }
+
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function render() {
+      // lucht
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, "#1a7a58"); g.addColorStop(1, "#0b3d2e");
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      // verre schaduwband onder oppervlak
+      ctx.fillStyle = "rgba(0,0,0,.12)";
+      ctx.fillRect(0, surfaceY(), W, H - surfaceY());
+
+      // In het menu is er nog geen wereld om te tekenen.
+      if (!bottle) return;
+
+      for (const p of platforms) {
+        if (sx(p.x) > W + 40 || sx(p.x) + p.w < -40) continue;
+        drawCrate(p);
+      }
+      drawAim();
+      drawBottle();
+      drawParticles();
+    }
+
+    function loop(t) {
+      const dt = Math.min(0.032, (t - lastT) / 1000 || 0);
+      lastT = t;
+      if (state === "flying" || state === "ready") update(dt);
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    // ---- HUD / schermen -------------------------------------------------
+    const hud = document.getElementById("hud");
+    const hudScore = document.getElementById("hudScore");
+    const hudCombo = document.getElementById("hudCombo");
+    let comboTimer = null;
+
+    function updateHud() { hudScore.textContent = score; }
+    function showCombo() {
+      if (combo < 2) return;
+      hudCombo.innerHTML = "combo <b>x" + combo + "</b>";
+      hudCombo.classList.add("show");
+      clearTimeout(comboTimer);
+      comboTimer = setTimeout(() => hudCombo.classList.remove("show"), 900);
+    }
+
+    const startScreen = document.getElementById("startScreen");
+    const gameOverEl = document.getElementById("gameOver");
+    const gameoverPrompt = document.getElementById("gameoverPrompt");
+    const promptScore = document.getElementById("promptScore");
+    const promptSave = document.getElementById("promptSave");
+    const startBest = document.getElementById("startBest");
+    const finalScore = document.getElementById("finalScore");
+    const nameInput = document.getElementById("nameInput");
+    const saveState = document.getElementById("saveState");
+    const boardWeek = document.getElementById("boardWeek");
+    const boardAll = document.getElementById("boardAll");
+    const weekLabel = document.getElementById("weekLabel");
+
+    let playerName = "";
+    function setSaveStatus(t) { promptSave.textContent = t; saveState.textContent = t; }
+
+    function localBest() { return parseInt(localStorage.getItem("kratflip_best") || "0", 10) || 0; }
+    function setLocalBest(v) { if (v > localBest()) localStorage.setItem("kratflip_best", String(v)); }
+
+    // ---- Game flow ------------------------------------------------------
+    async function startGame() {
+      const name = nameInput.value.trim();
+      if (!name) { nameInput.focus(); return; }   // naam is verplicht vóór het spelen
+      playerName = name;
+      localStorage.setItem("kratflip_name", name);
+      startScreen.classList.add("hidden");
+      gameOverEl.classList.add("hidden");
+      gameoverPrompt.classList.add("hidden");
+      hud.classList.remove("hidden");
+      resetGame();
+      sessionToken = null;
+      fetchSession();   // async, blokkeert het spelen niet
+    }
+
+    async function fetchSession() {
+      try {
+        const r = await fetch(API_BASE + "/session");
+        const d = await r.json();
+        sessionToken = d.token || null;
+      } catch (_) { sessionToken = null; }
+    }
+
+    function gameOver() {
+      if (state === "over") return;
+      state = "over";
+      blip(160, 0.12); blip(120, 0.14, 0.09);
+      if (navigator.vibrate) navigator.vibrate([30, 40, 60]);
+      setLocalBest(score);
+      finalScore.textContent = score;
+      promptScore.textContent = score;
+      setSaveStatus("");
+      hud.classList.add("hidden");
+      gameoverPrompt.classList.remove("hidden");   // eerst: doorgaan of stoppen
+      submitScore();                                // score op de achtergrond opslaan
+    }
+
+    async function submitScore() {
+      if (!sessionToken) { setSaveStatus("⚠ Offline — score niet opgeslagen op de ranglijst."); return; }
+      setSaveStatus("Opslaan…");
+      try {
+        const r = await fetch(API_BASE + "/scores", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: sessionToken, name: playerName, score }),
+        });
+        const d = await r.json();
+        if (d.success) {
+          setSaveStatus("✔ Score opgeslagen als " + (d.saved && d.saved.name ? d.saved.name : playerName));
+          sessionToken = null;               // token is verbruikt
+          if (!gameOverEl.classList.contains("hidden")) loadBoard(); // ververs als het scorescherm al open is
+        } else {
+          setSaveStatus("⚠ " + (d.error || "Opslaan mislukt"));
+        }
+      } catch (_) {
+        setSaveStatus("⚠ Netwerkfout — score niet opgeslagen.");
+      }
+    }
+
+    // ---- Leaderboard ----------------------------------------------------
+    let boardData = { weekTop: [], allTimeTop: [], weekKey: "" };
+
+    async function loadBoard() {
+      boardWeek.innerHTML = boardAll.innerHTML = '<li class="muted">Laden…</li>';
+      try {
+        const r = await fetch(API_BASE + "/scores");
+        boardData = await r.json();
+        weekLabel.textContent = boardData.weekKey ? "(" + boardData.weekKey + ")" : "";
+        renderBoard();
+      } catch (_) {
+        boardWeek.innerHTML = boardAll.innerHTML = '<li class="muted">Ranglijst niet beschikbaar (offline)</li>';
+        weekLabel.textContent = "";
+      }
+    }
+
+    function renderList(el, list) {
+      if (!list || !list.length) { el.innerHTML = '<li class="muted">Nog geen scores — wees de eerste!</li>'; return; }
+      el.innerHTML = list.map((row, i) =>
+        '<li><span class="rank">' + (i + 1) + '</span><span class="nm">' +
+        escapeHtml(row.name) + '</span><span class="sc">' + row.score + '</span></li>'
+      ).join("");
+    }
+    function renderBoard() {
+      renderList(boardWeek, boardData.weekTop);
+      renderList(boardAll, boardData.allTimeTop);
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    // ---- Geluid (WebAudio) ----------------------------------------------
+    let actx = null;
+    function blip(freq, dur, delay) {
+      try {
+        if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+        const t0 = actx.currentTime + (delay || 0);
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.type = "square"; o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.14, t0 + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        o.connect(g); g.connect(actx.destination);
+        o.start(t0); o.stop(t0 + dur + 0.02);
+      } catch (_) {}
+    }
+
+    // ---- Events ---------------------------------------------------------
+    const playBtn = document.getElementById("playBtn");
+    function syncPlayBtn() { playBtn.disabled = nameInput.value.trim().length === 0; }
+    playBtn.addEventListener("click", startGame);
+    document.getElementById("againBtn").addEventListener("click", startGame);
+    document.getElementById("continueBtn").addEventListener("click", startGame);   // Doorgaan = nieuw spel
+    document.getElementById("stopBtn").addEventListener("click", () => {           // Stoppen = scorescherm
+      gameoverPrompt.classList.add("hidden");
+      gameOverEl.classList.remove("hidden");
+      loadBoard();
+    });
+    nameInput.addEventListener("input", syncPlayBtn);
+    nameInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && nameInput.value.trim()) startGame();
+    });
+
+    // Naam voorvullen (?name= injectie door HO krat app, of vorige sessie)
+    nameInput.value = (params.get("name") || localStorage.getItem("kratflip_name") || "").slice(0, 10);
+    syncPlayBtn();
+    startBest.textContent = localBest();
+    requestAnimationFrame(loop);
+  })();
+  </script>
+</body>
+</html>

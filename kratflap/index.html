@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>Kratflap</title>
+  <style>
+    :root {
+      /* Mostly zwart-wit met kleine groentinten op kratje en hockeyspullen. */
+      --bg: #060606;
+      --panel: #111111;
+      --panel2: #1b1b1b;
+      --accentSoft: #f0f0f0;
+      --accent: #ffffff;
+      --danger: #d0d0d0;
+      --text: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: rgba(255,255,255,.12);
+      --shadow: rgba(0,0,0,.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 15%, #1f1f1f 0%, var(--bg) 58%, #000 100%);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      touch-action: manipulation;
+    }
+
+    #app {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .phone-frame {
+      position: relative;
+      width: min(100vw, 520px);
+      height: 100dvh;
+      max-height: 940px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #151515 0%, #050505 100%);
+      border-left: 1px solid rgba(255,255,255,.06);
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hud {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .title {
+      font-weight: 900;
+      letter-spacing: .06em;
+      font-size: 18px;
+      color: var(--accent);
+      text-shadow: 0 2px 0 #000;
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .scorebox {
+      text-align: right;
+      min-width: 92px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(5, 5, 5, .62);
+      box-shadow: 0 8px 22px var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .score-value {
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 950;
+      color: var(--text);
+      text-shadow: 0 2px 0 #000;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: radial-gradient(circle at 50% 30%, rgba(45, 45, 45, .70), rgba(0,0,0,.86) 60%);
+    }
+
+    .screen.show {
+      display: flex;
+    }
+
+    .card {
+      width: min(100%, 430px);
+      max-height: calc(100dvh - 38px);
+      overflow: auto;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(26,26,26,.97), rgba(8,8,8,.97));
+      box-shadow: 0 24px 70px rgba(0,0,0,.65);
+    }
+
+    h1, h2, p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 32px;
+      line-height: .95;
+      letter-spacing: -.04em;
+      text-shadow: 0 3px 0 #000;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .controls {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line);
+      color: #d0d0d0;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .name-row {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 14px;
+      background: #050505;
+      color: var(--text);
+      padding: 13px 14px;
+      font-size: 18px;
+      font-weight: 850;
+      outline: none;
+      text-transform: uppercase;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.12);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f2f2f2, #9a9a9a);
+      color: #080808;
+      padding: 14px 12px;
+      font-size: 16px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      box-shadow: 0 7px 0 #3a3a3a, 0 18px 40px rgba(0,0,0,.45);
+    }
+
+    button:active {
+      transform: translateY(4px);
+      box-shadow: 0 3px 0 #3a3a3a, 0 10px 24px rgba(0,0,0,.45);
+    }
+
+    .secondary {
+      background: linear-gradient(180deg, #303030, #151515);
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 0 #050505, 0 16px 32px rgba(0,0,0,.35);
+    }
+
+    .danger-lite {
+      margin-top: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #cfcfcf;
+    }
+
+    .leaderboards {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .board {
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--line);
+    }
+
+    .board h2 {
+      margin-bottom: 7px;
+      color: var(--accentSoft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 20px;
+      color: #e0e0e0;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    li span {
+      color: var(--muted);
+    }
+
+    .toast {
+      position: absolute;
+      top: 36%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.85);
+      background: rgba(255,255,255,.13);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .06em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .18s, transform .18s;
+      z-index: 20;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .pb-line {
+      margin-top: 6px;
+      color: #aaffaa;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      min-height: 18px;
+    }
+
+    .gameover-score {
+      margin-top: 10px;
+      font-size: 44px;
+      font-weight: 950;
+      color: var(--accent);
+      text-shadow: 0 3px 0 #000;
+    }
+
+    .tiny {
+      margin-top: 10px;
+      color: #888;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 360px) {
+      .leaderboards { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+      .score-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="phone-frame" id="frame">
+      <canvas id="game"></canvas>
+      <div id="toast" class="toast"></div>
+
+      <div class="hud">
+        <div class="topbar">
+          <div class="brand">
+            <div class="title">KRATFLAP</div>
+            <div class="subtitle">flappy kratten op hockeygras</div>
+          </div>
+          <div class="scorebox">
+            <div class="score-label">score</div>
+            <div class="score-value" id="scoreText">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen show" id="startScreen">
+        <div class="card">
+          <h1>Kratflap</h1>
+          <p class="tagline" id="startTagline">Een schrale kutgame voor tussen twee HO-kratten in.</p>
+
+          <div class="controls">
+            Tik ergens op het scherm om het kratje te laten flappen. Ontwijk sticks, ballen, pionnen en andere hockeymeuk. Raak je iets, dan is het krat gevallen en mag iemand anders halen.
+          </div>
+
+          <div class="name-row">
+            <label for="playerName">Naam, max 10 tekens</label>
+            <input id="playerName" maxlength="10" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="KRATHELD" />
+          </div>
+
+          <button id="startBtn">Start geklooi</button>
+
+          <div class="leaderboards">
+            <div class="board">
+              <h2>All-time top 5</h2>
+              <ol id="allTimeList"></ol>
+            </div>
+            <div class="board">
+              <h2>Week top 5</h2>
+              <ol id="weekList"></ol>
+            </div>
+          </div>
+          <button class="secondary danger-lite" id="resetScoresBtn" type="button">Wis lokale highscores</button>
+          <p class="tiny">Highscores worden ook gesynchroniseerd naar de HO-Krat app.</p>
+        </div>
+      </div>
+
+      <div class="screen" id="gameOverScreen">
+        <div class="card">
+          <h1>Krat gevallen.</h1>
+          <p class="tagline" id="deathLine">De hockeygoden zijn teleurgesteld.</p>
+          <div class="gameover-score" id="finalScore">0</div>
+          <p id="pbLine" class="pb-line"></p>
+          <button id="retryBtn">Nog een poging</button>
+          <button class="secondary" id="shareBtn">Deel score</button>
+          <button class="secondary" id="menuBtn">Highscores bekijken</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      const frame = document.getElementById("frame");
+
+      const scoreText = document.getElementById("scoreText");
+      const startScreen = document.getElementById("startScreen");
+      const gameOverScreen = document.getElementById("gameOverScreen");
+      const startBtn = document.getElementById("startBtn");
+      const retryBtn = document.getElementById("retryBtn");
+      const menuBtn = document.getElementById("menuBtn");
+      const playerNameInput = document.getElementById("playerName");
+      const allTimeList = document.getElementById("allTimeList");
+      const weekList = document.getElementById("weekList");
+      const finalScore = document.getElementById("finalScore");
+      const deathLine = document.getElementById("deathLine");
+      const resetScoresBtn = document.getElementById("resetScoresBtn");
+      const shareBtn = document.getElementById("shareBtn");
+
+      const API_BASE = "/api";
+      const STORAGE_KEY = "hokrat_kratflap_scores_v2";
+      const OLD_STORAGE_KEY = "hokrat_kratflap_scores_v1";
+      const NAME_KEY = "hokrat_kratflap_name_v1";
+      const MAX_NAME_LENGTH = 10;
+      const MAX_STORED_SCORES = 300;
+
+      let sessionToken = null;
+      let W = 0;
+      let H = 0;
+      let DPR = 1;
+      let running = false;
+      let dead = false;
+      let lastTime = 0;
+      let t = 0;
+      let score = 0;
+      let lastKillKind = null;
+      let lastMilestone = 0;
+      let toastTimer = null;
+
+      const toastEl = document.getElementById("toast");
+      const pbLineEl = document.getElementById("pbLine");
+
+      function showToast(text) {
+        toastEl.textContent = text;
+        toastEl.classList.add("show");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1600);
+      }
+
+      function getPersonalBest(name) {
+        const scores = getScores();
+        const mine = scores.filter(s => s.name === name);
+        return mine.length ? Math.max(...mine.map(s => s.score)) : 0;
+      }
+      let nextObstacleIn = 0;
+      let obstacles = [];
+      let particles = [];
+      let shake = 0;
+
+      const player = {
+        x: 88,
+        y: 220,
+        w: 42,
+        h: 34,
+        vy: 0,
+        rot: 0
+      };
+
+      const deathLinesByKind = {
+        wall: [
+          "Het veld heeft grenzen. Jij niet.",
+          "Buiten de lijnen. Vrije bal.",
+          "Gevlogen tegen het plafond. Typisch.",
+          "Je krat kent geen remmen.",
+          "Omhoog is ook een richting. De verkeerde.",
+          "Zelfs de lucht heeft een einde."
+        ],
+        stick: [
+          "Eigen stick, eigen schuld.",
+          "De stick had geen medelijden.",
+          "Geraakt door eigen materiaal. Het voelt extra erg.",
+          "Strafcorner. Wegens slecht kijken.",
+          "Typisch. Eigen materiaal, eigen graf.",
+          "Steken en stikken gaan hand in hand."
+        ],
+        pylon: [
+          "Gestrand op een pion. Dat is beschamend.",
+          "Een pion heeft je gestopt. Denk daar maar eens over na.",
+          "Kleiner dan een pion. Dat is je krat nu.",
+          "Pionnen zijn er voor een reden. Je weet nu welke.",
+          "Overwonnen door plastic kegeltje.",
+          "Je verloor van trainingsobstakels. Van trainingsobstakels."
+        ],
+        ball: [
+          "Hockeybal 1, krat 0.",
+          "Geraakt door de bal. Klassiek.",
+          "Bal in het gezicht. Helm had geholpen.",
+          "De bal mist nooit zijn doel.",
+          "Eigen bal, eigen schuld. Min of meer.",
+          "Schot in doel. Verkeerd doel."
+        ],
+        bag: [
+          "Neergeslagen door een tas vol vuile sportsokken.",
+          "De equipmentbag eist respect.",
+          "Bewust in de tas gevlogen? Lijkt erop.",
+          "De bag weegt meer dan je ego nu.",
+          "Krat vs. tas. Tas wint. Altijd.",
+          "Er zat een keeper in die tas. Misschien."
+        ]
+      };
+
+      const deathLinesByScore = {
+        zero: [
+          "Nul. Echt nul.",
+          "Niet eens één krat geflapped.",
+          "Record gevestigd. Het verkeerde.",
+          "De dug-out heeft gezwegen. Van schaamte.",
+          "Minder punten dan een lege training."
+        ],
+        low: [
+          "Minder kraten dan een keeper handschoenen heeft.",
+          "Amper verder dan de aftrap.",
+          "Je hebt het geprobeerd. Meer kan ik er niet van maken.",
+          "Dit was... iets.",
+          "Volgende keer lager insteken."
+        ],
+        mid: [
+          "Ruim onvoldoende. Maar je leeft tenminste nog.",
+          "De Spiritueel Leider keek even weg.",
+          "Dat was geen sprong, dat was administratie.",
+          "Je kratcontrole is matig.",
+          "Redelijk. Op een slechte dag.",
+          "De dug-out wil afstand nemen van deze actie.",
+          "Het krat had geen bitje in."
+        ],
+        good: [
+          "Niet slecht. Niet goed. Gewoon middelmatig.",
+          "De Spiritueel Leider knikte vaag.",
+          "Dit geeft aanvoerdersambitie. Maar nog niet.",
+          "Best okee, zeg maar.",
+          "Hier doe je het voor, toch?"
+        ],
+        great: [
+          "Respect. Echt. Maar ook: krat gevallen.",
+          "Je hebt meer dan 25 gehaald. En toch verloren.",
+          "Dit was eigenlijk best goed. Het krat zag dat anders.",
+          "Aanvoerder waardig. Bijna.",
+          "De dug-out applaudisseert. Zachtjes.",
+          "Indrukwekkend. Voor een krat."
+        ]
+      };
+
+      const startTaglines = [
+        "Een schrale kutgame voor tussen twee HO-kratten in.",
+        "Officieel goedgekeurd door niemand.",
+        "Tap om de eer van de vereniging te redden.",
+        "Getest op echte krat-handlers.",
+        "Gemaakt in een kwartier. Gespeeld in een eeuwigheid.",
+        "Je krat, jouw verantwoordelijkheid.",
+        "Flap of flop. Jij kiest.",
+        "Hockeyskills niet vereist. Wel handig.",
+        "Ook leuk als je verliest. Niet echt.",
+        "De Spiritueel Leider kijkt toe."
+      ];
+
+      const milestoneTexts = {
+        5:  "5! Lekker bezig!",
+        10: "10! Nu komt het!",
+        15: "15! De dug-out leeft op!",
+        20: "20! Aanvoerder worthy!",
+        25: "25! Ben je serieus?!",
+        30: "30! Belachelijk goed",
+        40: "40! Heb je dit geoefend?!",
+        50: "50! Opgave aanvaard"
+      };
+
+      function pickDeathLine(s, kind) {
+        if (kind && Math.random() < 0.6) {
+          const arr = deathLinesByKind[kind] || deathLinesByKind.wall;
+          return arr[Math.floor(Math.random() * arr.length)];
+        }
+        let arr;
+        if (s === 0) arr = deathLinesByScore.zero;
+        else if (s <= 4) arr = deathLinesByScore.low;
+        else if (s <= 14) arr = deathLinesByScore.mid;
+        else if (s <= 24) arr = deathLinesByScore.good;
+        else arr = deathLinesByScore.great;
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function refreshTagline() {
+        const el = document.getElementById("startTagline");
+        if (el) el.textContent = startTaglines[Math.floor(Math.random() * startTaglines.length)];
+      }
+
+      function clamp(n, a, b) {
+        return Math.max(a, Math.min(b, n));
+      }
+
+      function weekId(date = new Date()) {
+        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const dayNum = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+      }
+
+      function cleanName(value) {
+        const raw = (value || "").trim().toUpperCase().replace(/\s+/g, " ");
+        return (raw || "KRATHELD").slice(0, MAX_NAME_LENGTH);
+      }
+
+      function normalizeScoreEntry(item) {
+        if (!item || typeof item !== "object") return null;
+        const score = Math.max(0, Math.floor(Number(item.score)) || 0);
+        const ts = Number(item.ts) || Date.parse(item.createdAt) || Date.now();
+        return {
+          name: cleanName(item.name),
+          score,
+          ts,
+          createdAt: new Date(ts).toISOString(),
+          week: item.week || weekId(new Date(ts))
+        };
+      }
+
+      function readScoreArray(key) {
+        try {
+          const data = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(data) ? data.map(normalizeScoreEntry).filter(Boolean) : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function getScores() {
+        const current = readScoreArray(STORAGE_KEY);
+        const old = readScoreArray(OLD_STORAGE_KEY);
+        const merged = [...current, ...old]
+          .filter((item, index, arr) => index === arr.findIndex(x => x.name === item.name && x.score === item.score && x.ts === item.ts))
+          .sort((a, b) => b.score - a.score || a.ts - b.ts)
+          .slice(0, MAX_STORED_SCORES);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+        return merged;
+      }
+
+      function saveScore(name, points) {
+        const now = Date.now();
+        const entry = {
+          name: cleanName(name),
+          score: Math.max(0, Math.floor(points)),
+          ts: now,
+          createdAt: new Date(now).toISOString(),
+          week: weekId(new Date(now))
+        };
+        const scores = getScores();
+        scores.push(entry);
+        scores.sort((a, b) => b.score - a.score || a.ts - b.ts);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, MAX_STORED_SCORES)));
+        localStorage.setItem(NAME_KEY, entry.name);
+        return entry;
+      }
+
+      function clearScores() {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(OLD_STORAGE_KEY);
+        updateBoards();
+      }
+
+      function renderList(el, items, emptyText) {
+        el.innerHTML = "";
+        if (!items.length) {
+          const li = document.createElement("li");
+          li.innerHTML = `<span>${emptyText}</span>`;
+          el.appendChild(li);
+          return;
+        }
+        for (const item of items) {
+          const li = document.createElement("li");
+          li.innerHTML = `${escapeHtml(item.name)} <span>${item.score}</span>`;
+          el.appendChild(li);
+        }
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]));
+      }
+
+      function updateBoardsLocal() {
+        const scores = getScores();
+        const thisWeek = weekId();
+        const weekScores = scores.filter(s => s.week === thisWeek);
+        const allTop = [...scores].sort((a, b) => b.score - a.score || a.ts - b.ts).slice(0, 5);
+        const weekTop = [...weekScores].sort((a, b) => b.score - a.score || a.ts - b.ts).slice(0, 5);
+        renderList(allTimeList, allTop, "nog niks");
+        renderList(weekList, weekTop, "nog niks");
+      }
+
+      async function updateBoards() {
+        try {
+          const res = await fetch(API_BASE + "/scores");
+          if (!res.ok) throw new Error("not ok");
+          const data = await res.json();
+          renderList(allTimeList, data.allTimeTop || [], "nog niks");
+          renderList(weekList, data.weekTop || [], "nog niks");
+        } catch {
+          updateBoardsLocal();
+        }
+      }
+
+      function resize() {
+        const rect = frame.getBoundingClientRect();
+        W = Math.max(320, Math.floor(rect.width));
+        H = Math.max(520, Math.floor(rect.height));
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(W * DPR);
+        canvas.height = Math.floor(H * DPR);
+        canvas.style.width = W + "px";
+        canvas.style.height = H + "px";
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        player.x = W * 0.27;
+      }
+
+      async function fetchSessionToken() {
+        try {
+          const res = await fetch(API_BASE + "/session");
+          if (res.ok) {
+            const data = await res.json();
+            sessionToken = data.token || null;
+          }
+        } catch {
+          sessionToken = null;
+        }
+      }
+
+      async function submitScoreToApi(name, points) {
+        if (!sessionToken) return;
+        const token = sessionToken;
+        sessionToken = null;
+        try {
+          await fetch(API_BASE + "/scores", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token, name, score: points })
+          });
+        } catch {
+          // silently ignore network errors
+        }
+      }
+
+      function resetGame() {
+        running = true;
+        dead = false;
+        t = 0;
+        score = 0;
+        lastKillKind = null;
+        lastMilestone = 0;
+        nextObstacleIn = 0.65;
+        obstacles = [];
+        particles = [];
+        shake = 0;
+        player.y = H * 0.43;
+        player.vy = 0;
+        player.rot = 0;
+        scoreText.textContent = "0";
+        startScreen.classList.remove("show");
+        gameOverScreen.classList.remove("show");
+        lastTime = performance.now();
+        fetchSessionToken();
+        requestAnimationFrame(loop);
+      }
+
+      function flap() {
+        if (!running || dead) return;
+        player.vy = -420;
+        player.rot = -0.35;
+        for (let i = 0; i < 7; i++) {
+          particles.push({
+            x: player.x - 8,
+            y: player.y + player.h * .55,
+            vx: -80 - Math.random() * 80,
+            vy: -40 + Math.random() * 80,
+            life: .25 + Math.random() * .18,
+            r: 1 + Math.random() * 2
+          });
+        }
+      }
+
+      function spawnObstacle() {
+        const gap = clamp(160 - t * 1.5, 116, 160);
+        const marginTop = 88;
+        const marginBottom = 88;
+        const gapY = marginTop + Math.random() * Math.max(60, H - marginTop - marginBottom - gap);
+        const kind = ["stick", "pylon", "ball", "bag"][Math.floor(Math.random() * 4)];
+        obstacles.push({
+          x: W + 55,
+          w: 72,
+          gapY,
+          gap,
+          passed: false,
+          kind,
+          wobble: Math.random() * Math.PI * 2
+        });
+      }
+
+      function update(dt) {
+        t += dt;
+        const gravity = 1040;
+        const speed = Math.min(350, 185 + t * 4.2);
+
+        player.vy += gravity * dt;
+        player.y += player.vy * dt;
+        player.rot = clamp(player.rot + dt * 1.9, -0.45, 0.85);
+
+        nextObstacleIn -= dt;
+        if (nextObstacleIn <= 0) {
+          spawnObstacle();
+          nextObstacleIn = clamp(1.35 - t * .012, .92, 1.35);
+        }
+
+        for (const o of obstacles) {
+          o.x -= speed * dt;
+          if (!o.passed && o.x + o.w < player.x) {
+            o.passed = true;
+            score += 1;
+            scoreText.textContent = String(score);
+            if (milestoneTexts[score] && score > lastMilestone) {
+              lastMilestone = score;
+              showToast(milestoneTexts[score]);
+            }
+          }
+        }
+        obstacles = obstacles.filter(o => o.x > -130);
+
+        for (const p of particles) {
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          p.life -= dt;
+        }
+        particles = particles.filter(p => p.life > 0);
+        shake = Math.max(0, shake - dt * 18);
+
+        const halfH = player.h * 0.43;
+        if (player.y - halfH < 0 || player.y + halfH > H - 48) {
+          lastKillKind = "wall";
+          crash();
+          return;
+        }
+
+        const pr = playerRect();
+        for (const o of obstacles) {
+          const topRect = { x: o.x, y: 0, w: o.w, h: o.gapY };
+          const botRect = { x: o.x, y: o.gapY + o.gap, w: o.w, h: H - (o.gapY + o.gap) };
+          if (hit(pr, topRect) || hit(pr, botRect)) {
+            lastKillKind = o.kind;
+            crash();
+            return;
+          }
+        }
+      }
+
+      function playerRect() {
+        return {
+          x: player.x - player.w * .43,
+          y: player.y - player.h * .43,
+          w: player.w * .78,
+          h: player.h * .78
+        };
+      }
+
+      function hit(a, b) {
+        return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+      }
+
+      function crash() {
+        if (dead) return;
+        dead = true;
+        running = false;
+        shake = 12;
+        const name = cleanName(playerNameInput.value);
+        const prevBest = getPersonalBest(name);
+        saveScore(name, score);
+        submitScoreToApi(name, score);
+        updateBoards();
+        const isPB = score > 0 && score > prevBest;
+        finalScore.textContent = score;
+        pbLineEl.textContent = isPB ? "Nieuw persoonlijk record!" : "";
+        deathLine.textContent = pickDeathLine(score, lastKillKind);
+        shareBtn.dataset.shareScore = score;
+        shareBtn.dataset.shareName = name;
+        shareBtn.textContent = "Deel score";
+        setTimeout(() => gameOverScreen.classList.add("show"), 330);
+      }
+
+      shareBtn.addEventListener("click", async () => {
+        const s = Number(shareBtn.dataset.shareScore) || 0;
+        const n = shareBtn.dataset.shareName || "iemand";
+        const text = `${n} haalde ${s} bij HO Kratflap 🏑 Durf jij het beter?`;
+        const url = location.href.split("?")[0];
+        try {
+          if (!navigator.share) throw new Error("Web Share API unavailable");
+          await navigator.share({ title: "HO Kratflap", text, url });
+          shareBtn.textContent = "Gedeeld!";
+        } catch {
+          try {
+            await navigator.clipboard.writeText(`${text}\n${url}`);
+            shareBtn.textContent = "Gekopieerd!";
+          } catch {
+            shareBtn.textContent = "Kon niet kopiëren";
+          }
+        }
+        setTimeout(() => { shareBtn.textContent = "Deel score"; }, 2000);
+      });
+
+      function draw() {
+        const sx = shake ? (Math.random() - .5) * shake : 0;
+        const sy = shake ? (Math.random() - .5) * shake : 0;
+        ctx.save();
+        ctx.translate(sx, sy);
+
+        drawBackground();
+        for (const o of obstacles) drawObstacle(o);
+        drawParticles();
+        drawPlayer();
+        drawForeground();
+
+        ctx.restore();
+      }
+
+      function drawBackground() {
+        const g = ctx.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, "#181818");
+        g.addColorStop(.52, "#101010");
+        g.addColorStop(1, "#050505");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.save();
+        ctx.globalAlpha = .22;
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        const offset = -(t * 35) % 64;
+        for (let x = offset; x < W + 80; x += 64) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x - 130, H);
+          ctx.stroke();
+        }
+        ctx.globalAlpha = .13;
+        for (let y = 120; y < H; y += 120) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(W, y);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        drawHockeyCircle(W * .72 - (t * 22) % (W + 200), H * .56, 120);
+      }
+
+      function drawHockeyCircle(x, y, r) {
+        ctx.save();
+        ctx.globalAlpha = .16;
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawForeground() {
+        ctx.save();
+        ctx.fillStyle = "rgba(0,0,0,.25)";
+        ctx.fillRect(0, H - 48, W, 48);
+        ctx.strokeStyle = "rgba(255,255,255,.20)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(0, H - 49);
+        ctx.lineTo(W, H - 49);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawObstacle(o) {
+        const topH = o.gapY;
+        const botY = o.gapY + o.gap;
+        const botH = H - botY;
+        drawObstacleColumn(o.x, -20, o.w, topH + 20, true, o.kind, o.wobble);
+        drawObstacleColumn(o.x, botY, o.w, botH + 40, false, o.kind, o.wobble);
+      }
+
+      function drawObstacleColumn(x, y, w, h, upsideDown, kind, wobble) {
+        ctx.save();
+        ctx.translate(x + w / 2, y + (upsideDown ? h : 0));
+        if (upsideDown) ctx.scale(1, -1);
+
+        const stemW = 24;
+        ctx.fillStyle = "#111";
+        ctx.fillRect(-stemW / 2 + 3, 0, stemW, h);
+
+        ctx.fillStyle = "#3a3a3a";
+        ctx.strokeStyle = "rgba(255,255,255,.14)";
+        ctx.lineWidth = 2;
+        roundRect(-stemW / 2, 0, stemW, h, 10, true, true);
+
+        if (kind === "stick") drawStick(-22, 18, wobble);
+        if (kind === "pylon") drawPylon(-24, 14);
+        if (kind === "ball") drawBall(-21, 22);
+        if (kind === "bag") drawBag(-29, 12);
+
+        ctx.restore();
+      }
+
+      function drawStick(x, y, wobble) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(-.18 + Math.sin(t * 3 + wobble) * .03);
+        ctx.strokeStyle = "#8eb38a";
+        ctx.lineWidth = 7;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(42, 52);
+        ctx.stroke();
+        ctx.strokeStyle = "#33523a";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(42, 52);
+        ctx.quadraticCurveTo(58, 66, 28, 72);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawPylon(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = "#7ea07a";
+        ctx.strokeStyle = "rgba(0,0,0,.45)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(22, 0);
+        ctx.lineTo(44, 58);
+        ctx.lineTo(0, 58);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "rgba(225,245,225,.72)";
+        ctx.fillRect(10, 34, 24, 7);
+        ctx.restore();
+      }
+
+      function drawBall(x, y) {
+        ctx.save();
+        ctx.translate(x + 22, y + 22);
+        ctx.fillStyle = "#dbe8d8";
+        ctx.strokeStyle = "#101010";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(0, 0, 17, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "rgba(0,0,0,.16)";
+        ctx.beginPath();
+        ctx.arc(5, 5, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawBag(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = "#223326";
+        ctx.strokeStyle = "#8ca889";
+        ctx.lineWidth = 3;
+        roundRect(0, 16, 55, 42, 10, true, true);
+        ctx.strokeStyle = "#cfe6cd";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(28, 18, 16, Math.PI, 0);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawParticles() {
+        ctx.save();
+        for (const p of particles) {
+          ctx.globalAlpha = clamp(p.life * 3, 0, 1);
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawPlayer() {
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        ctx.rotate(player.rot);
+
+        ctx.fillStyle = "rgba(0,0,0,.35)";
+        ctx.beginPath();
+        ctx.ellipse(2, 28, 31, 8, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#597f59";
+        ctx.strokeStyle = "#111";
+        ctx.lineWidth = 3;
+        roundRect(-24, -18, 48, 36, 7, true, true);
+
+        ctx.fillStyle = "#8fb58e";
+        for (let i = -16; i <= 16; i += 16) {
+          roundRect(i - 5, -13, 10, 26, 3, true, false);
+        }
+
+        ctx.fillStyle = "#f5fff4";
+        ctx.font = "900 12px system-ui";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("HO", 0, 1);
+
+        ctx.strokeStyle = "#b8d8b4";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(-18, -22);
+        ctx.lineTo(18, -22);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function roundRect(x, y, w, h, r, fill, stroke) {
+        const rr = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rr, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+        ctx.arcTo(x, y + h, x, y, rr);
+        ctx.arcTo(x, y, x + w, y, rr);
+        ctx.closePath();
+        if (fill) ctx.fill();
+        if (stroke) ctx.stroke();
+      }
+
+      function loop(now) {
+        if (!running) {
+          draw();
+          return;
+        }
+        const dt = Math.min(0.033, (now - lastTime) / 1000 || 0.016);
+        lastTime = now;
+        update(dt);
+        draw();
+        if (running) requestAnimationFrame(loop);
+      }
+
+      function bootDraw() {
+        t += 0.016;
+        draw();
+        if (!running) requestAnimationFrame(bootDraw);
+      }
+
+      function startFromButton() {
+        playerNameInput.value = cleanName(playerNameInput.value);
+        resetGame();
+      }
+
+      function goMenu() {
+        gameOverScreen.classList.remove("show");
+        startScreen.classList.add("show");
+        refreshTagline();
+        updateBoards();
+      }
+
+      function onTap(e) {
+        if (e.target.closest("button,input,.card")) return;
+        if (startScreen.classList.contains("show") || gameOverScreen.classList.contains("show")) return;
+        flap();
+      }
+
+      window.addEventListener("resize", resize);
+      window.addEventListener("orientationchange", () => setTimeout(resize, 100));
+      canvas.addEventListener("pointerdown", onTap, { passive: true });
+      frame.addEventListener("pointerdown", onTap, { passive: true });
+      startBtn.addEventListener("click", startFromButton);
+      retryBtn.addEventListener("click", resetGame);
+      menuBtn.addEventListener("click", goMenu);
+      resetScoresBtn.addEventListener("click", clearScores);
+
+      playerNameInput.addEventListener("input", () => {
+        playerNameInput.value = playerNameInput.value.slice(0, MAX_NAME_LENGTH).toUpperCase();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          flap();
+        }
+      });
+
+      const savedName = localStorage.getItem(NAME_KEY);
+      playerNameInput.value = savedName ? cleanName(savedName) : "KRATHELD";
+      resize();
+      refreshTagline();
+      updateBoards();
+      requestAnimationFrame(bootDraw);
+    })();
+  </script>
+</body>
+</html>
