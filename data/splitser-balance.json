@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T21:22:22.926Z",
+  "updatedAt": "2026-08-12T22:12:16.200Z",
   "people": [
     {
       "name": "Jasper",
@@ -53,13 +53,6 @@
     {
       "name": "Jeroen",
       "fullName": "Jeroen Torfs",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Jochem",
-      "fullName": "Jochem Herbrink",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
