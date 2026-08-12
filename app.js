@@ -500,15 +500,24 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;");
 }
 
+const DEFAULT_LOCATION_NAME = "Schaap - Groen Geel";
+
+function plainLocationName(location) {
+  if (!location) return null;
+  if (typeof location === "string") return location;
+  return location.feature || location.name || location.address || null;
+}
+
 function buildLocationHtml(event) {
   const loc = event.knhbLocation;
+  const fallbackName = plainLocationName(event.location);
 
   if (!loc) {
-    return escapeHtml(event.location || "Nog geen locatie");
+    return escapeHtml(fallbackName || DEFAULT_LOCATION_NAME);
   }
 
   const displayParts = [loc.name, loc.city].filter(Boolean);
-  const displayName = displayParts.join(", ") || event.location || "Nog geen locatie";
+  const displayName = displayParts.join(", ") || fallbackName || DEFAULT_LOCATION_NAME;
 
   const queryParts = [loc.name, loc.address, loc.city].filter(Boolean);
   const query = encodeURIComponent(queryParts.join(", ") || displayName);
@@ -546,7 +555,7 @@ function renderPrimaryEventCard(data, event, chances) {
 
   card.style.display = "block";
 
-  setText("eventTitle", `${event.name || "Onbekend event"} - ${data.team || "HO"}`);
+  setText("eventTitle", event.name || "Onbekend event");
 
   const matchTeamsLine = buildMatchTeamsHtml(event);
   const fieldLine = buildFieldHtml(event);
@@ -603,7 +612,7 @@ function renderNextEventCard(data, event) {
 
   card.style.display = "block";
 
-  setText("nextEventTitle", `${event.name || "Onbekend event"} - ${data.team || "HO"}`);
+  setText("nextEventTitle", event.name || "Onbekend event");
 
   const nextMatchTeamsLine = buildMatchTeamsHtml(event);
   const nextFieldLine = buildFieldHtml(event);
@@ -646,7 +655,14 @@ async function checkHoKrat() {
   setResult("...", "Het Orakel raadpleegt Spond en Splitser.");
 
   if (!eventData || (!eventData.currentEvent && !eventData.upcomingEvent)) {
-    setResult("NEE.", randomFrom(responses.noSpond));
+    const decision = getFallbackTrainingDecision();
+
+    if (!decision.allowed) {
+      setResult("NEE.", randomFrom(responses.noSpond));
+      return;
+    }
+
+    openPopup(decision.mode, "HEB JE AL EEN KRAT GEHAALD DAN?");
     return;
   }
 
@@ -658,6 +674,23 @@ async function checkHoKrat() {
   }
 
   openPopup(decision.mode, "HEB JE AL EEN KRAT GEHAALD DAN?");
+}
+
+// Standaard trainingsdag van H15: dinsdag vanaf 19:00. Gebruikt als Spond-data
+// niet geladen kon worden, zodat de HO-krat check dan nog steeds werkt.
+function getFallbackTrainingDecision() {
+  const now = new Date();
+  const isTuesday = now.getDay() === 2;
+  const minutes = now.getHours() * 60 + now.getMinutes();
+
+  if (!isTuesday || minutes < 19 * 60) {
+    return { allowed: false };
+  }
+
+  return {
+    allowed: true,
+    mode: "firstCrateOnly"
+  };
 }
 
 function getDecision() {
