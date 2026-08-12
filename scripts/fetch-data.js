@@ -519,7 +519,7 @@ async function fetchPastMatches(username, password) {
     return evts.some(e => {
       if (!e.startTimestamp) return false;
       if (new Date(e.startTimestamp) >= now) return false;
-      return !String(e.heading || "").toLowerCase().includes("training");
+      return !String(e.heading || "").toLowerCase().includes("train");
     });
   }
 
@@ -543,7 +543,7 @@ async function fetchPastMatches(username, password) {
     .filter(e => {
       if (!e.startTimestamp) return false;
       if (new Date(e.startTimestamp) >= now) return false;
-      return !String(e.heading || "").toLowerCase().includes("training");
+      return !String(e.heading || "").toLowerCase().includes("train");
     })
     .sort((a, b) => new Date(b.startTimestamp) - new Date(a.startTimestamp))
     .slice(0, 60);
