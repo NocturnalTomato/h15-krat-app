@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-08-12T18:11:21.319Z",
+  "updatedAt": "2026-08-12T19:29:15.232Z",
   "people": [
+    {
+      "name": "Jasper",
+      "fullName": "Jasper van de Stadt",
+      "amount": "€9.82",
+      "amountCents": 982,
+      "isCurrent": false
+    },
     {
       "name": "Florian",
       "fullName": "Florian Bankeman",
@@ -107,13 +114,6 @@
       "isCurrent": false
     },
     {
-      "name": "Chris",
-      "fullName": "Chris de Haas",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
       "name": "Pim",
       "fullName": "Pim Kuiper",
       "amount": "€0.00",
@@ -123,13 +123,6 @@
     {
       "name": "Thomas van der Woning",
       "fullName": "Thomas van der Woning",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Jasper",
-      "fullName": "Jasper van de Stadt",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
@@ -174,6 +167,13 @@
       "fullName": "Joep van keulen",
       "amount": "€0.00",
       "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Chris",
+      "fullName": "Chris de Haas",
+      "amount": "-€9.82",
+      "amountCents": -982,
       "isCurrent": false
     }
   ]
