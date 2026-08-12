@@ -609,7 +609,7 @@ async function fetchPastMatches(username, password) {
    Splitser balance (wiebetaaltwat.nl)
 ============================================================ */
 
-const WBW_LIST_ID = "ccb30c39-6895-41d8-b90b-3486fd022f79";
+const WBW_LIST_ID = "10ad625c-b108-4510-9b2e-a6fe6e7fa488"; // "HCC Groen Geel - Heren 15"
 
 async function fetchSplitserBalance(email, password) {
   const loginResponse = await fetch("https://api2.wiebetaaltwat.nl/api/users/sign_in", {
