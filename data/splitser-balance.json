@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-08-12T10:27:43.102Z",
+  "updatedAt": "2026-08-12T11:24:45.572Z",
   "people": [
+    {
+      "name": "Florian",
+      "fullName": "Florian Bankeman",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
     {
       "name": "Luc",
       "fullName": "Luc de Goeij",
