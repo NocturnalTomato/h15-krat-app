@@ -310,7 +310,6 @@ async function hwFindTeamId(cache, uuid, token) {
 
   const teamId = String(team.id);
   cacheSet(cache, "hw_team_id", teamId);
-  if (team.recent_poule_id) cacheSet(cache, "hw_recent_poule_id", String(team.recent_poule_id));
   return teamId;
 }
 
@@ -350,52 +349,22 @@ async function fetchHwPlayedMatches(cache, uuid, token) {
 
 /* ============================================================
    Poule standings
+
+   HockeyWeerelt has no endpoint that returns "all poules a team has
+   ever played in" (the guessed /teams/{id}/poules route 404s), and the
+   "current poule" (recent_poule_id on the team object) changes whenever
+   a new season/competition starts. That field must therefore never be
+   served from a TTL cache -- a stale-but-still-valid id would hang
+   around until the TTL happened to expire on the same run as a lookup,
+   which in practice means it can lag an entire season behind. Instead
+   we fetch it fresh every run and diff it against the last-seen value
+   (no TTL, persisted in discovery-cache.json) to notice season changes
+   ourselves, archiving the previous poule's standings into history so
+   the frontend can still offer a season dropdown without a live backend.
 ============================================================ */
 
-async function fetchStandings(cache) {
-  const { uuid, token } = await hwGetOrCreateDevice(cache);
-
-  let teamId = cacheGet(cache, "hw_team_id", 30 * DAY_MS);
-  let recentPouleId = cacheGet(cache, "hw_recent_poule_id", 7 * DAY_MS);
-
-  if (!teamId) {
-    const clubsData = await hwRequest("/clubs", {}, "GET", uuid, token);
-    const clubs = clubsData.data || clubsData;
-    const gg = Array.isArray(clubs) && clubs.find(c => {
-      const n = (c.name || "").toLowerCase().replace(/-/g, " ");
-      return n.includes("groen") && n.includes("geel");
-    });
-    if (!gg) throw new Error("Club niet gevonden");
-
-    const clubRef = gg.federation_reference_id || gg.id;
-    const clubData = await hwRequest(`/clubs/${clubRef}`, {}, "GET", uuid, token);
-    const teamList = clubData.data?.teams || clubData.teams || [];
-    const h15 = Array.isArray(teamList) && teamList.find(t => {
-      const short = (t.short_name || "").toLowerCase().trim();
-      return short === "h15" || short === "15";
-    });
-    if (!h15) throw new Error("Team H15 niet gevonden");
-
-    teamId = String(h15.id);
-    if (h15.recent_poule_id) recentPouleId = String(h15.recent_poule_id);
-
-    cacheSet(cache, "hw_team_id", teamId);
-    if (recentPouleId) cacheSet(cache, "hw_recent_poule_id", recentPouleId);
-  }
-
-  let teamPoules = [];
-  try {
-    const poulesData = await hwRequest(`/teams/${teamId}/poules`, {}, "GET", uuid, token);
-    const arr = poulesData.data || poulesData;
-    if (Array.isArray(arr) && arr.length > 0) teamPoules = arr;
-  } catch { /* ignore */ }
-
-  const requestedPouleId = recentPouleId || "174656";
-  const pouleData = await hwRequest(`/poules/${requestedPouleId}`, {}, "GET", uuid, token);
-  const inner = pouleData.data || pouleData;
-  const rawStandings = Array.isArray(inner.standings) ? inner.standings : [];
-
-  const standings = rawStandings.map(s => ({
+function mapStandings(rawStandings) {
+  return (Array.isArray(rawStandings) ? rawStandings : []).map(s => ({
     rank: s.rank ?? null,
     team_id: s.team?.id ?? null,
     team_name: s.team?.name ?? s.team_name ?? "?",
@@ -407,17 +376,109 @@ async function fetchStandings(cache) {
     points_deducted: s.points_deducted ?? s.penalty_points ?? s.deductions ?? 0,
     points: s.points ?? 0,
   }));
+}
 
-  const pouleOptions = teamPoules.length > 1
-    ? teamPoules.map(p => ({ id: String(p.id ?? p.poule_id), label: p.name || p.competition?.name || String(p.id ?? p.poule_id) }))
-    : [{ id: String(requestedPouleId), label: inner.competition?.name || `Poule ${requestedPouleId}` }];
+function derivePouleLabel(inner) {
+  const firstDate = (inner.matches || [])
+    .map(m => m.date)
+    .filter(Boolean)
+    .sort()[0];
+  const year = firstDate ? new Date(firstDate).getFullYear() : null;
+  if (year) return `${year}-${year + 1}`;
+  return inner.competition?.name || `Poule ${inner.id}`;
+}
 
-  return {
-    poule_id: String(requestedPouleId),
-    competition: inner.competition?.name ?? null,
+async function fetchStandings(cache, isDebug) {
+  const { uuid, token } = await hwGetOrCreateDevice(cache);
+
+  // Club ref is stable (doesn't change between seasons) -- safe to cache long-term.
+  let clubRef = cacheGet(cache, "hw_club_ref", 90 * DAY_MS);
+  if (!clubRef) {
+    const clubsData = await hwRequest("/clubs", {}, "GET", uuid, token);
+    const clubs = clubsData.data || clubsData;
+    const gg = Array.isArray(clubs) && clubs.find(c => {
+      const n = (c.name || "").toLowerCase().replace(/-/g, " ");
+      return n.includes("groen") && n.includes("geel");
+    });
+    if (!gg) throw new Error("Club niet gevonden");
+    clubRef = gg.federation_reference_id || gg.id;
+    cacheSet(cache, "hw_club_ref", clubRef);
+  }
+
+  // Team's recent_poule_id is the "current season" field -- always fetch it
+  // fresh, never from a TTL cache (see block comment above).
+  const clubData = await hwRequest(`/clubs/${clubRef}`, {}, "GET", uuid, token);
+  const teamList = clubData.data?.teams || clubData.teams || [];
+  const h15 = Array.isArray(teamList) && teamList.find(t => {
+    const short = (t.short_name || "").toLowerCase().trim();
+    return short === "h15" || short === "15";
+  });
+  if (!h15) throw new Error("Team H15 niet gevonden");
+
+  const teamId = String(h15.id);
+  cacheSet(cache, "hw_team_id", teamId);
+
+  const lastSeenPouleId = cache.hw_last_seen_poule_id?.value || null;
+  const currentPouleId = h15.recent_poule_id ? String(h15.recent_poule_id) : lastSeenPouleId;
+  if (!currentPouleId) throw new Error("Geen recent_poule_id gevonden voor team H15");
+
+  let history = cache.hw_poule_history?.value || [];
+
+  if (isDebug) {
+    console.error("[hw-debug] raw team object:", JSON.stringify(h15));
+    console.error("[hw-debug] current_poule_id_from_hw:", currentPouleId, "last_seen_poule_id:", lastSeenPouleId);
+    console.error("[hw-debug] poule_history ids:", history.map(h => h.id));
+  }
+
+  // Season changed since the last run: archive the poule we used to show
+  // before we overwrite our only pointer to it.
+  if (lastSeenPouleId && lastSeenPouleId !== currentPouleId && !history.some(h => h.id === lastSeenPouleId)) {
+    try {
+      const oldPouleData = await hwRequest(`/poules/${lastSeenPouleId}`, {}, "GET", uuid, token);
+      const oldInner = oldPouleData.data || oldPouleData;
+      history.push({
+        id: lastSeenPouleId,
+        label: derivePouleLabel(oldInner),
+        competition: oldInner.competition?.name ?? null,
+        standings: mapStandings(oldInner.standings),
+      });
+      cacheSet(cache, "hw_poule_history", history);
+    } catch (err) {
+      if (isDebug) console.error("[hw-debug] failed to archive old poule", lastSeenPouleId, err.message);
+    }
+  }
+  if (lastSeenPouleId !== currentPouleId) {
+    cacheSet(cache, "hw_last_seen_poule_id", currentPouleId);
+  }
+
+  const pouleData = await hwRequest(`/poules/${currentPouleId}`, {}, "GET", uuid, token);
+  const inner = pouleData.data || pouleData;
+  const standings = mapStandings(inner.standings);
+  const competition = inner.competition?.name ?? null;
+
+  const standingsByPoule = {
+    [currentPouleId]: { competition, standings },
+  };
+  for (const h of history) {
+    standingsByPoule[h.id] = { competition: h.competition, standings: h.standings };
+  }
+
+  const pouleOptions = [
+    { id: currentPouleId, label: derivePouleLabel(inner) },
+    ...history.map(h => ({ id: h.id, label: h.label })),
+  ].sort((a, b) => Number(b.id) - Number(a.id));
+
+  const result = {
+    poule_id: currentPouleId,
+    competition,
     poule_options: pouleOptions,
     standings,
+    standingsByPoule,
   };
+
+  if (isDebug) result.debug = { raw_team_object: h15, current_poule_id_from_hw: currentPouleId, last_seen_poule_id: lastSeenPouleId, poule_history: history };
+
+  return result;
 }
 
 /* ============================================================
@@ -656,6 +717,7 @@ async function fetchSplitserBalance(email, password) {
 ============================================================ */
 
 let loadedCacheRef = {};
+const isDebug = process.argv.includes("--debug") || process.env.DEBUG_HW === "1";
 
 async function main() {
   const username = process.env.SPOND_USERNAME;
@@ -680,9 +742,9 @@ async function main() {
   }
 
   try {
-    const standings = await fetchStandings(loadedCacheRef);
+    const standings = await fetchStandings(loadedCacheRef, isDebug);
     writeJson(path.join(DATA_DIR, "standings.json"), standings);
-    console.log("standings.json updated. competition:", standings.competition);
+    console.log("standings.json updated. competition:", standings.competition, "poule_id:", standings.poule_id);
   } catch (err) {
     hadError = true;
     console.error("Standings fetch failed:", err.message);
@@ -756,4 +818,8 @@ async function main() {
   if (hadError) process.exitCode = 1;
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = { fetchStandings, cacheGet, cacheSet, hwGetOrCreateDevice, derivePouleLabel };

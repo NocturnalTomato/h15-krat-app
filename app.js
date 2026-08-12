@@ -2595,6 +2595,61 @@ init();
 
 const STANDINGS_URL = "./data/standings.json";
 
+function renderStandingsTable(pouleData) {
+  const body = document.getElementById("standingsBody");
+  if (!body) return;
+
+  if (!pouleData || !pouleData.standings || pouleData.standings.length === 0) {
+    body.innerHTML = `<div class="lineup-meta">Geen stand beschikbaar.</div>`;
+    return;
+  }
+
+  const compLabel = pouleData.competition
+    ? `<div class="standings-competition">${escapeHtml(pouleData.competition)}</div>`
+    : "";
+
+  const fmt = v => (v !== null && v !== undefined) ? v : "-";
+
+  let html = compLabel + `
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th class="standings-team-col">Team</th>
+          <th title="Gespeeld">GS</th>
+          <th title="Gewonnen">GW</th>
+          <th title="Gelijk">GL</th>
+          <th title="Verloren">VL</th>
+          <th title="Punten in mindering">PIM</th>
+          <th title="Punten">PT</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  for (const s of pouleData.standings) {
+    const isGG = s.team_id === 3781 ||
+      (s.team_name || "").toLowerCase().includes("h15");
+    const rowClass = isGG ? ' class="standings-gg"' : "";
+    const pim = s.points_deducted > 0 ? s.points_deducted : "-";
+    html += `
+      <tr${rowClass}>
+        <td>${fmt(s.rank)}</td>
+        <td class="standings-team-name">${escapeHtml(s.team_name || "?")}</td>
+        <td>${fmt(s.played)}</td>
+        <td>${fmt(s.won)}</td>
+        <td>${fmt(s.drawn)}</td>
+        <td>${fmt(s.lost)}</td>
+        <td>${pim}</td>
+        <td class="standings-pt">${fmt(s.points)}</td>
+      </tr>
+    `;
+  }
+
+  html += `</tbody></table>`;
+  body.innerHTML = html;
+}
+
 async function loadStandings() {
   const body = document.getElementById("standingsBody");
   if (!body) return;
@@ -2608,61 +2663,19 @@ async function loadStandings() {
       return;
     }
 
-    // Season selector removed — standings.json is a static snapshot of the
-    // current poule only (generated periodically by scripts/fetch-data.js),
-    // there's no live backend left to fetch a different season on demand.
     const sel = document.getElementById("standingsSeasonSelect");
-    if (sel) sel.style.display = "none";
+    const standingsByPoule = data.standingsByPoule || { [data.poule_id]: { competition: data.competition, standings: data.standings } };
 
-    if (!data.standings || data.standings.length === 0) {
-      body.innerHTML = `<div class="lineup-meta">Geen stand beschikbaar.</div>`;
-      return;
+    if (sel && Array.isArray(data.poule_options) && data.poule_options.length > 1) {
+      sel.innerHTML = data.poule_options.map(o => `<option value="${escapeHtml(o.id)}">${escapeHtml(o.label)}</option>`).join("");
+      sel.value = data.poule_id;
+      sel.style.display = "";
+      sel.onchange = () => renderStandingsTable(standingsByPoule[sel.value]);
+    } else if (sel) {
+      sel.style.display = "none";
     }
 
-    const compLabel = data.competition
-      ? `<div class="standings-competition">${escapeHtml(data.competition)}</div>`
-      : "";
-
-    const fmt = v => (v !== null && v !== undefined) ? v : "-";
-
-    let html = compLabel + `
-      <table class="standings-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th class="standings-team-col">Team</th>
-            <th title="Gespeeld">GS</th>
-            <th title="Gewonnen">GW</th>
-            <th title="Gelijk">GL</th>
-            <th title="Verloren">VL</th>
-            <th title="Punten in mindering">PIM</th>
-            <th title="Punten">PT</th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
-
-    for (const s of data.standings) {
-      const isGG = s.team_id === 3781 ||
-        (s.team_name || "").toLowerCase().includes("h15");
-      const rowClass = isGG ? ' class="standings-gg"' : "";
-      const pim = s.points_deducted > 0 ? s.points_deducted : "-";
-      html += `
-        <tr${rowClass}>
-          <td>${fmt(s.rank)}</td>
-          <td class="standings-team-name">${escapeHtml(s.team_name || "?")}</td>
-          <td>${fmt(s.played)}</td>
-          <td>${fmt(s.won)}</td>
-          <td>${fmt(s.drawn)}</td>
-          <td>${fmt(s.lost)}</td>
-          <td>${pim}</td>
-          <td class="standings-pt">${fmt(s.points)}</td>
-        </tr>
-      `;
-    }
-
-    html += `</tbody></table>`;
-    body.innerHTML = html;
+    renderStandingsTable(standingsByPoule[data.poule_id] || { competition: data.competition, standings: data.standings });
 
   } catch (e) {
     body.innerHTML = `<div class="lineup-meta">Fout bij laden van poulestand.</div>`;

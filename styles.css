@@ -1769,10 +1769,22 @@ summary {
 
 .standings-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 14px;
+  min-width: 0;
+}
+
+.standings-header > div {
+  min-width: 0;
+}
+
+.standings-header .stats-season-select {
+  max-width: 100%;
+  min-width: 0;
+  text-overflow: ellipsis;
 }
 
 .standings-competition {
