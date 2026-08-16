@@ -1,11 +1,32 @@
 {
-  "updatedAt": "2026-08-16T17:57:42.192Z",
+  "updatedAt": "2026-08-16T18:40:21.269Z",
   "people": [
     {
       "name": "Jasper",
       "fullName": "Jasper van de Stadt",
-      "amount": "€9.82",
-      "amountCents": 982,
+      "amount": "€43.51",
+      "amountCents": 4351,
+      "isCurrent": false
+    },
+    {
+      "name": "Joep",
+      "fullName": "Joep van keulen",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Sverre",
+      "fullName": "Sverre",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Timo",
+      "fullName": "Timo van Zagten",
+      "amount": "€0.00",
+      "amountCents": 0,
       "isCurrent": false
     },
     {
@@ -121,13 +142,6 @@
       "isCurrent": false
     },
     {
-      "name": "Jasper Piers",
-      "fullName": "Jasper Piers",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
       "name": "Koen",
       "fullName": "Koen Elfferich",
       "amount": "€0.00",
@@ -142,31 +156,17 @@
       "isCurrent": false
     },
     {
-      "name": "Sverre",
-      "fullName": "Sverre",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Timo",
-      "fullName": "Timo van Zagten",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Joep",
-      "fullName": "Joep van keulen",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
       "name": "Chris",
       "fullName": "Chris de Haas",
       "amount": "-€9.82",
       "amountCents": -982,
+      "isCurrent": false
+    },
+    {
+      "name": "Jasper Piers",
+      "fullName": "Jasper Piers",
+      "amount": "-€33.69",
+      "amountCents": -3369,
       "isCurrent": false
     }
   ]
