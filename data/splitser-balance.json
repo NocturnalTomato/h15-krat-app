@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T16:47:57.032Z",
+  "updatedAt": "2026-08-17T17:31:42.429Z",
   "people": [
     {
       "name": "Jasper",
@@ -137,20 +137,6 @@
     {
       "name": "Thomas van der Woning",
       "fullName": "Thomas van der Woning",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Koen",
-      "fullName": "Koen Elfferich",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Joppe",
-      "fullName": "Joppe Bastiaansen",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
