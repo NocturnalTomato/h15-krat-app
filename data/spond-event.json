@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T06:04:49.426Z",
+  "updatedAt": "2026-08-25T07:09:50.929Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -104,6 +104,7 @@
       "Sander Nuboer",
       "Sverre Broekman",
       "Thomas van Dijk",
+      "Thomas van der Woning",
       "Timo van Zagten",
       "Tom van Wijk"
     ],
@@ -114,14 +115,13 @@
     ],
     "unanswered": [
       "Florian Bankeman",
-      "Jeroen Torfs",
-      "Thomas van der Woning"
+      "Jeroen Torfs"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 15,
+      "attending": 16,
       "declined": 3,
-      "unanswered": 3
+      "unanswered": 2
     }
   }
 }
