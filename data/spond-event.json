@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T08:00:03.270Z",
+  "updatedAt": "2026-08-25T08:54:17.335Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -94,6 +94,7 @@
       "Bernard Zweers",
       "Bouke van Blokland",
       "Chris De Haas",
+      "Florian Bankeman",
       "Jasper van de Stadt",
       "Jules Lapre",
       "Koen de Koning",
@@ -114,14 +115,13 @@
       "Thijmen Post"
     ],
     "unanswered": [
-      "Florian Bankeman",
       "Jeroen Torfs"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 16,
+      "attending": 17,
       "declined": 3,
-      "unanswered": 2
+      "unanswered": 1
     }
   }
 }
