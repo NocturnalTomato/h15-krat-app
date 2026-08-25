@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T16:57:24.525Z",
+  "updatedAt": "2026-08-25T17:38:22.882Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -26,8 +26,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "3DE0507084934691B2F9BAC278E71373",
     "name": "Trainen H15",
     "startTimestamp": "2026-08-25T17:15:00Z",
@@ -51,7 +50,6 @@
       "Koen de Koning",
       "Morris Giele",
       "Noud van Maanen",
-      "Sander Nuboer",
       "Thijmen Post",
       "Thomas van Dijk",
       "Thomas van der Woning",
@@ -65,6 +63,7 @@
       "Mattie Steenvoorden",
       "Pepijn Bogaard",
       "Pim Kuiper",
+      "Sander Nuboer",
       "Sverre Broekman"
     ],
     "unanswered": [],
@@ -74,12 +73,12 @@
       "Sverre Broekman"
     ],
     "counts": {
-      "attending": 14,
-      "declined": 7,
+      "attending": 13,
+      "declined": 8,
       "unanswered": 0
     }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "AE827E4544F24CD8825E29A59CA91BC2",
     "name": "Trainen H15",
     "startTimestamp": "2026-09-01T17:15:00Z",
@@ -126,6 +125,55 @@
       "attending": 17,
       "declined": 3,
       "unanswered": 1
+    }
+  },
+  "nextEvent": {
+    "id": "557034EA140240879C91252FC440E077",
+    "name": "Trainen H15",
+    "startTimestamp": "2026-09-08T17:15:00Z",
+    "endTimestamp": "2026-09-08T18:45:00Z",
+    "location": {
+      "id": "8361B77F99EF49F897AC4A5C0827ECA2",
+      "feature": "Skaap",
+      "postalCode": "",
+      "country": "",
+      "administrativeAreaLevel1": "",
+      "administrativeAreaLevel2": "",
+      "locality": ""
+    },
+    "type": "training",
+    "attending": [
+      "Chris De Haas",
+      "Jules Lapre",
+      "Koen de Koning",
+      "Luc de Goeij",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pepijn Bogaard",
+      "Pim Kuiper",
+      "Thomas van Dijk",
+      "Timo van Zagten",
+      "Tom van Wijk"
+    ],
+    "declined": [
+      "Bernard Zweers",
+      "Jasper van de Stadt",
+      "Mattie Steenvoorden",
+      "Sverre Broekman"
+    ],
+    "unanswered": [
+      "Bouke van Blokland",
+      "Florian Bankeman",
+      "Jeroen Torfs",
+      "Sander Nuboer",
+      "Thijmen Post",
+      "Thomas van der Woning"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 11,
+      "declined": 4,
+      "unanswered": 6
     }
   }
 }
