@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T17:35:46.451Z",
+  "updatedAt": "2026-08-30T20:03:46.792Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -48,6 +48,7 @@
       "Chris De Haas",
       "Florian Bankeman",
       "Jasper van de Stadt",
+      "Jeroen Torfs",
       "Jules Lapre",
       "Koen de Koning",
       "Luc de Goeij",
@@ -66,14 +67,12 @@
       "Pim Kuiper",
       "Thijmen Post"
     ],
-    "unanswered": [
-      "Jeroen Torfs"
-    ],
+    "unanswered": [],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 17,
+      "attending": 18,
       "declined": 3,
-      "unanswered": 1
+      "unanswered": 0
     }
   },
   "nextEvent": {
@@ -93,6 +92,7 @@
     "type": "training",
     "attending": [
       "Chris De Haas",
+      "Jeroen Torfs",
       "Jules Lapre",
       "Koen de Koning",
       "Luc de Goeij",
@@ -113,16 +113,15 @@
     "unanswered": [
       "Bouke van Blokland",
       "Florian Bankeman",
-      "Jeroen Torfs",
       "Sander Nuboer",
       "Thijmen Post",
       "Thomas van der Woning"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 11,
+      "attending": 12,
       "declined": 4,
-      "unanswered": 6
+      "unanswered": 5
     }
   }
 }
