@@ -1,13 +1,6 @@
 {
-  "updatedAt": "2026-09-06T17:44:05.906Z",
+  "updatedAt": "2026-09-06T19:36:17.863Z",
   "people": [
-    {
-      "name": "Thomas van der Woning",
-      "fullName": "Thomas van der Woning",
-      "amount": "€48.89",
-      "amountCents": 4889,
-      "isCurrent": false
-    },
     {
       "name": "Jasper",
       "fullName": "Jasper van de Stadt",
@@ -16,15 +9,43 @@
       "isCurrent": false
     },
     {
+      "name": "Thomas van der Woning",
+      "fullName": "Thomas van der Woning",
+      "amount": "€30.07",
+      "amountCents": 3007,
+      "isCurrent": false
+    },
+    {
       "name": "Jeroen",
       "fullName": "Jeroen Torfs",
-      "amount": "€40.29",
-      "amountCents": 4029,
+      "amount": "€29.48",
+      "amountCents": 2948,
+      "isCurrent": false
+    },
+    {
+      "name": "Chris",
+      "fullName": "Chris de Haas",
+      "amount": "€29.46",
+      "amountCents": 2946,
+      "isCurrent": false
+    },
+    {
+      "name": "Koen de Koning",
+      "fullName": "Koen de Koning",
+      "amount": "€7.02",
+      "amountCents": 702,
       "isCurrent": false
     },
     {
       "name": "Joep",
       "fullName": "Joep van keulen",
+      "amount": "€0.00",
+      "amountCents": 0,
+      "isCurrent": false
+    },
+    {
+      "name": "Pim",
+      "fullName": "Pim Kuiper",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
@@ -51,22 +72,8 @@
       "isCurrent": false
     },
     {
-      "name": "Thomas",
-      "fullName": "Thomas de Hollander",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
       "name": "Thijmen",
       "fullName": "Thijmen Post",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "bernard",
-      "fullName": "bernard zweers",
       "amount": "€0.00",
       "amountCents": 0,
       "isCurrent": false
@@ -79,73 +86,66 @@
       "isCurrent": false
     },
     {
+      "name": "bernard",
+      "fullName": "bernard zweers",
+      "amount": "-€3.93",
+      "amountCents": -393,
+      "isCurrent": false
+    },
+    {
       "name": "Noud",
       "fullName": "Noud van Maanen",
-      "amount": "€0.00",
-      "amountCents": 0,
+      "amount": "-€3.93",
+      "amountCents": -393,
       "isCurrent": false
     },
     {
       "name": "Morris",
       "fullName": "Morris Giele",
-      "amount": "€0.00",
-      "amountCents": 0,
+      "amount": "-€3.93",
+      "amountCents": -393,
       "isCurrent": false
     },
     {
-      "name": "Pim",
-      "fullName": "Pim Kuiper",
-      "amount": "€0.00",
-      "amountCents": 0,
-      "isCurrent": false
-    },
-    {
-      "name": "Tom",
-      "fullName": "Tom v Wijk",
-      "amount": "-€6.11",
-      "amountCents": -611,
-      "isCurrent": false
-    },
-    {
-      "name": "Timo",
-      "fullName": "Timo van Zagten",
-      "amount": "-€6.11",
-      "amountCents": -611,
+      "name": "Thomas",
+      "fullName": "Thomas de Hollander",
+      "amount": "-€3.93",
+      "amountCents": -393,
       "isCurrent": false
     },
     {
       "name": "Florian",
       "fullName": "Florian Bankeman",
-      "amount": "-€11.91",
-      "amountCents": -1191,
+      "amount": "-€11.73",
+      "amountCents": -1173,
+      "isCurrent": false
+    },
+    {
+      "name": "Timo",
+      "fullName": "Timo van Zagten",
+      "amount": "-€13.00",
+      "amountCents": -1300,
+      "isCurrent": false
+    },
+    {
+      "name": "Tom",
+      "fullName": "Tom v Wijk",
+      "amount": "-€20.93",
+      "amountCents": -2093,
       "isCurrent": false
     },
     {
       "name": "Jules",
       "fullName": "Jules Lapre",
-      "amount": "-€11.91",
-      "amountCents": -1191,
-      "isCurrent": false
-    },
-    {
-      "name": "Bouke",
-      "fullName": "Bouke van Blokland",
-      "amount": "-€11.92",
-      "amountCents": -1192,
-      "isCurrent": false
-    },
-    {
-      "name": "Chris",
-      "fullName": "Chris de Haas",
       "amount": "-€21.73",
       "amountCents": -2173,
       "isCurrent": false
     },
     {
-      "name": "Koen de Koning",
-      "fullName": "Koen de Koning",
-      "amount": "-€29.31",
-      "amountCents": -2931,
+      "name": "Bouke",
+      "fullName": "Bouke van Blokland",
+      "amount": "-€22.74",
+      "amountCents": -2274,
       "isCurrent": false
     },
     {
