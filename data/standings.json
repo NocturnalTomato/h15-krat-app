@@ -26,6 +26,18 @@
     },
     {
       "rank": 2,
+      "team_id": 17730,
+      "team_name": "Leonidas H22",
+      "team_short": "H22",
+      "played": 1,
+      "won": 1,
+      "drawn": 0,
+      "lost": 0,
+      "points_deducted": 0,
+      "points": 3
+    },
+    {
+      "rank": 3,
       "team_id": 7097,
       "team_name": "Spijkenisse H2-O",
       "team_short": "H2-O",
@@ -37,7 +49,7 @@
       "points": 3
     },
     {
-      "rank": 3,
+      "rank": 4,
       "team_id": 8085,
       "team_name": "Zoetermeer H5",
       "team_short": "H5",
@@ -49,7 +61,7 @@
       "points": 3
     },
     {
-      "rank": 4,
+      "rank": 5,
       "team_id": 6485,
       "team_name": "Ring Pass H5",
       "team_short": "H5",
@@ -61,7 +73,7 @@
       "points": 3
     },
     {
-      "rank": 5,
+      "rank": 6,
       "team_id": 43836,
       "team_name": "Roomburg H8",
       "team_short": "H8",
@@ -73,7 +85,7 @@
       "points": 1
     },
     {
-      "rank": 6,
+      "rank": 7,
       "team_id": 3781,
       "team_name": "Groen-Geel H15",
       "team_short": "H15",
@@ -85,34 +97,22 @@
       "points": 1
     },
     {
-      "rank": 7,
-      "team_id": 34991,
-      "team_name": "Scoop Delft H4",
-      "team_short": "H4",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "points_deducted": 0,
-      "points": 0
-    },
-    {
       "rank": 8,
-      "team_id": 17730,
-      "team_name": "Leonidas H22",
-      "team_short": "H22",
-      "played": 0,
+      "team_id": 3778,
+      "team_name": "Groen-Geel H14",
+      "team_short": "H14",
+      "played": 1,
       "won": 0,
       "drawn": 0,
-      "lost": 0,
+      "lost": 1,
       "points_deducted": 0,
       "points": 0
     },
     {
       "rank": 9,
-      "team_id": 3778,
-      "team_name": "Groen-Geel H14",
-      "team_short": "H14",
+      "team_id": 34991,
+      "team_name": "Scoop Delft H4",
+      "team_short": "H4",
       "played": 1,
       "won": 0,
       "drawn": 0,
@@ -300,6 +300,18 @@
         },
         {
           "rank": 2,
+          "team_id": 17730,
+          "team_name": "Leonidas H22",
+          "team_short": "H22",
+          "played": 1,
+          "won": 1,
+          "drawn": 0,
+          "lost": 0,
+          "points_deducted": 0,
+          "points": 3
+        },
+        {
+          "rank": 3,
           "team_id": 7097,
           "team_name": "Spijkenisse H2-O",
           "team_short": "H2-O",
@@ -311,7 +323,7 @@
           "points": 3
         },
         {
-          "rank": 3,
+          "rank": 4,
           "team_id": 8085,
           "team_name": "Zoetermeer H5",
           "team_short": "H5",
@@ -323,7 +335,7 @@
           "points": 3
         },
         {
-          "rank": 4,
+          "rank": 5,
           "team_id": 6485,
           "team_name": "Ring Pass H5",
           "team_short": "H5",
@@ -335,7 +347,7 @@
           "points": 3
         },
         {
-          "rank": 5,
+          "rank": 6,
           "team_id": 43836,
           "team_name": "Roomburg H8",
           "team_short": "H8",
@@ -347,7 +359,7 @@
           "points": 1
         },
         {
-          "rank": 6,
+          "rank": 7,
           "team_id": 3781,
           "team_name": "Groen-Geel H15",
           "team_short": "H15",
@@ -359,34 +371,22 @@
           "points": 1
         },
         {
-          "rank": 7,
-          "team_id": 34991,
-          "team_name": "Scoop Delft H4",
-          "team_short": "H4",
-          "played": 0,
-          "won": 0,
-          "drawn": 0,
-          "lost": 0,
-          "points_deducted": 0,
-          "points": 0
-        },
-        {
           "rank": 8,
-          "team_id": 17730,
-          "team_name": "Leonidas H22",
-          "team_short": "H22",
-          "played": 0,
+          "team_id": 3778,
+          "team_name": "Groen-Geel H14",
+          "team_short": "H14",
+          "played": 1,
           "won": 0,
           "drawn": 0,
-          "lost": 0,
+          "lost": 1,
           "points_deducted": 0,
           "points": 0
         },
         {
           "rank": 9,
-          "team_id": 3778,
-          "team_name": "Groen-Geel H14",
-          "team_short": "H14",
+          "team_id": 34991,
+          "team_name": "Scoop Delft H4",
+          "team_short": "H4",
           "played": 1,
           "won": 0,
           "drawn": 0,
