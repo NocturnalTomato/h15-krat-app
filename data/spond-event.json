@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T12:39:48.229Z",
+  "updatedAt": "2026-09-07T17:56:18.001Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -59,12 +59,12 @@
     ],
     "declined": [
       "Bernard Zweers",
+      "Bouke van Blokland",
       "Jasper van de Stadt",
       "Mattie Steenvoorden",
       "Sverre Broekman"
     ],
     "unanswered": [
-      "Bouke van Blokland",
       "Sander Nuboer",
       "Thijmen Post",
       "Thomas van der Woning"
@@ -72,8 +72,8 @@
     "lastMinuteDeclined": [],
     "counts": {
       "attending": 13,
-      "declined": 4,
-      "unanswered": 4
+      "declined": 5,
+      "unanswered": 3
     }
   },
   "nextEvent": {
