@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T21:43:08.761Z",
+  "updatedAt": "2026-09-08T23:41:56.009Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -26,57 +26,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": {
-    "id": "557034EA140240879C91252FC440E077",
-    "name": "Trainen H15",
-    "startTimestamp": "2026-09-08T17:15:00Z",
-    "endTimestamp": "2026-09-08T18:45:00Z",
-    "location": {
-      "id": "8361B77F99EF49F897AC4A5C0827ECA2",
-      "feature": "Skaap",
-      "postalCode": "",
-      "country": "",
-      "administrativeAreaLevel1": "",
-      "administrativeAreaLevel2": "",
-      "locality": ""
-    },
-    "type": "training",
-    "attending": [
-      "Chris De Haas",
-      "Florian Bankeman",
-      "Jeroen Torfs",
-      "Koen de Koning",
-      "Luc de Goeij",
-      "Morris Giele",
-      "Noud van Maanen",
-      "Sander Nuboer",
-      "Thijmen Post",
-      "Thomas van Dijk",
-      "Timo van Zagten",
-      "Tom van Wijk"
-    ],
-    "declined": [
-      "Bernard Zweers",
-      "Bouke van Blokland",
-      "Jasper van de Stadt",
-      "Jules Lapre",
-      "Mattie Steenvoorden",
-      "Pepijn Bogaard",
-      "Pim Kuiper",
-      "Sverre Broekman",
-      "Thomas van der Woning"
-    ],
-    "unanswered": [],
-    "lastMinuteDeclined": [
-      "Jules Lapre",
-      "Thomas van der Woning"
-    ],
-    "counts": {
-      "attending": 12,
-      "declined": 9,
-      "unanswered": 0
-    }
-  },
+  "currentEvent": null,
   "upcomingEvent": {
     "id": "C7924350B70440A88D3916F4F94FFFDA",
     "name": "Trainen H15",
