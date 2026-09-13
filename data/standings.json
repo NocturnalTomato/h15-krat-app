@@ -14,6 +14,30 @@
   "standings": [
     {
       "rank": 1,
+      "team_id": 17730,
+      "team_name": "Leonidas H22",
+      "team_short": "H22",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "points_deducted": 0,
+      "points": 6
+    },
+    {
+      "rank": 2,
+      "team_id": 6485,
+      "team_name": "Ring Pass H5",
+      "team_short": "H5",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "points_deducted": 0,
+      "points": 6
+    },
+    {
+      "rank": 3,
       "team_id": 17731,
       "team_name": "Leonidas H23",
       "team_short": "H23",
@@ -25,19 +49,7 @@
       "points": 3
     },
     {
-      "rank": 2,
-      "team_id": 17730,
-      "team_name": "Leonidas H22",
-      "team_short": "H22",
-      "played": 1,
-      "won": 1,
-      "drawn": 0,
-      "lost": 0,
-      "points_deducted": 0,
-      "points": 3
-    },
-    {
-      "rank": 3,
+      "rank": 4,
       "team_id": 7097,
       "team_name": "Spijkenisse H2-O",
       "team_short": "H2-O",
@@ -49,26 +61,14 @@
       "points": 3
     },
     {
-      "rank": 4,
+      "rank": 5,
       "team_id": 8085,
       "team_name": "Zoetermeer H5",
       "team_short": "H5",
-      "played": 1,
+      "played": 2,
       "won": 1,
       "drawn": 0,
-      "lost": 0,
-      "points_deducted": 0,
-      "points": 3
-    },
-    {
-      "rank": 5,
-      "team_id": 6485,
-      "team_name": "Ring Pass H5",
-      "team_short": "H5",
-      "played": 1,
-      "won": 1,
-      "drawn": 0,
-      "lost": 0,
+      "lost": 1,
       "points_deducted": 0,
       "points": 3
     },
@@ -86,18 +86,6 @@
     },
     {
       "rank": 7,
-      "team_id": 3781,
-      "team_name": "Groen-Geel H15",
-      "team_short": "H15",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "points_deducted": 0,
-      "points": 1
-    },
-    {
-      "rank": 8,
       "team_id": 34991,
       "team_name": "Scoop Delft H4",
       "team_short": "H4",
@@ -109,10 +97,22 @@
       "points": 1
     },
     {
-      "rank": 9,
+      "rank": 8,
       "team_id": 3783,
       "team_name": "Groen-Geel H16",
       "team_short": "H16",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "points_deducted": 0,
+      "points": 1
+    },
+    {
+      "rank": 9,
+      "team_id": 3781,
+      "team_name": "Groen-Geel H15",
+      "team_short": "H15",
       "played": 2,
       "won": 0,
       "drawn": 1,
@@ -288,6 +288,30 @@
       "standings": [
         {
           "rank": 1,
+          "team_id": 17730,
+          "team_name": "Leonidas H22",
+          "team_short": "H22",
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "points_deducted": 0,
+          "points": 6
+        },
+        {
+          "rank": 2,
+          "team_id": 6485,
+          "team_name": "Ring Pass H5",
+          "team_short": "H5",
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "points_deducted": 0,
+          "points": 6
+        },
+        {
+          "rank": 3,
           "team_id": 17731,
           "team_name": "Leonidas H23",
           "team_short": "H23",
@@ -299,19 +323,7 @@
           "points": 3
         },
         {
-          "rank": 2,
-          "team_id": 17730,
-          "team_name": "Leonidas H22",
-          "team_short": "H22",
-          "played": 1,
-          "won": 1,
-          "drawn": 0,
-          "lost": 0,
-          "points_deducted": 0,
-          "points": 3
-        },
-        {
-          "rank": 3,
+          "rank": 4,
           "team_id": 7097,
           "team_name": "Spijkenisse H2-O",
           "team_short": "H2-O",
@@ -323,26 +335,14 @@
           "points": 3
         },
         {
-          "rank": 4,
+          "rank": 5,
           "team_id": 8085,
           "team_name": "Zoetermeer H5",
           "team_short": "H5",
-          "played": 1,
+          "played": 2,
           "won": 1,
           "drawn": 0,
-          "lost": 0,
-          "points_deducted": 0,
-          "points": 3
-        },
-        {
-          "rank": 5,
-          "team_id": 6485,
-          "team_name": "Ring Pass H5",
-          "team_short": "H5",
-          "played": 1,
-          "won": 1,
-          "drawn": 0,
-          "lost": 0,
+          "lost": 1,
           "points_deducted": 0,
           "points": 3
         },
@@ -360,18 +360,6 @@
         },
         {
           "rank": 7,
-          "team_id": 3781,
-          "team_name": "Groen-Geel H15",
-          "team_short": "H15",
-          "played": 1,
-          "won": 0,
-          "drawn": 1,
-          "lost": 0,
-          "points_deducted": 0,
-          "points": 1
-        },
-        {
-          "rank": 8,
           "team_id": 34991,
           "team_name": "Scoop Delft H4",
           "team_short": "H4",
@@ -383,10 +371,22 @@
           "points": 1
         },
         {
-          "rank": 9,
+          "rank": 8,
           "team_id": 3783,
           "team_name": "Groen-Geel H16",
           "team_short": "H16",
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "points_deducted": 0,
+          "points": 1
+        },
+        {
+          "rank": 9,
+          "team_id": 3781,
+          "team_name": "Groen-Geel H15",
+          "team_short": "H15",
           "played": 2,
           "won": 0,
           "drawn": 1,
