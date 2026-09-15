@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T10:21:34.667Z",
+  "updatedAt": "2026-09-15T15:12:08.251Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -54,27 +54,30 @@
       "Morris Giele",
       "Noud van Maanen",
       "Pepijn Bogaard",
-      "Sander Nuboer",
       "Sverre Broekman",
-      "Thijmen Post",
-      "Thomas van Dijk",
-      "Thomas van der Woning"
+      "Thijmen Post"
     ],
     "declined": [
       "Florian Bankeman",
       "Mattie Steenvoorden",
       "Pim Kuiper",
+      "Sander Nuboer",
+      "Thomas van Dijk",
+      "Thomas van der Woning",
       "Timo van Zagten",
       "Tom van Wijk"
     ],
     "unanswered": [],
     "lastMinuteDeclined": [
       "Florian Bankeman",
+      "Sander Nuboer",
+      "Thomas van Dijk",
+      "Thomas van der Woning",
       "Timo van Zagten"
     ],
     "counts": {
-      "attending": 16,
-      "declined": 5,
+      "attending": 13,
+      "declined": 8,
       "unanswered": 0
     }
   },
@@ -96,7 +99,6 @@
     "attending": [
       "Bernard Zweers",
       "Chris De Haas",
-      "Jasper van de Stadt",
       "Jeroen Torfs",
       "Koen de Koning",
       "Luc de Goeij",
@@ -107,6 +109,7 @@
       "Thomas van Dijk"
     ],
     "declined": [
+      "Jasper van de Stadt",
       "Jules Lapre",
       "Morris Giele",
       "Sander Nuboer",
@@ -122,8 +125,8 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 11,
-      "declined": 6,
+      "attending": 10,
+      "declined": 7,
       "unanswered": 4
     }
   }
