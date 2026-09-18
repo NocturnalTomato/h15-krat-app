@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T14:14:33.115Z",
+  "updatedAt": "2026-09-18T17:43:26.733Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -53,7 +53,9 @@
       "Noud van Maanen",
       "Pepijn Bogaard",
       "Pim Kuiper",
-      "Thomas van Dijk"
+      "Sverre Broekman",
+      "Thomas van Dijk",
+      "Tom van Wijk"
     ],
     "declined": [
       "Jasper van de Stadt",
@@ -65,15 +67,13 @@
       "Timo van Zagten"
     ],
     "unanswered": [
-      "Bouke van Blokland",
-      "Sverre Broekman",
-      "Tom van Wijk"
+      "Bouke van Blokland"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 11,
+      "attending": 13,
       "declined": 7,
-      "unanswered": 3
+      "unanswered": 1
     }
   },
   "nextEvent": {
@@ -103,7 +103,9 @@
       "Pepijn Bogaard",
       "Pim Kuiper",
       "Thomas van Dijk",
-      "Timo van Zagten"
+      "Thomas van der Woning",
+      "Timo van Zagten",
+      "Tom van Wijk"
     ],
     "declined": [
       "Bernard Zweers",
@@ -114,15 +116,13 @@
       "Florian Bankeman",
       "Luc de Goeij",
       "Sverre Broekman",
-      "Thijmen Post",
-      "Thomas van der Woning",
-      "Tom van Wijk"
+      "Thijmen Post"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 12,
+      "attending": 14,
       "declined": 2,
-      "unanswered": 7
+      "unanswered": 5
     }
   }
 }
