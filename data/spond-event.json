@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T06:59:08.696Z",
+  "updatedAt": "2026-09-21T13:57:17.929Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -44,6 +44,7 @@
     "type": "training",
     "attending": [
       "Bernard Zweers",
+      "Bouke van Blokland",
       "Chris De Haas",
       "Jeroen Torfs",
       "Koen de Koning",
@@ -66,14 +67,12 @@
       "Thomas van der Woning",
       "Timo van Zagten"
     ],
-    "unanswered": [
-      "Bouke van Blokland"
-    ],
+    "unanswered": [],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 12,
+      "attending": 13,
       "declined": 8,
-      "unanswered": 1
+      "unanswered": 0
     }
   },
   "nextEvent": {
@@ -92,6 +91,7 @@
     },
     "type": "training",
     "attending": [
+      "Bouke van Blokland",
       "Chris De Haas",
       "Jasper van de Stadt",
       "Jeroen Torfs",
@@ -112,7 +112,6 @@
       "Sander Nuboer"
     ],
     "unanswered": [
-      "Bouke van Blokland",
       "Florian Bankeman",
       "Luc de Goeij",
       "Sverre Broekman",
@@ -120,9 +119,9 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 14,
+      "attending": 15,
       "declined": 2,
-      "unanswered": 5
+      "unanswered": 4
     }
   }
 }
