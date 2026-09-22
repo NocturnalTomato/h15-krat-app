@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T20:13:44.613Z",
+  "updatedAt": "2026-09-22T23:01:04.730Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -26,57 +26,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": {
-    "id": "2E75AF5944E144B48FC15A7E14E7B9E4",
-    "name": "Trainen H15",
-    "startTimestamp": "2026-09-22T17:15:00Z",
-    "endTimestamp": "2026-09-22T18:45:00Z",
-    "location": {
-      "id": "DC00257FF6DD48258F2D141D873862FF",
-      "feature": "Skaap",
-      "postalCode": "",
-      "country": "",
-      "administrativeAreaLevel1": "",
-      "administrativeAreaLevel2": "",
-      "locality": ""
-    },
-    "type": "training",
-    "attending": [
-      "Bouke van Blokland",
-      "Chris De Haas",
-      "Jasper van de Stadt",
-      "Jeroen Torfs",
-      "Koen de Koning",
-      "Luc de Goeij",
-      "Mattie Steenvoorden",
-      "Pepijn Bogaard",
-      "Pim Kuiper",
-      "Sverre Broekman",
-      "Thomas van Dijk",
-      "Tom van Wijk"
-    ],
-    "declined": [
-      "Bernard Zweers",
-      "Florian Bankeman",
-      "Jules Lapre",
-      "Morris Giele",
-      "Noud van Maanen",
-      "Sander Nuboer",
-      "Thijmen Post",
-      "Thomas van der Woning",
-      "Timo van Zagten"
-    ],
-    "unanswered": [],
-    "lastMinuteDeclined": [
-      "Bernard Zweers",
-      "Noud van Maanen"
-    ],
-    "counts": {
-      "attending": 12,
-      "declined": 9,
-      "unanswered": 0
-    }
-  },
+  "currentEvent": null,
   "upcomingEvent": {
     "id": "DE4788C239334A2ABF273F9976017370",
     "name": "Trainen H15",
@@ -110,11 +60,11 @@
     ],
     "declined": [
       "Bernard Zweers",
+      "Florian Bankeman",
       "Sander Nuboer",
       "Thomas van Dijk"
     ],
     "unanswered": [
-      "Florian Bankeman",
       "Luc de Goeij",
       "Sverre Broekman",
       "Thijmen Post"
@@ -122,8 +72,8 @@
     "lastMinuteDeclined": [],
     "counts": {
       "attending": 14,
-      "declined": 3,
-      "unanswered": 4
+      "declined": 4,
+      "unanswered": 3
     }
   },
   "nextEvent": {
@@ -145,6 +95,7 @@
       "Bernard Zweers",
       "Bouke van Blokland",
       "Chris De Haas",
+      "Florian Bankeman",
       "Jeroen Torfs",
       "Jules Lapre",
       "Koen de Koning",
@@ -158,7 +109,6 @@
       "Pim Kuiper"
     ],
     "unanswered": [
-      "Florian Bankeman",
       "Jasper van de Stadt",
       "Luc de Goeij",
       "Noud van Maanen",
@@ -170,9 +120,9 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 10,
+      "attending": 11,
       "declined": 2,
-      "unanswered": 9
+      "unanswered": 8
     }
   }
 }
