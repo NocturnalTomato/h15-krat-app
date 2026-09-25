@@ -89,12 +89,20 @@ async function spondGet(path_, token) {
   return JSON.parse(text);
 }
 
+// Events created with Spond's "match" type carry matchEvent/matchInfo and are
+// typically titled "<team> - <opponent>", without any of the keywords below.
+function isSpondMatch(event) {
+  return event.matchEvent === true || !!event.matchInfo;
+}
+
 function isRelevantEvent(event) {
+  if (isSpondMatch(event)) return true;
   const name = String(event.heading || "").toLowerCase();
   return name.includes("train") || name.includes("thuis") || name.includes("uit") || name.includes("td");
 }
 
 function getEventType(event) {
+  if (isSpondMatch(event)) return "wedstrijd";
   const name = String(event.heading || "").toLowerCase();
   if (name.includes("train")) return "training";
   if (name.includes("td")) return "td";
@@ -604,7 +612,7 @@ async function fetchPastMatches(username, password) {
     .filter(e => {
       if (!e.startTimestamp) return false;
       if (new Date(e.startTimestamp) >= now) return false;
-      return !String(e.heading || "").toLowerCase().includes("train");
+      return isSpondMatch(e) || !String(e.heading || "").toLowerCase().includes("train");
     })
     .sort((a, b) => new Date(b.startTimestamp) - new Date(a.startTimestamp))
     .slice(0, 60);
@@ -625,10 +633,11 @@ async function fetchPastMatches(username, password) {
     const subHeading = String(e.subHeading || "");
     const description = String(e.description || "");
     const lower = heading.toLowerCase();
-    const isHome = lower.includes("thuis");
+    const matchType = String(e.matchInfo?.type || "").toUpperCase();
+    const isHome = matchType ? matchType === "HOME" : lower.includes("thuis");
 
     const enrich = enrichMap.get(date);
-    let opponent = enrich?.opponent || "";
+    let opponent = enrich?.opponent || e.matchInfo?.opponentName || "";
     let goalsFor = enrich?.goalsFor ?? null;
     let goalsAgainst = enrich?.goalsAgainst ?? null;
 
