@@ -1,7 +1,29 @@
 {
-  "lastUpdated": null,
+  "lastUpdated": "2026-09-25T18:24:49.365Z",
   "team": "Heren 15",
   "matchToday": false,
-  "nextMatch": null,
-  "matchAfter": null
+  "nextMatch": {
+    "datetime": "2026-09-27T10:45:00",
+    "homeTeam": "Groen-Geel H15",
+    "awayTeam": "Groen-Geel H17",
+    "location": {
+      "name": null,
+      "address": null,
+      "city": null
+    },
+    "field": null,
+    "competition": null
+  },
+  "matchAfter": {
+    "datetime": "2026-10-04T09:00:00",
+    "homeTeam": "Groen-Geel H14",
+    "awayTeam": "Groen-Geel H15",
+    "location": {
+      "name": null,
+      "address": null,
+      "city": null
+    },
+    "field": null,
+    "competition": null
+  }
 }
