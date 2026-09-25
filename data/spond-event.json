@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T18:24:47.005Z",
+  "updatedAt": "2026-09-25T18:25:43.184Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -67,13 +67,13 @@
     },
     "knhbDateTime": "2026-09-27T10:45:00",
     "knhbLocation": {
-      "name": null,
-      "address": null,
-      "city": null
+      "name": "Roggewoning (Groen-Geel)",
+      "address": "Buurtweg 122, 2244AJ Wassenaar",
+      "city": "Wassenaar"
     },
     "knhbHomeTeam": "Groen-Geel H15",
     "knhbAwayTeam": "Groen-Geel H17",
-    "knhbField": null
+    "knhbField": "Schapenweide"
   },
   "nextEvent": {
     "id": "DE4788C239334A2ABF273F9976017370",
