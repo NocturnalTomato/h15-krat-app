@@ -380,14 +380,15 @@ function hwName(v) {
   return v.name || v.team_name || v.full_name || null;
 }
 
+// location: { facility: { name, address: "Buurtweg 122\n2244AJ Wassenaar" }, field: { name } }
 function hwLocation(m) {
-  const loc = m.location || m.venue || m.accommodation || m.home?.club?.accommodation || null;
-  if (!loc) return null;
-  if (typeof loc === "string") return { name: loc };
+  const facility = m.location?.facility;
+  if (!facility?.name && !facility?.address) return null;
+  const [street, postcodeCity] = String(facility.address || "").split("\n").map(x => x.trim());
   return {
-    name: loc.name || null,
-    address: loc.address || [loc.street, loc.house_number].filter(Boolean).join(" ") || null,
-    city: loc.city || loc.place || null,
+    name: facility.name || null,
+    address: [street, postcodeCity].filter(Boolean).join(", ") || null,
+    city: (postcodeCity || "").replace(/^\d{4}\s?[A-Z]{2}\s+/, "") || null,
   };
 }
 
@@ -402,19 +403,18 @@ async function fetchHwUpcomingMatches(cache) {
 
   const todayStr = hwToLocalDateTime(new Date().toISOString()).substring(0, 10);
   const upcoming = matches
-    .map(m => ({ raw: m, datetime: hwToLocalDateTime(m.datetime || m.date || m.start_date) }))
+    .filter(m => !/cancel/i.test(m.status || ""))
+    .map(m => ({ raw: m, datetime: hwToLocalDateTime(m.date || m.datetime || m.start_date) }))
     .filter(x => x.datetime && x.datetime.substring(0, 10) >= todayStr)
     .sort((a, b) => a.datetime.localeCompare(b.datetime));
-
-  if (upcoming[0]) console.log("[hw] next match raw:", JSON.stringify(upcoming[0].raw));
 
   return upcoming.map(({ raw: m, datetime }) => ({
     datetime,
     home_team: { name: hwName(m.home) || hwName(m.home_team) },
     away_team: { name: hwName(m.away) || hwName(m.away_team) },
     location: hwLocation(m),
-    field: hwName(m.field) || m.field_name || null,
-    competition: { name: hwName(m.competition) || hwName(m.poule?.competition) || null },
+    field: m.location?.field?.name || null,
+    competition: { name: m.competition_name || m.poule_name || null },
   }));
 }
 
