@@ -228,7 +228,7 @@ function enrichWithKnhb(event, knhbMatches) {
   if (!match) return event;
 
   let knhbStartUtc = event.startTimestamp;
-  if (match.datetime) {
+  if (match.datetime && match.datetime.length >= 16) {
     const month = parseInt(match.datetime.substring(5, 7), 10);
     const offsetMs = (month >= 3 && month <= 10 ? 2 : 1) * 3600000;
     const asUtc = new Date(match.datetime + "Z");
@@ -356,6 +356,80 @@ async function fetchHwPlayedMatches(cache, uuid, token) {
   } catch {
     return null;
   }
+}
+
+// publicaties.hockeyweerelt.nl (the old KNHB source) no longer resolves, so
+// upcoming matches come from the app API instead, mapped to the same shape
+// fetchKnhbUpcoming returned: datetime is local Amsterdam time without offset.
+function hwToLocalDateTime(value) {
+  if (!value) return null;
+  const str = String(value).replace(" ", "T");
+  if (!/(Z|[+-]\d{2}:?\d{2})$/.test(str)) return str.length === 16 ? `${str}:00` : str.substring(0, 19);
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Amsterdam", hourCycle: "h23",
+      year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit"
+    }).formatToParts(new Date(str)).map(p => [p.type, p.value])
+  );
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}`;
+}
+
+function hwName(v) {
+  if (!v) return null;
+  if (typeof v === "string") return v;
+  return v.name || v.team_name || v.full_name || null;
+}
+
+function hwLocation(m) {
+  const loc = m.location || m.venue || m.accommodation || m.home?.club?.accommodation || null;
+  if (!loc) return null;
+  if (typeof loc === "string") return { name: loc };
+  return {
+    name: loc.name || null,
+    address: loc.address || [loc.street, loc.house_number].filter(Boolean).join(" ") || null,
+    city: loc.city || loc.place || null,
+  };
+}
+
+async function fetchHwUpcomingMatches(cache) {
+  const { uuid, token } = await hwGetOrCreateDevice(cache);
+  const teamId = await hwFindTeamId(cache, uuid, token);
+  if (!teamId) throw new Error("HW team H15 niet gevonden");
+
+  const data = await hwRequest("/matches/team", { "team_id[]": teamId }, "GET", uuid, token);
+  const matches = data.data || data;
+  if (!Array.isArray(matches)) throw new Error("HW /matches/team returned no list");
+
+  const todayStr = hwToLocalDateTime(new Date().toISOString()).substring(0, 10);
+  const upcoming = matches
+    .map(m => ({ raw: m, datetime: hwToLocalDateTime(m.datetime || m.date || m.start_date) }))
+    .filter(x => x.datetime && x.datetime.substring(0, 10) >= todayStr)
+    .sort((a, b) => a.datetime.localeCompare(b.datetime));
+
+  if (upcoming[0]) console.log("[hw] next match raw:", JSON.stringify(upcoming[0].raw));
+
+  return upcoming.map(({ raw: m, datetime }) => ({
+    datetime,
+    home_team: { name: hwName(m.home) || hwName(m.home_team) },
+    away_team: { name: hwName(m.away) || hwName(m.away_team) },
+    location: hwLocation(m),
+    field: hwName(m.field) || m.field_name || null,
+    competition: { name: hwName(m.competition) || hwName(m.poule?.competition) || null },
+  }));
+}
+
+async function fetchUpcomingMatches(cache) {
+  try {
+    return await fetchHwUpcomingMatches(cache);
+  } catch (err) {
+    console.error("HW upcoming matches failed, falling back to KNHB:", err.message);
+  }
+  let teamId = cacheGet(cache, "knhb_team_id", DAY_MS);
+  if (!teamId) {
+    teamId = await discoverKnhbTeamId();
+    cacheSet(cache, "knhb_team_id", teamId);
+  }
+  return await fetchKnhbUpcoming(teamId) || [];
 }
 
 /* ============================================================
@@ -554,12 +628,7 @@ async function fetchSpondEvent(username, password, historyStore) {
 
   let knhbMatches = null;
   try {
-    let teamId = cacheGet(loadedCacheRef, "knhb_team_id", DAY_MS);
-    if (!teamId) {
-      teamId = await discoverKnhbTeamId();
-      cacheSet(loadedCacheRef, "knhb_team_id", teamId);
-    }
-    knhbMatches = await fetchKnhbUpcoming(teamId);
+    knhbMatches = await fetchUpcomingMatches(loadedCacheRef);
   } catch { /* enrichment is best-effort */ }
 
   if (output.currentEvent) output.currentEvent = enrichWithKnhb(output.currentEvent, knhbMatches);
@@ -773,14 +842,9 @@ async function main() {
   }
 
   try {
-    let teamId = cacheGet(loadedCacheRef, "knhb_team_id", DAY_MS);
-    if (!teamId) {
-      teamId = await discoverKnhbTeamId();
-      cacheSet(loadedCacheRef, "knhb_team_id", teamId);
-    }
-    const matches = await fetchKnhbUpcoming(teamId) || [];
+    const matches = await fetchUpcomingMatches(loadedCacheRef);
     const now = new Date();
-    const todayStr = now.toISOString().substring(0, 10);
+    const todayStr = hwToLocalDateTime(now.toISOString()).substring(0, 10);
     const upcoming = matches
       .filter(m => m.datetime && m.datetime.substring(0, 10) >= todayStr)
       .sort((a, b) => a.datetime.localeCompare(b.datetime));
