@@ -90,9 +90,12 @@ async function spondGet(path_, token) {
 }
 
 // Events created with Spond's "match" type carry matchEvent/matchInfo and are
-// typically titled "<team> - <opponent>", without any of the keywords below.
+// titled "Groen-Geel H15 - <opponent>", without any of the other keywords.
+// Trainings ("Trainen H15") and TDs can also contain H15, so exclude those.
 function isSpondMatch(event) {
-  return event.matchEvent === true || !!event.matchInfo;
+  if (event.matchEvent === true || event.matchInfo) return true;
+  const name = String(event.heading || "").toLowerCase();
+  return !name.includes("train") && !name.includes("td") && /\bh ?15\b/.test(name);
 }
 
 function isRelevantEvent(event) {
