@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T07:08:19.044Z",
+  "updatedAt": "2026-09-27T13:04:34.227Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 21,
@@ -26,11 +26,10 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "914AB5087B6648DBB9FA0098108F44C4",
     "name": "Groen-Geel H15 – GG H17",
-    "startTimestamp": "2026-09-27T08:45:00.000Z",
+    "startTimestamp": "2026-09-27T08:45:00Z",
     "endTimestamp": "2026-09-27T09:45:00Z",
     "location": null,
     "type": "wedstrijd",
@@ -64,18 +63,9 @@
       "attending": 10,
       "declined": 10,
       "unanswered": 0
-    },
-    "knhbDateTime": "2026-09-27T10:45:00",
-    "knhbLocation": {
-      "name": "Roggewoning (Groen-Geel)",
-      "address": "Buurtweg 122, 2244AJ Wassenaar",
-      "city": "Wassenaar"
-    },
-    "knhbHomeTeam": "Groen-Geel H15",
-    "knhbAwayTeam": "Groen-Geel H17",
-    "knhbField": "Schapenweide"
+    }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "DE4788C239334A2ABF273F9976017370",
     "name": "Trainen H15",
     "startTimestamp": "2026-09-29T17:15:00Z",
@@ -123,5 +113,54 @@
       "declined": 5,
       "unanswered": 2
     }
+  },
+  "nextEvent": {
+    "id": "49C987A033A849F3BD33E2BE88129556",
+    "name": "GG H14 – Groen-Geel H15",
+    "startTimestamp": "2026-10-04T07:00:00.000Z",
+    "endTimestamp": "2026-10-04T08:00:00Z",
+    "location": null,
+    "type": "wedstrijd",
+    "attending": [
+      "Bernard Zweers",
+      "Bouke van Blokland",
+      "Chris De Haas",
+      "Jasper van de Stadt",
+      "Jeroen Torfs",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pepijn Bogaard",
+      "Thijmen Post",
+      "Thomas van der Woning",
+      "Timo van Zagten",
+      "Tom van Wijk"
+    ],
+    "declined": [
+      "Florian Bankeman",
+      "Jules Lapre",
+      "Koen de Koning",
+      "Luc de Goeij",
+      "Pim Kuiper",
+      "Thomas van Dijk"
+    ],
+    "unanswered": [
+      "Sander Nuboer",
+      "Sverre Broekman"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 12,
+      "declined": 6,
+      "unanswered": 2
+    },
+    "knhbDateTime": "2026-10-04T09:00:00",
+    "knhbLocation": {
+      "name": "Roggewoning (Groen-Geel)",
+      "address": "Buurtweg 122, 2244AJ Wassenaar",
+      "city": "Wassenaar"
+    },
+    "knhbHomeTeam": "Groen-Geel H14",
+    "knhbAwayTeam": "Groen-Geel H15",
+    "knhbField": "Groene Weide"
   }
 }

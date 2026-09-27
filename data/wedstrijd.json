@@ -1,20 +1,8 @@
 {
-  "lastUpdated": "2026-09-27T07:08:21.154Z",
+  "lastUpdated": "2026-09-27T13:04:36.860Z",
   "team": "Heren 15",
-  "matchToday": true,
+  "matchToday": false,
   "nextMatch": {
-    "datetime": "2026-09-27T10:45:00",
-    "homeTeam": "Groen-Geel H15",
-    "awayTeam": "Groen-Geel H17",
-    "location": {
-      "name": "Roggewoning (Groen-Geel)",
-      "address": "Buurtweg 122, 2244AJ Wassenaar",
-      "city": "Wassenaar"
-    },
-    "field": "Schapenweide",
-    "competition": null
-  },
-  "matchAfter": {
     "datetime": "2026-10-04T09:00:00",
     "homeTeam": "Groen-Geel H14",
     "awayTeam": "Groen-Geel H15",
@@ -24,6 +12,18 @@
       "city": "Wassenaar"
     },
     "field": "Groene Weide",
+    "competition": null
+  },
+  "matchAfter": {
+    "datetime": "2026-10-11T12:00:00",
+    "homeTeam": "Groen-Geel H15",
+    "awayTeam": "Zoetermeer H5",
+    "location": {
+      "name": "Roggewoning (HGC)",
+      "address": "Buurtweg 120, 2244AJ Wassenaar",
+      "city": "Wassenaar"
+    },
+    "field": "Veld 3",
     "competition": null
   }
 }
