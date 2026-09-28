@@ -50,21 +50,21 @@
     },
     {
       "rank": 4,
-      "team_id": 8085,
-      "team_name": "Zoetermeer H5",
-      "team_short": "H5",
-      "played": 4,
-      "won": 3,
-      "drawn": 0,
-      "lost": 1,
-      "points_deducted": 0,
-      "points": 9
-    },
-    {
-      "rank": 5,
       "team_id": 17730,
       "team_name": "Leonidas H22",
       "team_short": "H22",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "points_deducted": 0,
+      "points": 7
+    },
+    {
+      "rank": 5,
+      "team_id": 8085,
+      "team_name": "Zoetermeer H5",
+      "team_short": "H5",
       "played": 4,
       "won": 2,
       "drawn": 1,
@@ -86,6 +86,18 @@
     },
     {
       "rank": 7,
+      "team_id": 17731,
+      "team_name": "Leonidas H23",
+      "team_short": "H23",
+      "played": 4,
+      "won": 1,
+      "drawn": 1,
+      "lost": 2,
+      "points_deducted": 0,
+      "points": 4
+    },
+    {
+      "rank": 8,
       "team_id": 34991,
       "team_name": "Scoop Delft H4",
       "team_short": "H4",
@@ -97,7 +109,7 @@
       "points": 4
     },
     {
-      "rank": 8,
+      "rank": 9,
       "team_id": 44005,
       "team_name": "Groen-Geel H17",
       "team_short": "H17",
@@ -107,18 +119,6 @@
       "lost": 2,
       "points_deducted": 0,
       "points": 4
-    },
-    {
-      "rank": 9,
-      "team_id": 17731,
-      "team_name": "Leonidas H23",
-      "team_short": "H23",
-      "played": 4,
-      "won": 1,
-      "drawn": 0,
-      "lost": 3,
-      "points_deducted": 0,
-      "points": 3
     },
     {
       "rank": 10,
@@ -324,21 +324,21 @@
         },
         {
           "rank": 4,
-          "team_id": 8085,
-          "team_name": "Zoetermeer H5",
-          "team_short": "H5",
-          "played": 4,
-          "won": 3,
-          "drawn": 0,
-          "lost": 1,
-          "points_deducted": 0,
-          "points": 9
-        },
-        {
-          "rank": 5,
           "team_id": 17730,
           "team_name": "Leonidas H22",
           "team_short": "H22",
+          "played": 4,
+          "won": 2,
+          "drawn": 1,
+          "lost": 1,
+          "points_deducted": 0,
+          "points": 7
+        },
+        {
+          "rank": 5,
+          "team_id": 8085,
+          "team_name": "Zoetermeer H5",
+          "team_short": "H5",
           "played": 4,
           "won": 2,
           "drawn": 1,
@@ -360,6 +360,18 @@
         },
         {
           "rank": 7,
+          "team_id": 17731,
+          "team_name": "Leonidas H23",
+          "team_short": "H23",
+          "played": 4,
+          "won": 1,
+          "drawn": 1,
+          "lost": 2,
+          "points_deducted": 0,
+          "points": 4
+        },
+        {
+          "rank": 8,
           "team_id": 34991,
           "team_name": "Scoop Delft H4",
           "team_short": "H4",
@@ -371,7 +383,7 @@
           "points": 4
         },
         {
-          "rank": 8,
+          "rank": 9,
           "team_id": 44005,
           "team_name": "Groen-Geel H17",
           "team_short": "H17",
@@ -381,18 +393,6 @@
           "lost": 2,
           "points_deducted": 0,
           "points": 4
-        },
-        {
-          "rank": 9,
-          "team_id": 17731,
-          "team_name": "Leonidas H23",
-          "team_short": "H23",
-          "played": 4,
-          "won": 1,
-          "drawn": 0,
-          "lost": 3,
-          "points_deducted": 0,
-          "points": 3
         },
         {
           "rank": 10,
