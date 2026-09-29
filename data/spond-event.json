@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T09:37:42.948Z",
+  "updatedAt": "2026-09-29T16:08:16.454Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -56,7 +56,6 @@
       "Pim Kuiper",
       "Thijmen Post",
       "Thomas van der Woning",
-      "Timo van Zagten",
       "Tom van Wijk"
     ],
     "declined": [
@@ -67,13 +66,16 @@
       "Reinier de Rooij",
       "Sander Nuboer",
       "Sverre Broekman",
-      "Thomas van Dijk"
+      "Thomas van Dijk",
+      "Timo van Zagten"
     ],
     "unanswered": [],
-    "lastMinuteDeclined": [],
+    "lastMinuteDeclined": [
+      "Timo van Zagten"
+    ],
     "counts": {
-      "attending": 14,
-      "declined": 8,
+      "attending": 13,
+      "declined": 9,
       "unanswered": 0
     }
   },
