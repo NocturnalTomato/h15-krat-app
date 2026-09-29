@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T16:08:16.454Z",
+  "updatedAt": "2026-09-29T20:49:33.640Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,8 +27,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "DE4788C239334A2ABF273F9976017370",
     "name": "Trainen H15",
     "startTimestamp": "2026-09-29T17:15:00Z",
@@ -79,7 +78,7 @@
       "unanswered": 0
     }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "49C987A033A849F3BD33E2BE88129556",
     "name": "GG H14 – Groen-Geel H15",
     "startTimestamp": "2026-10-04T07:00:00.000Z",
@@ -128,5 +127,55 @@
     "knhbHomeTeam": "Groen-Geel H14",
     "knhbAwayTeam": "Groen-Geel H15",
     "knhbField": "Groene Weide"
+  },
+  "nextEvent": {
+    "id": "AFC42ADCAD4B443EB3F6A2F2FC8AFCF8",
+    "name": "Trainen H15",
+    "startTimestamp": "2026-10-06T17:15:00Z",
+    "endTimestamp": "2026-10-06T18:45:00Z",
+    "location": {
+      "id": "8D9C17E8A3834CC6B8798B88CB073CDA",
+      "feature": "Skaap",
+      "postalCode": "",
+      "country": "",
+      "administrativeAreaLevel1": "",
+      "administrativeAreaLevel2": "",
+      "locality": ""
+    },
+    "type": "training",
+    "attending": [
+      "Bernard Zweers",
+      "Bouke van Blokland",
+      "Chris De Haas",
+      "Florian Bankeman",
+      "Jeroen Torfs",
+      "Jules Lapre",
+      "Koen de Koning",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pepijn Bogaard",
+      "Thomas van Dijk",
+      "Timo van Zagten",
+      "Tom van Wijk"
+    ],
+    "declined": [
+      "Mattie Steenvoorden",
+      "Pim Kuiper"
+    ],
+    "unanswered": [
+      "Jasper van de Stadt",
+      "Luc de Goeij",
+      "Reinier de Rooij",
+      "Sander Nuboer",
+      "Sverre Broekman",
+      "Thijmen Post",
+      "Thomas van der Woning"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 13,
+      "declined": 2,
+      "unanswered": 7
+    }
   }
 }
