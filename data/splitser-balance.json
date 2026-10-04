@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-04T06:12:36.773Z",
+  "updatedAt": "2026-10-04T12:29:22.500Z",
   "people": [
     {
-      "name": "Koen de Koning",
+      "name": "Leen",
       "fullName": "Koen de Koning",
       "amount": "€83.88",
       "amountCents": 8388,
@@ -16,6 +16,13 @@
       "isCurrent": false
     },
     {
+      "name": "Pepijn",
+      "fullName": "Pepijn",
+      "amount": "€27.94",
+      "amountCents": 2794,
+      "isCurrent": false
+    },
+    {
       "name": "Jeroen",
       "fullName": "Jeroen Torfs",
       "amount": "€24.51",
@@ -25,22 +32,15 @@
     {
       "name": "Chris",
       "fullName": "Chris de Haas",
-      "amount": "€24.49",
-      "amountCents": 2449,
+      "amount": "€20.93",
+      "amountCents": 2093,
       "isCurrent": false
     },
     {
-      "name": "Thomas van der Woning",
+      "name": "Jos",
       "fullName": "Thomas van der Woning",
-      "amount": "€19.76",
-      "amountCents": 1976,
-      "isCurrent": false
-    },
-    {
-      "name": "Pepijn",
-      "fullName": "Pepijn",
-      "amount": "€3.04",
-      "amountCents": 304,
+      "amount": "€16.20",
+      "amountCents": 1620,
       "isCurrent": false
     },
     {
@@ -65,13 +65,6 @@
       "isCurrent": false
     },
     {
-      "name": "Noud",
-      "fullName": "Noud van Maanen",
-      "amount": "-€3.93",
-      "amountCents": -393,
-      "isCurrent": false
-    },
-    {
       "name": "Sverre",
       "fullName": "Sverre",
       "amount": "-€4.97",
@@ -86,10 +79,24 @@
       "isCurrent": false
     },
     {
+      "name": "Noud",
+      "fullName": "Noud van Maanen",
+      "amount": "-€7.48",
+      "amountCents": -748,
+      "isCurrent": false
+    },
+    {
       "name": "Thijmen",
       "fullName": "Thijmen Post",
-      "amount": "-€4.98",
-      "amountCents": -498,
+      "amount": "-€8.54",
+      "amountCents": -854,
+      "isCurrent": false
+    },
+    {
+      "name": "bernard",
+      "fullName": "bernard zweers",
+      "amount": "-€8.90",
+      "amountCents": -890,
       "isCurrent": false
     },
     {
@@ -102,15 +109,8 @@
     {
       "name": "Morris",
       "fullName": "Morris Giele",
-      "amount": "-€8.90",
-      "amountCents": -890,
-      "isCurrent": false
-    },
-    {
-      "name": "bernard",
-      "fullName": "bernard zweers",
-      "amount": "-€8.90",
-      "amountCents": -890,
+      "amount": "-€12.46",
+      "amountCents": -1246,
       "isCurrent": false
     },
     {
@@ -128,13 +128,6 @@
       "isCurrent": false
     },
     {
-      "name": "Tom",
-      "fullName": "Tom v Wijk",
-      "amount": "-€25.90",
-      "amountCents": -2590,
-      "isCurrent": false
-    },
-    {
       "name": "Jules",
       "fullName": "Jules Lapre",
       "amount": "-€26.70",
@@ -142,10 +135,17 @@
       "isCurrent": false
     },
     {
+      "name": "Tom",
+      "fullName": "Tom v Wijk",
+      "amount": "-€29.45",
+      "amountCents": -2945,
+      "isCurrent": false
+    },
+    {
       "name": "Bouke",
       "fullName": "Bouke van Blokland",
-      "amount": "-€27.71",
-      "amountCents": -2771,
+      "amount": "-€31.27",
+      "amountCents": -3127,
       "isCurrent": false
     },
     {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T06:12:32.302Z",
+  "updatedAt": "2026-10-04T12:29:19.385Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,11 +27,10 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "49C987A033A849F3BD33E2BE88129556",
     "name": "GG H14 – Groen-Geel H15",
-    "startTimestamp": "2026-10-04T07:00:00.000Z",
+    "startTimestamp": "2026-10-04T07:00:00Z",
     "endTimestamp": "2026-10-04T08:00:00Z",
     "location": null,
     "type": "wedstrijd",
@@ -67,18 +66,9 @@
       "attending": 11,
       "declined": 9,
       "unanswered": 1
-    },
-    "knhbDateTime": "2026-10-04T09:00:00",
-    "knhbLocation": {
-      "name": "Roggewoning (Groen-Geel)",
-      "address": "Buurtweg 122, 2244AJ Wassenaar",
-      "city": "Wassenaar"
-    },
-    "knhbHomeTeam": "Groen-Geel H14",
-    "knhbAwayTeam": "Groen-Geel H15",
-    "knhbField": "Groene Weide"
+    }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "AFC42ADCAD4B443EB3F6A2F2FC8AFCF8",
     "name": "Trainen H15",
     "startTimestamp": "2026-10-06T17:15:00Z",
@@ -127,5 +117,55 @@
       "declined": 4,
       "unanswered": 4
     }
+  },
+  "nextEvent": {
+    "id": "FE55142EB136473A894317E6EDFFDB2E",
+    "name": "Groen-Geel H15 – Zoetermeer H5",
+    "startTimestamp": "2026-10-11T10:00:00.000Z",
+    "endTimestamp": "2026-10-11T11:00:00Z",
+    "location": null,
+    "type": "wedstrijd",
+    "attending": [
+      "Bernard Zweers",
+      "Bouke van Blokland",
+      "Chris De Haas",
+      "Florian Bankeman",
+      "Jules Lapre",
+      "Koen de Koning",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pim Kuiper",
+      "Sander Nuboer",
+      "Thomas van Dijk",
+      "Thomas van der Woning",
+      "Timo van Zagten"
+    ],
+    "declined": [
+      "Jeroen Torfs",
+      "Luc de Goeij",
+      "Pepijn Bogaard",
+      "Thijmen Post"
+    ],
+    "unanswered": [
+      "Jasper van de Stadt",
+      "Reinier de Rooij",
+      "Sverre Broekman",
+      "Tom van Wijk"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 13,
+      "declined": 4,
+      "unanswered": 4
+    },
+    "knhbDateTime": "2026-10-11T12:00:00",
+    "knhbLocation": {
+      "name": "Roggewoning (HGC)",
+      "address": "Buurtweg 120, 2244AJ Wassenaar",
+      "city": "Wassenaar"
+    },
+    "knhbHomeTeam": "Groen-Geel H15",
+    "knhbAwayTeam": "Zoetermeer H5",
+    "knhbField": "Veld 3"
   }
 }
