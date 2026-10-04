@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T12:29:19.385Z",
+  "updatedAt": "2026-10-04T16:57:53.294Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -133,7 +133,6 @@
       "Jules Lapre",
       "Koen de Koning",
       "Morris Giele",
-      "Noud van Maanen",
       "Pim Kuiper",
       "Sander Nuboer",
       "Thomas van Dijk",
@@ -143,6 +142,7 @@
     "declined": [
       "Jeroen Torfs",
       "Luc de Goeij",
+      "Noud van Maanen",
       "Pepijn Bogaard",
       "Thijmen Post"
     ],
@@ -154,8 +154,8 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 13,
-      "declined": 4,
+      "attending": 12,
+      "declined": 5,
       "unanswered": 4
     },
     "knhbDateTime": "2026-10-11T12:00:00",
