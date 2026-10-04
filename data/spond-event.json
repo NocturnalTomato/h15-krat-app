@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T16:57:53.294Z",
+  "updatedAt": "2026-10-04T20:03:21.324Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -90,9 +90,11 @@
       "Jeroen Torfs",
       "Jules Lapre",
       "Koen de Koning",
+      "Luc de Goeij",
       "Noud van Maanen",
       "Pepijn Bogaard",
       "Sander Nuboer",
+      "Sverre Broekman",
       "Thijmen Post",
       "Thomas van Dijk",
       "Thomas van der Woning",
@@ -107,15 +109,13 @@
     ],
     "unanswered": [
       "Jasper van de Stadt",
-      "Luc de Goeij",
-      "Reinier de Rooij",
-      "Sverre Broekman"
+      "Reinier de Rooij"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 14,
+      "attending": 16,
       "declined": 4,
-      "unanswered": 4
+      "unanswered": 2
     }
   },
   "nextEvent": {
