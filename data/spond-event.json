@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T02:03:23.121Z",
+  "updatedAt": "2026-10-05T09:07:28.893Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -55,7 +55,6 @@
       "Pepijn Bogaard",
       "Sander Nuboer",
       "Sverre Broekman",
-      "Thijmen Post",
       "Thomas van Dijk",
       "Thomas van der Woning",
       "Timo van Zagten",
@@ -65,7 +64,8 @@
       "Florian Bankeman",
       "Mattie Steenvoorden",
       "Morris Giele",
-      "Pim Kuiper"
+      "Pim Kuiper",
+      "Thijmen Post"
     ],
     "unanswered": [
       "Jasper van de Stadt",
@@ -73,8 +73,8 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 16,
-      "declined": 4,
+      "attending": 15,
+      "declined": 5,
       "unanswered": 2
     }
   },
