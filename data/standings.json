@@ -14,9 +14,9 @@
   "standings": [
     {
       "rank": 1,
-      "team_id": 43836,
-      "team_name": "Roomburg H8",
-      "team_short": "H8",
+      "team_id": 6485,
+      "team_name": "Ring Pass H5",
+      "team_short": "H5",
       "played": 5,
       "won": 4,
       "drawn": 1,
@@ -26,15 +26,15 @@
     },
     {
       "rank": 2,
-      "team_id": 6485,
-      "team_name": "Ring Pass H5",
-      "team_short": "H5",
-      "played": 4,
+      "team_id": 43836,
+      "team_name": "Roomburg H8",
+      "team_short": "H8",
+      "played": 5,
       "won": 4,
-      "drawn": 0,
+      "drawn": 1,
       "lost": 0,
       "points_deducted": 0,
-      "points": 12
+      "points": 13
     },
     {
       "rank": 3,
@@ -65,12 +65,12 @@
       "team_id": 17730,
       "team_name": "Leonidas H22",
       "team_short": "H22",
-      "played": 4,
+      "played": 5,
       "won": 2,
-      "drawn": 1,
+      "drawn": 2,
       "lost": 1,
       "points_deducted": 0,
-      "points": 7
+      "points": 8
     },
     {
       "rank": 6,
@@ -288,9 +288,9 @@
       "standings": [
         {
           "rank": 1,
-          "team_id": 43836,
-          "team_name": "Roomburg H8",
-          "team_short": "H8",
+          "team_id": 6485,
+          "team_name": "Ring Pass H5",
+          "team_short": "H5",
           "played": 5,
           "won": 4,
           "drawn": 1,
@@ -300,15 +300,15 @@
         },
         {
           "rank": 2,
-          "team_id": 6485,
-          "team_name": "Ring Pass H5",
-          "team_short": "H5",
-          "played": 4,
+          "team_id": 43836,
+          "team_name": "Roomburg H8",
+          "team_short": "H8",
+          "played": 5,
           "won": 4,
-          "drawn": 0,
+          "drawn": 1,
           "lost": 0,
           "points_deducted": 0,
-          "points": 12
+          "points": 13
         },
         {
           "rank": 3,
@@ -339,12 +339,12 @@
           "team_id": 17730,
           "team_name": "Leonidas H22",
           "team_short": "H22",
-          "played": 4,
+          "played": 5,
           "won": 2,
-          "drawn": 1,
+          "drawn": 2,
           "lost": 1,
           "points_deducted": 0,
-          "points": 7
+          "points": 8
         },
         {
           "rank": 6,

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T06:44:47.452Z",
+  "updatedAt": "2026-10-06T13:40:28.615Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -62,20 +62,19 @@
     ],
     "declined": [
       "Florian Bankeman",
+      "Jasper van de Stadt",
       "Mattie Steenvoorden",
       "Morris Giele",
       "Pim Kuiper",
       "Reinier de Rooij",
       "Thijmen Post"
     ],
-    "unanswered": [
-      "Jasper van de Stadt"
-    ],
+    "unanswered": [],
     "lastMinuteDeclined": [],
     "counts": {
       "attending": 15,
-      "declined": 6,
-      "unanswered": 1
+      "declined": 7,
+      "unanswered": 0
     }
   },
   "nextEvent": {
