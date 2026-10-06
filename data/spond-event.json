@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T19:06:43.949Z",
+  "updatedAt": "2026-10-06T23:04:45.757Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,55 +27,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": {
-    "id": "AFC42ADCAD4B443EB3F6A2F2FC8AFCF8",
-    "name": "Trainen H15",
-    "startTimestamp": "2026-10-06T17:15:00Z",
-    "endTimestamp": "2026-10-06T18:45:00Z",
-    "location": {
-      "id": "8D9C17E8A3834CC6B8798B88CB073CDA",
-      "feature": "Skaap",
-      "postalCode": "",
-      "country": "",
-      "administrativeAreaLevel1": "",
-      "administrativeAreaLevel2": "",
-      "locality": ""
-    },
-    "type": "training",
-    "attending": [
-      "Bernard Zweers",
-      "Bouke van Blokland",
-      "Chris De Haas",
-      "Jeroen Torfs",
-      "Jules Lapre",
-      "Koen de Koning",
-      "Luc de Goeij",
-      "Noud van Maanen",
-      "Sander Nuboer",
-      "Sverre Broekman",
-      "Thomas van Dijk",
-      "Thomas van der Woning",
-      "Timo van Zagten",
-      "Tom van Wijk"
-    ],
-    "declined": [
-      "Florian Bankeman",
-      "Jasper van de Stadt",
-      "Mattie Steenvoorden",
-      "Morris Giele",
-      "Pepijn Bogaard",
-      "Pim Kuiper",
-      "Reinier de Rooij",
-      "Thijmen Post"
-    ],
-    "unanswered": [],
-    "lastMinuteDeclined": [],
-    "counts": {
-      "attending": 14,
-      "declined": 8,
-      "unanswered": 0
-    }
-  },
+  "currentEvent": null,
   "upcomingEvent": {
     "id": "FE55142EB136473A894317E6EDFFDB2E",
     "name": "Groen-Geel H15 – Zoetermeer H5",
@@ -88,7 +40,6 @@
       "Chris De Haas",
       "Florian Bankeman",
       "Jasper van de Stadt",
-      "Jules Lapre",
       "Koen de Koning",
       "Morris Giele",
       "Pim Kuiper",
@@ -101,20 +52,21 @@
     "declined": [
       "Bernard Zweers",
       "Jeroen Torfs",
+      "Jules Lapre",
       "Luc de Goeij",
       "Noud van Maanen",
       "Pepijn Bogaard",
+      "Sverre Broekman",
       "Thijmen Post"
     ],
     "unanswered": [
-      "Reinier de Rooij",
-      "Sverre Broekman"
+      "Reinier de Rooij"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 13,
-      "declined": 6,
-      "unanswered": 2
+      "attending": 12,
+      "declined": 8,
+      "unanswered": 1
     },
     "knhbDateTime": "2026-10-11T12:00:00",
     "knhbLocation": {
