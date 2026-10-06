@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T13:40:28.615Z",
+  "updatedAt": "2026-10-06T19:06:43.949Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,8 +27,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "AFC42ADCAD4B443EB3F6A2F2FC8AFCF8",
     "name": "Trainen H15",
     "startTimestamp": "2026-10-06T17:15:00Z",
@@ -52,7 +51,6 @@
       "Koen de Koning",
       "Luc de Goeij",
       "Noud van Maanen",
-      "Pepijn Bogaard",
       "Sander Nuboer",
       "Sverre Broekman",
       "Thomas van Dijk",
@@ -65,6 +63,7 @@
       "Jasper van de Stadt",
       "Mattie Steenvoorden",
       "Morris Giele",
+      "Pepijn Bogaard",
       "Pim Kuiper",
       "Reinier de Rooij",
       "Thijmen Post"
@@ -72,12 +71,12 @@
     "unanswered": [],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 15,
-      "declined": 7,
+      "attending": 14,
+      "declined": 8,
       "unanswered": 0
     }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "FE55142EB136473A894317E6EDFFDB2E",
     "name": "Groen-Geel H15 – Zoetermeer H5",
     "startTimestamp": "2026-10-11T10:00:00.000Z",
@@ -88,6 +87,7 @@
       "Bouke van Blokland",
       "Chris De Haas",
       "Florian Bankeman",
+      "Jasper van de Stadt",
       "Jules Lapre",
       "Koen de Koning",
       "Morris Giele",
@@ -95,7 +95,8 @@
       "Sander Nuboer",
       "Thomas van Dijk",
       "Thomas van der Woning",
-      "Timo van Zagten"
+      "Timo van Zagten",
+      "Tom van Wijk"
     ],
     "declined": [
       "Bernard Zweers",
@@ -106,16 +107,14 @@
       "Thijmen Post"
     ],
     "unanswered": [
-      "Jasper van de Stadt",
       "Reinier de Rooij",
-      "Sverre Broekman",
-      "Tom van Wijk"
+      "Sverre Broekman"
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 11,
+      "attending": 13,
       "declined": 6,
-      "unanswered": 4
+      "unanswered": 2
     },
     "knhbDateTime": "2026-10-11T12:00:00",
     "knhbLocation": {
@@ -126,5 +125,55 @@
     "knhbHomeTeam": "Groen-Geel H15",
     "knhbAwayTeam": "Zoetermeer H5",
     "knhbField": "Veld 3"
+  },
+  "nextEvent": {
+    "id": "348D5A38CBD44BCE9A506FF970372A34",
+    "name": "Trainen H15",
+    "startTimestamp": "2026-10-13T17:15:00Z",
+    "endTimestamp": "2026-10-13T18:45:00Z",
+    "location": {
+      "id": "70180752DE98457BAA7FD7998C298030",
+      "feature": "Skaap",
+      "postalCode": "",
+      "country": "",
+      "administrativeAreaLevel1": "",
+      "administrativeAreaLevel2": "",
+      "locality": ""
+    },
+    "type": "training",
+    "attending": [
+      "Florian Bankeman",
+      "Koen de Koning",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pim Kuiper",
+      "Sander Nuboer",
+      "Thomas van Dijk",
+      "Thomas van der Woning",
+      "Timo van Zagten",
+      "Tom van Wijk"
+    ],
+    "declined": [
+      "Bernard Zweers",
+      "Bouke van Blokland",
+      "Chris De Haas",
+      "Jeroen Torfs",
+      "Jules Lapre",
+      "Mattie Steenvoorden",
+      "Pepijn Bogaard",
+      "Thijmen Post"
+    ],
+    "unanswered": [
+      "Jasper van de Stadt",
+      "Luc de Goeij",
+      "Reinier de Rooij",
+      "Sverre Broekman"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 10,
+      "declined": 8,
+      "unanswered": 4
+    }
   }
 }
