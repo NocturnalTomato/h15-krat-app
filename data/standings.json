@@ -1,6 +1,6 @@
 {
   "poule_id": "182775",
-  "competition": "Heren Reserve Sep tm Jun",
+  "competition": "Heren Reserve",
   "poule_options": [
     {
       "id": "182775",
@@ -284,7 +284,7 @@
       ]
     },
     "182775": {
-      "competition": "Heren Reserve Sep tm Jun",
+      "competition": "Heren Reserve",
       "standings": [
         {
           "rank": 1,
