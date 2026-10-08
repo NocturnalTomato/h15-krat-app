@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T21:36:40.431Z",
+  "updatedAt": "2026-10-08T01:20:25.313Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -56,17 +56,16 @@
       "Luc de Goeij",
       "Noud van Maanen",
       "Pepijn Bogaard",
+      "Reinier de Rooij",
       "Sverre Broekman",
       "Thijmen Post"
     ],
-    "unanswered": [
-      "Reinier de Rooij"
-    ],
+    "unanswered": [],
     "lastMinuteDeclined": [],
     "counts": {
       "attending": 12,
-      "declined": 8,
-      "unanswered": 1
+      "declined": 9,
+      "unanswered": 0
     },
     "knhbDateTime": "2026-10-11T12:00:00",
     "knhbLocation": {
