@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-09T14:32:54.343Z",
+  "lastUpdated": "2026-10-09T19:48:59.595Z",
   "team": "Heren 15",
   "matchToday": false,
   "nextMatch": {
@@ -15,7 +15,7 @@
     "competition": "Heren Reserve"
   },
   "matchAfter": {
-    "datetime": "2026-10-25T00:00:00",
+    "datetime": "2026-10-25T13:00:00",
     "homeTeam": "Scoop Delft H4",
     "awayTeam": "Groen-Geel H15",
     "location": {
@@ -23,7 +23,7 @@
       "address": "Mekelweg 8, 2628CD Delft",
       "city": "Delft"
     },
-    "field": null,
+    "field": "Veld 3",
     "competition": "Heren Reserve"
   }
 }
