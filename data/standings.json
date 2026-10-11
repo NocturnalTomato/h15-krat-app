@@ -41,15 +41,39 @@
       "team_id": 43836,
       "team_name": "Roomburg H8",
       "team_short": "H8",
-      "played": 5,
+      "played": 6,
       "won": 4,
       "drawn": 1,
-      "lost": 0,
+      "lost": 1,
       "points_deducted": 0,
       "points": 13
     },
     {
       "rank": 4,
+      "team_id": 17730,
+      "team_name": "Leonidas H22",
+      "team_short": "H22",
+      "played": 6,
+      "won": 3,
+      "drawn": 2,
+      "lost": 1,
+      "points_deducted": 0,
+      "points": 11
+    },
+    {
+      "rank": 5,
+      "team_id": 34991,
+      "team_name": "Scoop Delft H4",
+      "team_short": "H4",
+      "played": 6,
+      "won": 3,
+      "drawn": 1,
+      "lost": 2,
+      "points_deducted": 0,
+      "points": 10
+    },
+    {
+      "rank": 6,
       "team_id": 3778,
       "team_name": "Groen-Geel H14",
       "team_short": "H14",
@@ -61,19 +85,7 @@
       "points": 9
     },
     {
-      "rank": 5,
-      "team_id": 17730,
-      "team_name": "Leonidas H22",
-      "team_short": "H22",
-      "played": 5,
-      "won": 2,
-      "drawn": 2,
-      "lost": 1,
-      "points_deducted": 0,
-      "points": 8
-    },
-    {
-      "rank": 6,
+      "rank": 7,
       "team_id": 17731,
       "team_name": "Leonidas H23",
       "team_short": "H23",
@@ -83,18 +95,6 @@
       "lost": 2,
       "points_deducted": 0,
       "points": 8
-    },
-    {
-      "rank": 7,
-      "team_id": 34991,
-      "team_name": "Scoop Delft H4",
-      "team_short": "H4",
-      "played": 5,
-      "won": 2,
-      "drawn": 1,
-      "lost": 2,
-      "points_deducted": 0,
-      "points": 7
     },
     {
       "rank": 8,
@@ -137,10 +137,10 @@
       "team_id": 44005,
       "team_name": "Groen-Geel H17",
       "team_short": "H17",
-      "played": 5,
+      "played": 6,
       "won": 1,
       "drawn": 1,
-      "lost": 3,
+      "lost": 4,
       "points_deducted": 0,
       "points": 4
     },
@@ -315,15 +315,39 @@
           "team_id": 43836,
           "team_name": "Roomburg H8",
           "team_short": "H8",
-          "played": 5,
+          "played": 6,
           "won": 4,
           "drawn": 1,
-          "lost": 0,
+          "lost": 1,
           "points_deducted": 0,
           "points": 13
         },
         {
           "rank": 4,
+          "team_id": 17730,
+          "team_name": "Leonidas H22",
+          "team_short": "H22",
+          "played": 6,
+          "won": 3,
+          "drawn": 2,
+          "lost": 1,
+          "points_deducted": 0,
+          "points": 11
+        },
+        {
+          "rank": 5,
+          "team_id": 34991,
+          "team_name": "Scoop Delft H4",
+          "team_short": "H4",
+          "played": 6,
+          "won": 3,
+          "drawn": 1,
+          "lost": 2,
+          "points_deducted": 0,
+          "points": 10
+        },
+        {
+          "rank": 6,
           "team_id": 3778,
           "team_name": "Groen-Geel H14",
           "team_short": "H14",
@@ -335,19 +359,7 @@
           "points": 9
         },
         {
-          "rank": 5,
-          "team_id": 17730,
-          "team_name": "Leonidas H22",
-          "team_short": "H22",
-          "played": 5,
-          "won": 2,
-          "drawn": 2,
-          "lost": 1,
-          "points_deducted": 0,
-          "points": 8
-        },
-        {
-          "rank": 6,
+          "rank": 7,
           "team_id": 17731,
           "team_name": "Leonidas H23",
           "team_short": "H23",
@@ -357,18 +369,6 @@
           "lost": 2,
           "points_deducted": 0,
           "points": 8
-        },
-        {
-          "rank": 7,
-          "team_id": 34991,
-          "team_name": "Scoop Delft H4",
-          "team_short": "H4",
-          "played": 5,
-          "won": 2,
-          "drawn": 1,
-          "lost": 2,
-          "points_deducted": 0,
-          "points": 7
         },
         {
           "rank": 8,
@@ -411,10 +411,10 @@
           "team_id": 44005,
           "team_name": "Groen-Geel H17",
           "team_short": "H17",
-          "played": 5,
+          "played": 6,
           "won": 1,
           "drawn": 1,
-          "lost": 3,
+          "lost": 4,
           "points_deducted": 0,
           "points": 4
         },
