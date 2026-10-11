@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T19:44:55.706Z",
+  "updatedAt": "2026-10-11T23:13:20.796Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,46 +27,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": {
-    "id": "FE55142EB136473A894317E6EDFFDB2E",
-    "name": "Groen-Geel H15 – Zoetermeer H5",
-    "startTimestamp": "2026-10-11T10:00:00Z",
-    "endTimestamp": "2026-10-11T11:00:00Z",
-    "location": null,
-    "type": "wedstrijd",
-    "attending": [
-      "Bouke van Blokland",
-      "Chris De Haas",
-      "Florian Bankeman",
-      "Jasper van de Stadt",
-      "Koen de Koning",
-      "Morris Giele",
-      "Pim Kuiper",
-      "Sander Nuboer",
-      "Thomas van Dijk",
-      "Thomas van der Woning",
-      "Timo van Zagten",
-      "Tom van Wijk"
-    ],
-    "declined": [
-      "Bernard Zweers",
-      "Jeroen Torfs",
-      "Jules Lapre",
-      "Luc de Goeij",
-      "Noud van Maanen",
-      "Pepijn Bogaard",
-      "Reinier de Rooij",
-      "Sverre Broekman",
-      "Thijmen Post"
-    ],
-    "unanswered": [],
-    "lastMinuteDeclined": [],
-    "counts": {
-      "attending": 12,
-      "declined": 9,
-      "unanswered": 0
-    }
-  },
+  "currentEvent": null,
   "upcomingEvent": {
     "id": "348D5A38CBD44BCE9A506FF970372A34",
     "name": "Trainen H15",
