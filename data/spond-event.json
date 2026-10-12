@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T23:13:20.796Z",
+  "updatedAt": "2026-10-12T02:28:31.280Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -62,20 +62,20 @@
       "Chris De Haas",
       "Jeroen Torfs",
       "Jules Lapre",
+      "Luc de Goeij",
       "Mattie Steenvoorden",
       "Pepijn Bogaard",
       "Thijmen Post"
     ],
     "unanswered": [
       "Jasper van de Stadt",
-      "Luc de Goeij",
       "Reinier de Rooij"
     ],
     "lastMinuteDeclined": [],
     "counts": {
       "attending": 11,
-      "declined": 8,
-      "unanswered": 3
+      "declined": 9,
+      "unanswered": 2
     }
   },
   "nextEvent": {
