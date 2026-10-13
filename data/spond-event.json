@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T16:22:39.307Z",
+  "updatedAt": "2026-10-13T21:27:39.188Z",
   "team": "Groen-Geel H15",
   "groupId": "18B54BC5B26B4702BED90DD551143C76",
   "memberCount": 22,
@@ -27,8 +27,7 @@
     "Timo van Zagten",
     "Tom van Wijk"
   ],
-  "currentEvent": null,
-  "upcomingEvent": {
+  "currentEvent": {
     "id": "348D5A38CBD44BCE9A506FF970372A34",
     "name": "Trainen H15",
     "startTimestamp": "2026-10-13T17:15:00Z",
@@ -80,7 +79,7 @@
       "unanswered": 1
     }
   },
-  "nextEvent": {
+  "upcomingEvent": {
     "id": "7D807CB189A84EE78A4E79C5501200CB",
     "name": "Trainen H15",
     "startTimestamp": "2026-10-20T17:15:00Z",
@@ -96,7 +95,6 @@
     },
     "type": "training",
     "attending": [
-      "Florian Bankeman",
       "Jules Lapre",
       "Koen de Koning",
       "Morris Giele",
@@ -107,6 +105,7 @@
     ],
     "declined": [
       "Chris De Haas",
+      "Florian Bankeman",
       "Jeroen Torfs",
       "Mattie Steenvoorden",
       "Pepijn Bogaard",
@@ -125,9 +124,59 @@
     ],
     "lastMinuteDeclined": [],
     "counts": {
-      "attending": 8,
-      "declined": 6,
+      "attending": 7,
+      "declined": 7,
       "unanswered": 8
     }
+  },
+  "nextEvent": {
+    "id": "F006FF37954C4F29A9A41F5E21314F20",
+    "name": "Scoop Delft H4 – Groen-Geel H15",
+    "startTimestamp": "2026-10-25T11:00:00.000Z",
+    "endTimestamp": "2026-10-25T13:00:00Z",
+    "location": null,
+    "type": "wedstrijd",
+    "attending": [
+      "Bernard Zweers",
+      "Bouke van Blokland",
+      "Chris De Haas",
+      "Florian Bankeman",
+      "Jasper van de Stadt",
+      "Jules Lapre",
+      "Koen de Koning",
+      "Morris Giele",
+      "Noud van Maanen",
+      "Pim Kuiper",
+      "Sverre Broekman",
+      "Thijmen Post",
+      "Thomas van Dijk",
+      "Thomas van der Woning",
+      "Timo van Zagten",
+      "Tom van Wijk"
+    ],
+    "declined": [
+      "Jeroen Torfs",
+      "Luc de Goeij",
+      "Pepijn Bogaard"
+    ],
+    "unanswered": [
+      "Reinier de Rooij",
+      "Sander Nuboer"
+    ],
+    "lastMinuteDeclined": [],
+    "counts": {
+      "attending": 16,
+      "declined": 3,
+      "unanswered": 2
+    },
+    "knhbDateTime": "2026-10-25T13:00:00",
+    "knhbLocation": {
+      "name": "TU Delft - Sportcentrum Dopie/Scoop",
+      "address": "Mekelweg 8, 2628CD Delft",
+      "city": "Delft"
+    },
+    "knhbHomeTeam": "Scoop Delft H4",
+    "knhbAwayTeam": "Groen-Geel H15",
+    "knhbField": "Veld 3"
   }
 }
